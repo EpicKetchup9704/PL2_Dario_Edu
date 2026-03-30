@@ -1,4 +1,5 @@
 package pl2.darioedu;
+import java.util.ArrayList;
 
 public class Actividad {
     private String titulo;
@@ -11,22 +12,29 @@ public class Actividad {
     private String monitor;
     private Sala sala ;
 
-    // tenemos que echar un ojo a como empaquetamos los horarios y las salas, por ahora he puesto arrays
-    // imaginate que las clases son los lunes a las 19 y los miercoles a las 17, tenemos que mirarlo.
+    // Por ahora he creado una clase Sesion para tener bien empaquetadas las sesiones con sus horas correspondientes
 
-    private String[] horariosInicio;
-    private String[] horariosFin;
-    private String[] diasSemana;
+    private ArrayList<Sesion> listaSesiones ;
 
     private boolean esExtraordinaria;
 
-    public Actividad(String titulo, String tipo,String monitor, Sala sala, String[] horariosIni, String[] horariosFin, String[] dias, boolean extra){
+    public Actividad(String titulo, String tipo,String monitor, Sala sala, boolean extra){
         this.titulo = titulo ;
         this.tipo = tipo ;
         this.sala = sala ;
-        this.horariosInicio = horariosIni ;
-        this.horariosFin = horariosFin ;
-        this.diasSemana = dias ;
+        // Por ahora creo que de cara a la interfaz es mejor no meter las sesiones en el constructor
+        // Primero creamos la actividad, despues se le añaden o quitan sesiones
         this.esExtraordinaria = extra ;
+    }
+    public void addSesion(Sesion clase){
+        this.listaSesiones.add(clase) ;
+    }
+    public void quitarClase(Sesion clase){
+        // Tengo que mirar como hacer este metodo, especialmente tenemos que pensarlo en funcion de como funciona la interfaz
+    }
+
+    public ArrayList<Sesion> getSesiones(){
+        return listaSesiones ;
+        // IMPORTANTE, he creado en Sesion un toString, tenemos que ver como integrarlo con la interfaz
     }
 }
