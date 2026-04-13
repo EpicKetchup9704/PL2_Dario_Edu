@@ -1,12 +1,14 @@
 package pl2.darioedu;
+import java.util.ArrayList;//Creamos un arrayList de nombre de dominios de correo válidos para que no haya usuarios con correos anónimos / desechables
+import java.util.Arrays;
 
 public class Usuario {
     // Esto va a ser una clase padre, de aqui heredaran Administrador y Usuario Normal
-    private String nombre;
-    private String correo;
-    private String sal;
-    private String hasheo;
-    private boolean adminStatus;
+    private final static ArrayList<String> dominioCorreo = new ArrayList(Arrays.asList("proton.me","gmail.com","hotmail.com")); //Modificar si se desea añadir alguno más
+    protected final String nombre;
+    protected String correo;
+    protected String sal;
+    protected String hasheo;
 
     public Usuario(String nombre, String correo, String contra){
         this.nombre = nombre;
@@ -14,13 +16,21 @@ public class Usuario {
         this.sal = GestorSeguridad.generarSal();
         this.hasheo = GestorSeguridad.hashearContra((contra + this.getSal()));
     }
+    public Usuario(String nombre, String correo){
+        this.nombre = nombre;
+        this.correo = correo;
+    }
     public String getNombre(){
         return this.nombre ;
     }
     public String getCorreo(){
         return this.correo ;
     }
-
+    //Creo método setHash por razones relacionadas con la lectura de la base de datos
+    public void setHash(String hash){
+        this.hasheo = hash;
+    }
+    
     // SE PRESUPONE PARA LOS DOS SIGUIENTES METODOS QUE EL USUARIO SE DEBE AUTENTICAR ANTES DE PODER CAMBIAR LAS COSAS
     // ESO CREO QUE SE HARÁ EN LA INTERFAZ
 
@@ -32,9 +42,6 @@ public class Usuario {
         this.hasheo = GestorSeguridad.hashearContra((contra + this.getSal()));
     }
 
-    public boolean esAdmin(){
-        return this.adminStatus ;
-    }
 
     public String getSal(){
         return this.sal ;
@@ -48,5 +55,8 @@ public class Usuario {
         return (GestorSeguridad.hashearContra(tempHash).equals(this.getHash()));
 
 
+    }
+    public static boolean validarCorreo(String correo){
+        return((correo.length() != 0)&&(correo.split("@").length == 2)&&(dominioCorreo.contains((correo.split("@")[1]))));
     }
 }

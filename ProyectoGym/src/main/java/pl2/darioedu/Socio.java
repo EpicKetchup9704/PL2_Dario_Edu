@@ -12,7 +12,6 @@ public class Socio extends Usuario{
         this.telefono = telefono;
         this.tarjeta = tarjeta;
         this.isVip = vip;
-        this.adminStatus = false;
 
     }
     public void cambiarDireccion(String direccion){

@@ -1,3 +1,4 @@
+
 package pl2.darioedu;
 import java.util.ArrayList;
 
@@ -11,8 +12,6 @@ public class Actividad {
 
     private String monitor;
     private Sala sala ;
-    private int precioNorm ;
-    private int precioVip ;
 
     // Por ahora he creado una clase Sesion para tener bien empaquetadas las sesiones con sus horas correspondientes
 
@@ -20,15 +19,13 @@ public class Actividad {
 
     private boolean esExtraordinaria;
 
-    public Actividad(String titulo, String tipo,String monitor, Sala sala, boolean extra, int precio){
+    public Actividad(String titulo, String tipo,String monitor, Sala sala, boolean extra){
         this.titulo = titulo ;
         this.tipo = tipo ;
         this.sala = sala ;
         // Por ahora creo que de cara a la interfaz es mejor no meter las sesiones en el constructor
         // Primero creamos la actividad, despues se le añaden o quitan sesiones
         this.esExtraordinaria = extra ;
-        this.precioNorm = precio;
-        this.precioVip = ((int) precio * 0.9) ;
     }
     public void addSesion(Sesion clase){
         this.listaSesiones.add(clase) ;
