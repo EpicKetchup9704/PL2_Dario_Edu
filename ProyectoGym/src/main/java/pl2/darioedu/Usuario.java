@@ -6,6 +6,7 @@ public class Usuario {
     private String correo;
     private String sal;
     private String hasheo;
+    private boolean adminStatus;
 
     public Usuario(String nombre, String correo, String contra){
         this.nombre = nombre;
@@ -31,6 +32,9 @@ public class Usuario {
         this.hasheo = GestorSeguridad.hashearContra((contra + this.getSal()));
     }
 
+    public boolean esAdmin(){
+        return this.adminStatus ;
+    }
 
     public String getSal(){
         return this.sal ;
