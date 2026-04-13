@@ -28,7 +28,7 @@ public class Actividad {
         // Primero creamos la actividad, despues se le añaden o quitan sesiones
         this.esExtraordinaria = extra ;
         this.precioNorm = precio;
-        this.precioVip = ((int) precio * 0.9) ;
+        this.precioVip = (int) (precio * 0.9);
     }
     public void addSesion(Sesion clase){
         this.listaSesiones.add(clase) ;
