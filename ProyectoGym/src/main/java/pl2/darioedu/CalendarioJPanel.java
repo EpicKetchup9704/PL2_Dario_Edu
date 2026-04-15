@@ -1,0 +1,952 @@
+package pl2.darioedu;
+import java.time.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import javax.swing.JToggleButton;
+import java.awt.Color;
+/**
+ *
+ * @author Darío DP -> :)
+ */
+public class CalendarioJPanel extends javax.swing.JPanel {
+    private int mes;
+    private String nombreMes;
+    private int anno;
+    private final int diaMin = LocalDate.now().getDayOfWeek().getValue();
+    private final int annoMin = LocalDate.now().getYear();
+    private final int mesMin = LocalDate.now().getMonthValue();
+    private final int annoMax = 2030; //Establecemos el valor máximo de los años a x.
+    private final int mesMax = 12; //Establecemos el mes máximo
+    private final int diaMax = 31; //Establecemos el día maximo
+    private final ArrayList<Integer> valoresBotones = crearValoresListaBotones(anno,mes);
+    /**
+     * Creates new form CalendarioJPanel
+     */
+    
+    public CalendarioJPanel() {
+        this.mes = LocalDate.now().getMonthValue();
+        this.anno = LocalDate.now().getYear();
+        this.nombreMes = Globales.listaMeses[this.mes];
+        initComponents();
+        this.Anno.setText(Globales.listaMeses[mes] + " " + String.valueOf(anno));
+        ArrayList<Integer> valores = CalendarioJPanel.crearValoresListaBotones(anno, mes);
+        this.setValorBotones(valores);
+    }
+
+    public CalendarioJPanel(int mes, String nombreMes, int anno) {
+        //Creación del JPanelInicial
+        this.mes = mes;
+        this.nombreMes = nombreMes;
+        this.anno = anno;
+        this.nombreMes = Globales.listaMeses[mes];
+        initComponents();
+        this.Anno.setText(Globales.listaMeses[mes] + " " + String.valueOf(anno));
+        ArrayList<Integer> valores = CalendarioJPanel.crearValoresListaBotones(anno, mes);
+        this.setValorBotones(valores);
+    }
+    public CalendarioJPanel(int mes, int anno){
+        initComponents();
+        this.mes = mes;
+        this.nombreMes = Globales.listaMeses[mes-1];
+        this.anno = anno;
+    }
+    public void setColorCelda(int dia, Color color){
+        //Con este método hacemos que una celda (correspondiente con su posicion) se coloree de un color en concreto
+        this.listaBotones.get(valoresBotones.get(dia)).setForeground(color);
+    }
+    public boolean[] setEstadoFlechas(int anno, int mes){
+        /*
+        * Vamos a devolver dos valores para las flechas, una lista de estilo boolean,boolean; donde el primero es para la izq y el otro para la derecha 
+        */
+        if (anno>annoMin ){
+            if (mes<=mesMin){
+                boolean[] devolver = {false,true};
+                return devolver;
+            }
+            boolean[] devolver = {true,false};
+            return devolver;
+        }
+        else{
+            if(mes>=mesMax){
+                boolean[] devolver = {true,false};
+                return devolver;
+            }
+            boolean[] devolver = {true,false};
+            return devolver;
+        }
+    }
+    public void refrescarJPanel(int anno, int mes){
+        this.jButton1.setEnabled(setEstadoFlechas(anno,mes)[0]);
+        this.jButton2.setEnabled(setEstadoFlechas(anno,mes)[1]);
+        this.setTitulo(mes, anno);
+        this.nombreMes = Globales.listaMeses[mes-1];
+        if (anno<=annoMin && mes <=mesMin){
+            this.setValorBotones(this.crearValoresListaBotonesMin(anno, mes));
+        }
+        else if (anno >=annoMax && mes >=annoMax){
+            this.setValorBotones(this.crearValoresListaBotonesMax(anno, mes));
+        }
+        else{this.setValorBotones(crearValoresListaBotones(anno, mes));}
+        
+    }
+    public static final ArrayList<Integer> crearValoresListaBotones(int anno, int mes){
+        /*
+        Permite crear una lista de valores enteros para el estado de los botones (0 si no es viisible y su correspondiente dia)
+        */
+        ArrayList<Integer> lista = new ArrayList<>();//Ponemos Integer (clase envoltura) ya que int se refiere al tipo de dato
+        int numero = LocalDate.of(anno,mes,1).getDayOfWeek().ordinal(); //Empezamos averiguando qué día empieza el mes y lo pasamos a su valor enter
+        int max = LocalDate.of(anno,mes,1).getMonth().maxLength(); //Devuelve el último día del mes
+        //Esta parte es para insertar los números correspondientes antes de la aparicion del uno
+        for (int i = 0; i<(7-numero);i++){
+            lista.add(0);
+        }
+        //Esta parte es para añadir todos los días del mes
+        for (int i = 1; i <= max; i++){
+            lista.add(i);
+        }
+        return lista;
+    }
+    public ArrayList<Integer> crearValoresListaBotonesMin(int anno, int mes){
+        //Método para cuando el mes coincide con el mes min y anno min coinciden o anno max y mes max coinciden.
+        ArrayList<Integer> listaAuxiliar = crearValoresListaBotones(anno,mes);
+                for (int i = 0; i<=diaMin;i++){
+                    listaAuxiliar.set(i, 0);
+                }
+        return listaAuxiliar;
+        
+    }
+    public ArrayList<Integer> crearValoresListaBotonesMax(int anno, int mes){
+        ArrayList<Integer> listaAuxiliar = crearValoresListaBotones(anno,mes);
+                for (int i = diaMax - 1; i<35;i++){
+                    listaAuxiliar.set(i, 0);
+                }
+        return listaAuxiliar;
+    }
+    
+    public void setPeriodo(int mes, int anno){
+        this.mes = mes;
+        this.anno = anno;
+        this.nombreMes = Globales.listaMeses[mes];
+    }
+    
+    public void setTitulo(int mes, int anno){
+        this.Anno.setText(Globales.listaMeses[mes] + String.valueOf(anno));
+    }
+    
+    public final void setValorBotones(ArrayList<Integer> listaNum){ //Lo llamamos en el constructor y puede hacer una sobrecarga de metodos = final
+        for (JToggleButton aux : listaBotones){
+            int posicion = Integer.parseInt(aux.getName().substring(1)) - 1; //Obtenemos el nombre de la variable, escogemos el numero y le restamos 1
+            aux.setText(String.valueOf(listaNum.get(posicion).intValue())); //Hay que pasar de Integer a int
+            aux.setVisible(!(posicion==0)); //Si el valor del ArrayList es 0, se oculta
+        }
+    }
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        Anno = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        B1 = new javax.swing.JToggleButton();
+        B2 = new javax.swing.JToggleButton();
+        B3 = new javax.swing.JToggleButton();
+        B4 = new javax.swing.JToggleButton();
+        B5 = new javax.swing.JToggleButton();
+        B6 = new javax.swing.JToggleButton();
+        B7 = new javax.swing.JToggleButton();
+        B14 = new javax.swing.JToggleButton();
+        B9 = new javax.swing.JToggleButton();
+        B10 = new javax.swing.JToggleButton();
+        B11 = new javax.swing.JToggleButton();
+        B12 = new javax.swing.JToggleButton();
+        B13 = new javax.swing.JToggleButton();
+        B8 = new javax.swing.JToggleButton();
+        B21 = new javax.swing.JToggleButton();
+        B16 = new javax.swing.JToggleButton();
+        B17 = new javax.swing.JToggleButton();
+        B18 = new javax.swing.JToggleButton();
+        B19 = new javax.swing.JToggleButton();
+        B20 = new javax.swing.JToggleButton();
+        B15 = new javax.swing.JToggleButton();
+        B26 = new javax.swing.JToggleButton();
+        B27 = new javax.swing.JToggleButton();
+        B22 = new javax.swing.JToggleButton();
+        B28 = new javax.swing.JToggleButton();
+        B23 = new javax.swing.JToggleButton();
+        B24 = new javax.swing.JToggleButton();
+        B25 = new javax.swing.JToggleButton();
+        B33 = new javax.swing.JToggleButton();
+        B34 = new javax.swing.JToggleButton();
+        B29 = new javax.swing.JToggleButton();
+        B35 = new javax.swing.JToggleButton();
+        B30 = new javax.swing.JToggleButton();
+        B31 = new javax.swing.JToggleButton();
+        B32 = new javax.swing.JToggleButton();
+
+        Anno.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
+        Anno.setText("Septiembre 2026");
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/FlechaIzq.png"))); // NOI18N
+        jButton1.setMaximumSize(new java.awt.Dimension(75, 75));
+        jButton1.setMinimumSize(new java.awt.Dimension(75, 75));
+        jButton1.setPreferredSize(new java.awt.Dimension(75, 75));
+        jButton1.addActionListener(this::jButton1ActionPerformed);
+
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/FlechaDer.png"))); // NOI18N
+        jButton2.setMaximumSize(new java.awt.Dimension(75, 75));
+        jButton2.setMinimumSize(new java.awt.Dimension(75, 75));
+        jButton2.setPreferredSize(new java.awt.Dimension(75, 75));
+        jButton2.addActionListener(this::jButton2ActionPerformed);
+
+        B1.setText("1");
+        B1.setMaximumSize(new java.awt.Dimension(43, 30));
+        B1.setMinimumSize(new java.awt.Dimension(43, 30));
+        B1.setPreferredSize(new java.awt.Dimension(43, 30));
+        B1.addChangeListener(this::B1StateChanged);
+        B1.addActionListener(this::B1ActionPerformed);
+
+        B2.setText("1");
+        B2.setMaximumSize(new java.awt.Dimension(43, 30));
+        B2.setMinimumSize(new java.awt.Dimension(43, 30));
+        B2.setPreferredSize(new java.awt.Dimension(43, 30));
+        B2.addChangeListener(this::B2StateChanged);
+        B2.addActionListener(this::B2ActionPerformed);
+
+        B3.setText("1");
+        B3.setMaximumSize(new java.awt.Dimension(43, 30));
+        B3.setMinimumSize(new java.awt.Dimension(43, 30));
+        B3.setPreferredSize(new java.awt.Dimension(43, 30));
+        B3.addChangeListener(this::B3StateChanged);
+        B3.addActionListener(this::B3ActionPerformed);
+
+        B4.setText("1");
+        B4.setMaximumSize(new java.awt.Dimension(43, 30));
+        B4.setMinimumSize(new java.awt.Dimension(43, 30));
+        B4.setPreferredSize(new java.awt.Dimension(43, 30));
+        B4.addChangeListener(this::B4StateChanged);
+        B4.addActionListener(this::B4ActionPerformed);
+
+        B5.setText("1");
+        B5.setMaximumSize(new java.awt.Dimension(43, 30));
+        B5.setMinimumSize(new java.awt.Dimension(43, 30));
+        B5.setPreferredSize(new java.awt.Dimension(43, 30));
+        B5.addChangeListener(this::B5StateChanged);
+        B5.addActionListener(this::B5ActionPerformed);
+
+        B6.setText("1");
+        B6.setMaximumSize(new java.awt.Dimension(43, 30));
+        B6.setMinimumSize(new java.awt.Dimension(43, 30));
+        B6.setPreferredSize(new java.awt.Dimension(43, 30));
+        B6.addChangeListener(this::B6StateChanged);
+        B6.addActionListener(this::B6ActionPerformed);
+
+        B7.setText("1");
+        B7.setMaximumSize(new java.awt.Dimension(43, 30));
+        B7.setMinimumSize(new java.awt.Dimension(43, 30));
+        B7.setPreferredSize(new java.awt.Dimension(43, 30));
+        B7.addChangeListener(this::B7StateChanged);
+        B7.addActionListener(this::B7ActionPerformed);
+
+        B14.setText("1");
+        B14.setMaximumSize(new java.awt.Dimension(43, 30));
+        B14.setMinimumSize(new java.awt.Dimension(43, 30));
+        B14.setPreferredSize(new java.awt.Dimension(43, 30));
+        B14.addChangeListener(this::B14StateChanged);
+        B14.addActionListener(this::B14ActionPerformed);
+
+        B9.setText("1");
+        B9.setMaximumSize(new java.awt.Dimension(43, 30));
+        B9.setMinimumSize(new java.awt.Dimension(43, 30));
+        B9.setPreferredSize(new java.awt.Dimension(43, 30));
+        B9.addChangeListener(this::B9StateChanged);
+        B9.addActionListener(this::B9ActionPerformed);
+
+        B10.setText("1");
+        B10.setMaximumSize(new java.awt.Dimension(43, 30));
+        B10.setMinimumSize(new java.awt.Dimension(43, 30));
+        B10.setPreferredSize(new java.awt.Dimension(43, 30));
+        B10.addChangeListener(this::B10StateChanged);
+        B10.addActionListener(this::B10ActionPerformed);
+
+        B11.setText("1");
+        B11.setMaximumSize(new java.awt.Dimension(43, 30));
+        B11.setMinimumSize(new java.awt.Dimension(43, 30));
+        B11.setPreferredSize(new java.awt.Dimension(43, 30));
+        B11.addChangeListener(this::B11StateChanged);
+        B11.addActionListener(this::B11ActionPerformed);
+
+        B12.setText("1");
+        B12.setMaximumSize(new java.awt.Dimension(43, 30));
+        B12.setMinimumSize(new java.awt.Dimension(43, 30));
+        B12.setPreferredSize(new java.awt.Dimension(43, 30));
+        B12.addChangeListener(this::B12StateChanged);
+        B12.addActionListener(this::B12ActionPerformed);
+
+        B13.setText("1");
+        B13.setMaximumSize(new java.awt.Dimension(43, 30));
+        B13.setMinimumSize(new java.awt.Dimension(43, 30));
+        B13.setPreferredSize(new java.awt.Dimension(43, 30));
+        B13.addChangeListener(this::B13StateChanged);
+        B13.addActionListener(this::B13ActionPerformed);
+
+        B8.setText("1");
+        B8.setMaximumSize(new java.awt.Dimension(43, 30));
+        B8.setMinimumSize(new java.awt.Dimension(43, 30));
+        B8.setPreferredSize(new java.awt.Dimension(43, 30));
+        B8.addChangeListener(this::B8StateChanged);
+        B8.addActionListener(this::B8ActionPerformed);
+
+        B21.setText("1");
+        B21.setMaximumSize(new java.awt.Dimension(43, 30));
+        B21.setMinimumSize(new java.awt.Dimension(43, 30));
+        B21.setPreferredSize(new java.awt.Dimension(43, 30));
+        B21.addChangeListener(this::B21StateChanged);
+        B21.addActionListener(this::B21ActionPerformed);
+
+        B16.setText("1");
+        B16.setMaximumSize(new java.awt.Dimension(43, 30));
+        B16.setMinimumSize(new java.awt.Dimension(43, 30));
+        B16.setPreferredSize(new java.awt.Dimension(43, 30));
+        B16.addChangeListener(this::B16StateChanged);
+        B16.addActionListener(this::B16ActionPerformed);
+
+        B17.setText("1");
+        B17.setMaximumSize(new java.awt.Dimension(43, 30));
+        B17.setMinimumSize(new java.awt.Dimension(43, 30));
+        B17.setPreferredSize(new java.awt.Dimension(43, 30));
+        B17.addChangeListener(this::B17StateChanged);
+        B17.addActionListener(this::B17ActionPerformed);
+
+        B18.setText("1");
+        B18.setMaximumSize(new java.awt.Dimension(43, 30));
+        B18.setMinimumSize(new java.awt.Dimension(43, 30));
+        B18.setPreferredSize(new java.awt.Dimension(43, 30));
+        B18.addChangeListener(this::B18StateChanged);
+        B18.addActionListener(this::B18ActionPerformed);
+
+        B19.setText("1");
+        B19.setMaximumSize(new java.awt.Dimension(43, 30));
+        B19.setMinimumSize(new java.awt.Dimension(43, 30));
+        B19.setPreferredSize(new java.awt.Dimension(43, 30));
+        B19.addChangeListener(this::B19StateChanged);
+        B19.addActionListener(this::B19ActionPerformed);
+
+        B20.setText("1");
+        B20.setMaximumSize(new java.awt.Dimension(43, 30));
+        B20.setMinimumSize(new java.awt.Dimension(43, 30));
+        B20.setPreferredSize(new java.awt.Dimension(43, 30));
+        B20.addChangeListener(this::B20StateChanged);
+        B20.addActionListener(this::B20ActionPerformed);
+
+        B15.setText("1");
+        B15.setMaximumSize(new java.awt.Dimension(43, 30));
+        B15.setMinimumSize(new java.awt.Dimension(43, 30));
+        B15.setPreferredSize(new java.awt.Dimension(43, 30));
+        B15.addChangeListener(this::B15StateChanged);
+        B15.addActionListener(this::B15ActionPerformed);
+
+        B26.setText("1");
+        B26.setMaximumSize(new java.awt.Dimension(43, 30));
+        B26.setMinimumSize(new java.awt.Dimension(43, 30));
+        B26.setPreferredSize(new java.awt.Dimension(43, 30));
+        B26.addChangeListener(this::B26StateChanged);
+        B26.addActionListener(this::B26ActionPerformed);
+
+        B27.setText("1");
+        B27.setMaximumSize(new java.awt.Dimension(43, 30));
+        B27.setMinimumSize(new java.awt.Dimension(43, 30));
+        B27.setPreferredSize(new java.awt.Dimension(43, 30));
+        B27.addChangeListener(this::B27StateChanged);
+        B27.addActionListener(this::B27ActionPerformed);
+
+        B22.setText("1");
+        B22.setMaximumSize(new java.awt.Dimension(43, 30));
+        B22.setMinimumSize(new java.awt.Dimension(43, 30));
+        B22.setPreferredSize(new java.awt.Dimension(43, 30));
+        B22.addChangeListener(this::B22StateChanged);
+        B22.addActionListener(this::B22ActionPerformed);
+
+        B28.setText("1");
+        B28.setMaximumSize(new java.awt.Dimension(43, 30));
+        B28.setMinimumSize(new java.awt.Dimension(43, 30));
+        B28.setPreferredSize(new java.awt.Dimension(43, 30));
+        B28.addChangeListener(this::B28StateChanged);
+        B28.addActionListener(this::B28ActionPerformed);
+
+        B23.setText("1");
+        B23.setMaximumSize(new java.awt.Dimension(43, 30));
+        B23.setMinimumSize(new java.awt.Dimension(43, 30));
+        B23.setPreferredSize(new java.awt.Dimension(43, 30));
+        B23.addChangeListener(this::B23StateChanged);
+        B23.addActionListener(this::B23ActionPerformed);
+
+        B24.setText("1");
+        B24.setMaximumSize(new java.awt.Dimension(43, 30));
+        B24.setMinimumSize(new java.awt.Dimension(43, 30));
+        B24.setPreferredSize(new java.awt.Dimension(43, 30));
+        B24.addChangeListener(this::B24StateChanged);
+        B24.addActionListener(this::B24ActionPerformed);
+
+        B25.setText("1");
+        B25.setMaximumSize(new java.awt.Dimension(43, 30));
+        B25.setMinimumSize(new java.awt.Dimension(43, 30));
+        B25.setPreferredSize(new java.awt.Dimension(43, 30));
+        B25.addChangeListener(this::B25StateChanged);
+        B25.addActionListener(this::B25ActionPerformed);
+
+        B33.setText("1");
+        B33.setMaximumSize(new java.awt.Dimension(43, 30));
+        B33.setMinimumSize(new java.awt.Dimension(43, 30));
+        B33.setPreferredSize(new java.awt.Dimension(43, 30));
+        B33.addChangeListener(this::B33StateChanged);
+        B33.addActionListener(this::B33ActionPerformed);
+
+        B34.setText("1");
+        B34.setMaximumSize(new java.awt.Dimension(43, 30));
+        B34.setMinimumSize(new java.awt.Dimension(43, 30));
+        B34.setPreferredSize(new java.awt.Dimension(43, 30));
+        B34.addChangeListener(this::B34StateChanged);
+        B34.addActionListener(this::B34ActionPerformed);
+
+        B29.setText("1");
+        B29.setMaximumSize(new java.awt.Dimension(43, 30));
+        B29.setMinimumSize(new java.awt.Dimension(43, 30));
+        B29.setPreferredSize(new java.awt.Dimension(43, 30));
+        B29.addChangeListener(this::B29StateChanged);
+        B29.addActionListener(this::B29ActionPerformed);
+
+        B35.setText("1");
+        B35.setMaximumSize(new java.awt.Dimension(43, 30));
+        B35.setMinimumSize(new java.awt.Dimension(43, 30));
+        B35.setPreferredSize(new java.awt.Dimension(43, 30));
+        B35.addChangeListener(this::B35StateChanged);
+        B35.addActionListener(this::B35ActionPerformed);
+
+        B30.setText("1");
+        B30.setMaximumSize(new java.awt.Dimension(43, 30));
+        B30.setMinimumSize(new java.awt.Dimension(43, 30));
+        B30.setPreferredSize(new java.awt.Dimension(43, 30));
+        B30.addChangeListener(this::B30StateChanged);
+        B30.addActionListener(this::B30ActionPerformed);
+
+        B31.setText("1");
+        B31.setMaximumSize(new java.awt.Dimension(43, 30));
+        B31.setMinimumSize(new java.awt.Dimension(43, 30));
+        B31.setPreferredSize(new java.awt.Dimension(43, 30));
+        B31.addChangeListener(this::B31StateChanged);
+        B31.addActionListener(this::B31ActionPerformed);
+
+        B32.setText("1");
+        B32.setMaximumSize(new java.awt.Dimension(43, 30));
+        B32.setMinimumSize(new java.awt.Dimension(43, 30));
+        B32.setPreferredSize(new java.awt.Dimension(43, 30));
+        B32.addChangeListener(this::B32StateChanged);
+        B32.addActionListener(this::B32ActionPerformed);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(Anno))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(B1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(B2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(B3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(B4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(B5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(B6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(B7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(B8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(B9, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(B10, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(B11, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(B12, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(B13, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(B14, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(B15, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(B16, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(B17, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(B18, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(B19, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(B20, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(B21, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(B22, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(B23, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(B24, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(B25, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(B26, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(B27, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(B28, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(B29, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(B30, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(B31, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(B32, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(B33, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(B34, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(B35, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Anno)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(B1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(B2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(B3, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(B4, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(B5, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(B6, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(B7, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(B8, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(B9, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(B10, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(B11, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(B12, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(B13, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(B14, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(B15, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(B16, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(B17, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(B18, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(B19, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(B20, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(B21, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(B22, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(B23, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(B24, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(B25, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(B26, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(B27, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(B28, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(B29, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(B30, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(B31, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(B32, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(B33, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(B34, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(B35, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))))
+        );
+
+        B1.getAccessibleContext().setAccessibleName("Boton1");
+        B1.getAccessibleContext().setAccessibleDescription("");
+        B1.getAccessibleContext().setAccessibleParent(null);
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if ((this.mes -1) < 1){ //O ==0, es lo mismo
+            this.refrescarJPanel(anno-1, 12);
+        }
+        else{
+            this.refrescarJPanel(anno,this.mes-1);
+        }
+             
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        if ((this.mes +1) > 12){ //O ==0, es lo mismo
+            this.refrescarJPanel(anno+1, 1);
+        }
+        else{
+            this.refrescarJPanel(anno,this.mes+1);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void B1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B1ActionPerformed
+
+    private void B1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B1StateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B1StateChanged
+
+    private void B2StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B2StateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B2StateChanged
+
+    private void B2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B2ActionPerformed
+
+    private void B3StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B3StateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B3StateChanged
+
+    private void B3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B3ActionPerformed
+
+    private void B4StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B4StateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B4StateChanged
+
+    private void B4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B4ActionPerformed
+
+    private void B5StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B5StateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B5StateChanged
+
+    private void B5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B5ActionPerformed
+
+    private void B6StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B6StateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B6StateChanged
+
+    private void B6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B6ActionPerformed
+
+    private void B7StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B7StateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B7StateChanged
+
+    private void B7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B7ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B7ActionPerformed
+
+    private void B14StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B14StateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B14StateChanged
+
+    private void B14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B14ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B14ActionPerformed
+
+    private void B9StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B9StateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B9StateChanged
+
+    private void B9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B9ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B9ActionPerformed
+
+    private void B10StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B10StateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B10StateChanged
+
+    private void B10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B10ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B10ActionPerformed
+
+    private void B11StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B11StateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B11StateChanged
+
+    private void B11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B11ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B11ActionPerformed
+
+    private void B12StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B12StateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B12StateChanged
+
+    private void B12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B12ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B12ActionPerformed
+
+    private void B13StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B13StateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B13StateChanged
+
+    private void B13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B13ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B13ActionPerformed
+
+    private void B8StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B8StateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B8StateChanged
+
+    private void B8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B8ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B8ActionPerformed
+
+    private void B21StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B21StateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B21StateChanged
+
+    private void B21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B21ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B21ActionPerformed
+
+    private void B16StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B16StateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B16StateChanged
+
+    private void B16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B16ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B16ActionPerformed
+
+    private void B17StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B17StateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B17StateChanged
+
+    private void B17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B17ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B17ActionPerformed
+
+    private void B18StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B18StateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B18StateChanged
+
+    private void B18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B18ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B18ActionPerformed
+
+    private void B19StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B19StateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B19StateChanged
+
+    private void B19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B19ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B19ActionPerformed
+
+    private void B20StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B20StateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B20StateChanged
+
+    private void B20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B20ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B20ActionPerformed
+
+    private void B15StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B15StateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B15StateChanged
+
+    private void B15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B15ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B15ActionPerformed
+
+    private void B26StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B26StateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B26StateChanged
+
+    private void B26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B26ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B26ActionPerformed
+
+    private void B27StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B27StateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B27StateChanged
+
+    private void B27ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B27ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B27ActionPerformed
+
+    private void B22StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B22StateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B22StateChanged
+
+    private void B22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B22ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B22ActionPerformed
+
+    private void B28StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B28StateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B28StateChanged
+
+    private void B28ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B28ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B28ActionPerformed
+
+    private void B23StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B23StateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B23StateChanged
+
+    private void B23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B23ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B23ActionPerformed
+
+    private void B24StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B24StateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B24StateChanged
+
+    private void B24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B24ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B24ActionPerformed
+
+    private void B25StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B25StateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B25StateChanged
+
+    private void B25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B25ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B25ActionPerformed
+
+    private void B33StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B33StateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B33StateChanged
+
+    private void B33ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B33ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B33ActionPerformed
+
+    private void B34StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B34StateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B34StateChanged
+
+    private void B34ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B34ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B34ActionPerformed
+
+    private void B29StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B29StateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B29StateChanged
+
+    private void B29ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B29ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B29ActionPerformed
+
+    private void B35StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B35StateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B35StateChanged
+
+    private void B35ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B35ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B35ActionPerformed
+
+    private void B30StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B30StateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B30StateChanged
+
+    private void B30ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B30ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B30ActionPerformed
+
+    private void B31StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B31StateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B31StateChanged
+
+    private void B31ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B31ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B31ActionPerformed
+
+    private void B32StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B32StateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B32StateChanged
+
+    private void B32ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B32ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B32ActionPerformed
+
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Anno;
+    private javax.swing.JToggleButton B1;
+    private javax.swing.JToggleButton B10;
+    private javax.swing.JToggleButton B11;
+    private javax.swing.JToggleButton B12;
+    private javax.swing.JToggleButton B13;
+    private javax.swing.JToggleButton B14;
+    private javax.swing.JToggleButton B15;
+    private javax.swing.JToggleButton B16;
+    private javax.swing.JToggleButton B17;
+    private javax.swing.JToggleButton B18;
+    private javax.swing.JToggleButton B19;
+    private javax.swing.JToggleButton B2;
+    private javax.swing.JToggleButton B20;
+    private javax.swing.JToggleButton B21;
+    private javax.swing.JToggleButton B22;
+    private javax.swing.JToggleButton B23;
+    private javax.swing.JToggleButton B24;
+    private javax.swing.JToggleButton B25;
+    private javax.swing.JToggleButton B26;
+    private javax.swing.JToggleButton B27;
+    private javax.swing.JToggleButton B28;
+    private javax.swing.JToggleButton B29;
+    private javax.swing.JToggleButton B3;
+    private javax.swing.JToggleButton B30;
+    private javax.swing.JToggleButton B31;
+    private javax.swing.JToggleButton B32;
+    private javax.swing.JToggleButton B33;
+    private javax.swing.JToggleButton B34;
+    private javax.swing.JToggleButton B35;
+    private javax.swing.JToggleButton B4;
+    private javax.swing.JToggleButton B5;
+    private javax.swing.JToggleButton B6;
+    private javax.swing.JToggleButton B7;
+    private javax.swing.JToggleButton B8;
+    private javax.swing.JToggleButton B9;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    // End of variables declaration//GEN-END:variables
+    private ArrayList<JToggleButton> listaBotones = new ArrayList<>(Arrays.asList(B1,B2,B3,B4,B5,B6,B7,B8,B9,B10,B11,B12,B13,B14,B15,B16,B17,B18,B19,B20,B21,B22,B23,B24,B25,B26,B27,B28,B29,B30,B31,B32,B33,B34,B35));
+    
+}
