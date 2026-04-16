@@ -1,8 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package pl2.darioedu;
+import java.awt.Toolkit; //Necesario para importar el icono para el menu emergente -> https://stackoverflow.com/questions/15657569/how-to-set-icon-to-jframe
 
 /**
  *
@@ -44,6 +41,7 @@ public class PanelAyuda extends javax.swing.JFrame {
         jTextArea1 = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setIconImage(Toolkit.getDefaultToolkit().getImage("AyudaBoton.png"));
         setResizable(false);
 
         jButton1.setText("Entendido");

@@ -1,11 +1,14 @@
 package pl2.darioedu;
 //  QUEDA PENDIENTE PONERLE LO DE BUSCAR ACTIVIDADES Y ESPECIALMENTE EL COBRARLAS, POR AHORA SOLO HE METIDO LOS ATRIBUTOS BASICOS
+
+import java.util.ArrayList;
+
 public class Socio extends Usuario{
     private String direccion;
     private String tarjeta;
     private int telefono;
     private boolean isVip;
-
+    private ArrayList<Actividad> listaActividades;
     public Socio(String nombre, String correo, String contra, String direccion, int telefono, String tarjeta, boolean vip) {
         super(nombre, correo, contra);
         this.direccion = direccion;
@@ -41,4 +44,7 @@ public class Socio extends Usuario{
    public void cambiarStatusVip(boolean vip){
         this.isVip = vip;
    }
+   public ArrayList<Actividad> getListaActividades(){return this.listaActividades;}
+   public void addActividad(Actividad aux){this.listaActividades.add(aux);}
+   public void removeActividad(Actividad aux){this.listaActividades.remove(aux);}
 }

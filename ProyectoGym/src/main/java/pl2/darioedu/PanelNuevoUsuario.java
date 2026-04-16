@@ -11,7 +11,9 @@ package pl2.darioedu;
 public class PanelNuevoUsuario extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(PanelNuevoUsuario.class.getName());
-
+    private String nombre;
+    private String contra;
+    private String correo;
     /**
      * Creates new form PanelNuevoUsuario
      */
@@ -19,7 +21,12 @@ public class PanelNuevoUsuario extends javax.swing.JFrame {
         initComponents();
         this.setTitle("JavaFit - Register Menu - "+Globales.version);
     }
-
+    
+    public void getValores(){
+        this.nombre = this.jTextField1.getText();
+        this.correo = this.jTextField2.getText();
+        this.contra = String.valueOf(this.jPasswordField1.getPassword());
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -141,7 +148,7 @@ public class PanelNuevoUsuario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        this.jLabel2.setVisible(false);
+        
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed

@@ -1,10 +1,9 @@
 package pl2.darioedu;
 import java.util.ArrayList;//Creamos un arrayList de nombre de dominios de correo válidos para que no haya usuarios con correos anónimos / desechables
-import java.util.Arrays;
 
-public class Usuario {
+public class Usuario{
     // Esto va a ser una clase padre, de aqui heredaran Administrador y Usuario Normal
-    private final static ArrayList<String> dominioCorreo = new ArrayList(Arrays.asList("proton.me","gmail.com","hotmail.com")); //Modificar si se desea añadir alguno más
+    private final static ArrayList<String> dominioCorreo = Globales.dominios; //Modificar si se desea añadir alguno más
     protected final String nombre;
     protected String correo;
     protected String sal;
@@ -59,4 +58,5 @@ public class Usuario {
     public static boolean validarCorreo(String correo){
         return((correo.length() != 0)&&(correo.split("@").length == 2)&&(dominioCorreo.contains((correo.split("@")[1]))));
     }
+    
 }

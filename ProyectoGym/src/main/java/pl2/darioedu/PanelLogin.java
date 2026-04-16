@@ -116,7 +116,7 @@ public class PanelLogin extends javax.swing.JFrame {
         return this.jTextField1.getText();
     }
     public final String getHash(){
-        String contra = this.jPasswordField1.getToolTipText();
+        String contra = String.valueOf(this.jPasswordField1.getPassword());
         String hash = GestorSeguridad.hashearContra(contra);
         return hash;
     }
@@ -134,5 +134,5 @@ public class PanelLogin extends javax.swing.JFrame {
         this.jLabel2.setVisible(true);
     }
     public boolean validarCampos(){
-        return(LecturaArchivos.verificarUsuario(getUsuario(),getHash())); }
+        return(false); }
 }

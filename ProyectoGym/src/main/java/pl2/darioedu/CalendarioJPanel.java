@@ -24,15 +24,15 @@ public class CalendarioJPanel extends javax.swing.JPanel {
      */
     
     public CalendarioJPanel() {
-        this.mes = LocalDate.now().getMonthValue();
-        this.anno = LocalDate.now().getYear();
+        this.mes = LocalDate.now().getMonthValue(); //->int
+        this.anno = LocalDate.now().getYear(); //->int
         this.nombreMes = Globales.listaMeses[this.mes];
-        initComponents();
-        this.Anno.setText(Globales.listaMeses[mes] + " " + String.valueOf(anno));
-        ArrayList<Integer> valores = CalendarioJPanel.crearValoresListaBotones(anno, mes);
+        initComponents(); //->Se inician componentes
+        this.Anno.setText(this.nombreMes + " " + String.valueOf(this.anno)); //Se va a poner el texo como mes + + anno
+        ArrayList<Integer> valores = this.crearValoresListaBotonesMin(this.anno, this.mes);
         this.setValorBotones(valores);
     }
-
+ //Me he quedado aquí revisando, mirar más tarde;
     public CalendarioJPanel(int mes, String nombreMes, int anno) {
         //Creación del JPanelInicial
         this.mes = mes;
@@ -91,13 +91,13 @@ public class CalendarioJPanel extends javax.swing.JPanel {
     }
     public static final ArrayList<Integer> crearValoresListaBotones(int anno, int mes){
         /*
-        Permite crear una lista de valores enteros para el estado de los botones (0 si no es viisible y su correspondiente dia)
+        Permite crear una lista de valores enteros para el estado de los botones (0 si no es visible y su correspondiente dia)
         */
         ArrayList<Integer> lista = new ArrayList<>();//Ponemos Integer (clase envoltura) ya que int se refiere al tipo de dato
         int numero = LocalDate.of(anno,mes,1).getDayOfWeek().ordinal(); //Empezamos averiguando qué día empieza el mes y lo pasamos a su valor enter
         int max = LocalDate.of(anno,mes,1).getMonth().maxLength(); //Devuelve el último día del mes
         //Esta parte es para insertar los números correspondientes antes de la aparicion del uno
-        for (int i = 0; i<(7-numero);i++){
+        for (int i=0; i<(7-numero);i++){
             lista.add(0);
         }
         //Esta parte es para añadir todos los días del mes
@@ -106,8 +106,8 @@ public class CalendarioJPanel extends javax.swing.JPanel {
         }
         return lista;
     }
-    public ArrayList<Integer> crearValoresListaBotonesMin(int anno, int mes){
-        //Método para cuando el mes coincide con el mes min y anno min coinciden o anno max y mes max coinciden.
+    public final ArrayList<Integer> crearValoresListaBotonesMin(int anno, int mes){
+        //Método para cuando el mes coincide con el mes min y anno min coinciden
         ArrayList<Integer> listaAuxiliar = crearValoresListaBotones(anno,mes);
                 for (int i = 0; i<=diaMin;i++){
                     listaAuxiliar.set(i, 0);
@@ -115,7 +115,8 @@ public class CalendarioJPanel extends javax.swing.JPanel {
         return listaAuxiliar;
         
     }
-    public ArrayList<Integer> crearValoresListaBotonesMax(int anno, int mes){
+    public final ArrayList<Integer> crearValoresListaBotonesMax(int anno, int mes){
+        //Método para cuando el mes coincide con el mes max y anno max coinciden
         ArrayList<Integer> listaAuxiliar = crearValoresListaBotones(anno,mes);
                 for (int i = diaMax - 1; i<35;i++){
                     listaAuxiliar.set(i, 0);
@@ -187,6 +188,10 @@ public class CalendarioJPanel extends javax.swing.JPanel {
         B30 = new javax.swing.JToggleButton();
         B31 = new javax.swing.JToggleButton();
         B32 = new javax.swing.JToggleButton();
+
+        setMaximumSize(new java.awt.Dimension(210, 370));
+        setMinimumSize(new java.awt.Dimension(210, 370));
+        setPreferredSize(new java.awt.Dimension(210, 370));
 
         Anno.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
         Anno.setText("Septiembre 2026");
@@ -947,6 +952,6 @@ public class CalendarioJPanel extends javax.swing.JPanel {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     // End of variables declaration//GEN-END:variables
-    private ArrayList<JToggleButton> listaBotones = new ArrayList<>(Arrays.asList(B1,B2,B3,B4,B5,B6,B7,B8,B9,B10,B11,B12,B13,B14,B15,B16,B17,B18,B19,B20,B21,B22,B23,B24,B25,B26,B27,B28,B29,B30,B31,B32,B33,B34,B35));
+    private final ArrayList<JToggleButton> listaBotones = new ArrayList<>(Arrays.asList(B1,B2,B3,B4,B5,B6,B7,B8,B9,B10,B11,B12,B13,B14,B15,B16,B17,B18,B19,B20,B21,B22,B23,B24,B25,B26,B27,B28,B29,B30,B31,B32,B33,B34,B35));
     
 }

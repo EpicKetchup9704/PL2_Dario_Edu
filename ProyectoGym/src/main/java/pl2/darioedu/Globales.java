@@ -1,5 +1,13 @@
 package pl2.darioedu;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 /**
  * Apartado para variables globales, relacionadas con, por ejemplo, versión del programa, etc.
  * Se puede usar si quieremos asignar variables String para difernetes Idiomas; se puede crear una clase abstracta para heredar de ahí los Strings
@@ -8,4 +16,8 @@ package pl2.darioedu;
 public class Globales {
     public static final String version = "1.0.1";
     public static final String[] listaMeses = {"Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"};
+    public static final ArrayList<String> dominios = new ArrayList(Arrays.asList("proton.me","gmail.com","hotmail.com","outlook.com"));
+    public static ArrayList<String> listaMonitores = new ArrayList(Arrays.asList("Darío Domínguez Puebla", "Eduardo Domínguez"));
+    public static ArrayList<String> listaTipos = new ArrayList(Arrays.asList("Yoga","Natación","Cardio"));
+   
 }

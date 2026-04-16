@@ -3,21 +3,15 @@ package pl2.darioedu;
 import java.util.ArrayList;
 
 public class Actividad {
+    private boolean esExtraordinaria;
     private String titulo;
     private String tipo;
-
-    // TENEMOS QUE PENSAR SI HACER LOS MONITORES, SALAS Y AFORO CLASES PROPIAS DE CARA
-    // A SU REUTILIZACION, TANTO PARA ACTIVIDADES NORMALES COMO ESPECIALMENTE PARA LAS
-    // EXTRAORDINARIAS
-
-    private String monitor;
+    private String monitor; //Monitor solo contiene un String, luego no se crea clase adicional
     private Sala sala ;
 
     // Por ahora he creado una clase Sesion para tener bien empaquetadas las sesiones con sus horas correspondientes
 
     private ArrayList<Sesion> listaSesiones ;
-
-    private boolean esExtraordinaria;
 
     public Actividad(String titulo, String tipo,String monitor, Sala sala, boolean extra){
         this.titulo = titulo ;
@@ -38,4 +32,5 @@ public class Actividad {
         return listaSesiones ;
         // IMPORTANTE, he creado en Sesion un toString, tenemos que ver como integrarlo con la interfaz
     }
+    public void setExtraordinario(boolean estado){this.esExtraordinaria=estado;}
 }
