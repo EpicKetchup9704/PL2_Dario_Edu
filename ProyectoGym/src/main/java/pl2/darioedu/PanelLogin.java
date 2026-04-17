@@ -19,29 +19,37 @@ public class PanelLogin extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jPasswordField1 = new javax.swing.JPasswordField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        jButtonAcceder = new javax.swing.JButton();
+        jButtonAyuda = new javax.swing.JButton();
+        jTextFieldUsuario = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 204, 153));
 
         jLabel1.setFont(new java.awt.Font("Caladea", 0, 48)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("JavaFit");
         jLabel1.setPreferredSize(new java.awt.Dimension(140, 60));
 
+        jPasswordField1.setBackground(new java.awt.Color(255, 204, 102));
         jPasswordField1.addActionListener(this::jPasswordField1ActionPerformed);
 
-        jButton1.setText("Acceder");
-        jButton1.setMaximumSize(new java.awt.Dimension(70, 20));
-        jButton1.setMinimumSize(new java.awt.Dimension(70, 20));
-        jButton1.setPreferredSize(new java.awt.Dimension(70, 20));
-        jButton1.addActionListener(this::jButton1ActionPerformed);
+        jButtonAcceder.setBackground(new java.awt.Color(255, 153, 0));
+        jButtonAcceder.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        jButtonAcceder.setText("Acceder");
+        jButtonAcceder.setMaximumSize(new java.awt.Dimension(70, 20));
+        jButtonAcceder.setMinimumSize(new java.awt.Dimension(70, 20));
+        jButtonAcceder.setPreferredSize(new java.awt.Dimension(70, 20));
+        jButtonAcceder.addActionListener(this::jButtonAccederActionPerformed);
 
-        jButton2.setText("Ayuda");
-        jButton2.addActionListener(this::jButton2ActionPerformed);
+        jButtonAyuda.setBackground(new java.awt.Color(255, 153, 0));
+        jButtonAyuda.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        jButtonAyuda.setText("Ayuda");
+        jButtonAyuda.addActionListener(this::jButtonAyudaActionPerformed);
 
-        jTextField1.addActionListener(this::jTextField1ActionPerformed);
+        jTextFieldUsuario.setBackground(new java.awt.Color(255, 204, 102));
+        jTextFieldUsuario.addActionListener(this::jTextFieldUsuarioActionPerformed);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 0, 0));
@@ -58,11 +66,10 @@ public class PanelLogin extends javax.swing.JFrame {
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPasswordField1)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButtonAcceder, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(20, 20, 20)
-                        .addComponent(jButton2)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jButtonAyuda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jTextFieldUsuario, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(20, 20, 20))
         );
@@ -72,53 +79,77 @@ public class PanelLogin extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextFieldUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
                 .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
                 .addComponent(jLabel2)
                 .addGap(11, 11, 11)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButtonAcceder, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonAyuda, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jButtonAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAyudaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jButtonAyudaActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void jTextFieldUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldUsuarioActionPerformed
        this.jLabel2.setVisible(false);
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_jTextFieldUsuarioActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButtonAccederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAccederActionPerformed
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButtonAccederActionPerformed
 
     private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
         this.jLabel2.setVisible(false);
     }//GEN-LAST:event_jPasswordField1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButtonAcceder;
+    private javax.swing.JButton jButtonAyuda;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextFieldUsuario;
     // End of variables declaration//GEN-END:variables
 
     public final String getUsuario(){
-        return this.jTextField1.getText();
+        return this.jTextFieldUsuario.getText();
     }
     public final String getHash(){
         String contra = String.valueOf(this.jPasswordField1.getPassword());
         String hash = GestorSeguridad.hashearContra(contra);
         return hash;
+    }
+    public void autenticar(){
+        // POR HACER
+    }
+    public void crearPanel(Usuario usuarioEncontrado){
+        if (usuarioEncontrado instanceof Administrador) {
+    
+    
+    Administrador elAdmin = (Administrador) usuarioEncontrado;
+    
+    
+    PanelAdmin panelAdmin = new PanelAdmin(elAdmin);
+    panelAdmin.setVisible(true);
+    
+} else if (usuarioEncontrado instanceof Socio) {
+    
+    // IMPORTANTE, ESTA PUESTO LAS BARRAS PARA QUE COMPILE, HAY QUE QUITARLAS CUANDO ESO
+    Socio elSocio = (Socio) usuarioEncontrado;
+    // PanelSocio panelSocio = new PanelSocio(elSocio);
+    this.setVisible(false);
+    //panelSocio.setVisible(true);
+    this.dispose();
+    
+}
     }
     public void cerrarVentana(){
         //Cerrar ventana en forma de código: https://stackoverflow.com/questions/1234912/how-to-programmatically-close-a-jframe
