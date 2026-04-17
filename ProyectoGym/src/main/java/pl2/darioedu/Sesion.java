@@ -1,25 +1,27 @@
 package pl2.darioedu;
 
+import java.io.Serializable;
 import java.time.*;
 /*
 * Hay que establecer algunas características más relacionadas con la fecha: sea numDia (ya que dia es DAYOFWEEK), sea mes y año
 */
 
-public class Sesion {
+public class Sesion implements Serializable {
+    //Voy a poner las horas como de tipo entero ya que con LocalTime es dificil operar
     private int anno;
     private int mes;
     private int numDia;
     private DayOfWeek dia;
-    private LocalTime horaInicio;
-    private LocalTime horaFin;
-
-    public Sesion(DayOfWeek dia, LocalTime horaIni, LocalTime horaFin){
+    private int horaInicio;
+    private int horaFin;
+    
+    public Sesion(DayOfWeek dia, int horaIni, int horaFin){
         this.dia = dia;
         this.horaInicio = horaIni;
         this.horaFin = horaFin;
     }
 
-    public Sesion(int anno, int mes, DayOfWeek dia, LocalTime horaInicio, LocalTime horaFin) {
+    public Sesion(int anno, int mes, DayOfWeek dia, int horaInicio, int horaFin) {
         this.anno = anno;
         this.mes = mes;
         this.numDia = dia.getValue();
@@ -38,11 +40,11 @@ public class Sesion {
         this.numDia = dia.getValue();
     }
 
-    public void setHoraIni(LocalTime hora){
+    public void setHoraIni(int hora){
         this.horaInicio = hora;
     }
 
-    public void setHoraFin(LocalTime hora){
+    public void setHoraFin(int hora){
         this.horaFin = hora;
     }
 
@@ -50,11 +52,11 @@ public class Sesion {
         return this.dia;
     }
 
-    public LocalTime getHoraInicio(){
+    public int getHoraInicio(){
         return this.horaInicio;
     }
 
-    public LocalTime getHoraFin(){
+    public int getHoraFin(){
         return this.horaFin;
     }
     public int getAnno(){
@@ -67,6 +69,46 @@ public class Sesion {
     
     public int getNumDiA(){
         return this.numDia;
+    }
+    public String getSesionIdentificativo(){
+        //Creo esta clase para tema de la interfaz
+        if (this.numDia<10){
+          if (this.horaInicio<10){
+            if (this.horaFin<10){
+               return (anno + "" + mes + ":" + numDia + ":" + horaInicio + ":" + horaFin); 
+            }
+            else{
+                return (anno + "" + mes + ":" + numDia + ":" + horaInicio + ":" + horaFin);
+            }
+          }
+          else{
+              if (this.horaFin<10){
+                return (anno + "" + mes + ":" + numDia + ":" + horaInicio + ":" + horaFin);
+            }
+              else{
+                return (anno + "" + mes + ":" + numDia + ":" + horaInicio + ":" + horaFin);  
+              }
+          }
+        }
+        else{
+           if (this.horaInicio<10){
+            if (this.horaFin<10){
+                return (anno + "" + mes + ":" + numDia + ":" + horaInicio + ":" + horaFin);
+            }
+            else{
+                return (anno + "" + mes + ":" + numDia + ":" + horaInicio + ":" + horaFin);
+            }
+          }
+          else{
+              if (this.horaFin<10){
+                return (anno + "" + mes + ":" + numDia + ":" + horaInicio + ":" + horaFin);
+            }
+              else{
+                  return (anno + "" + mes + ":" + numDia + ":" + horaInicio + ":" + horaFin);
+              }
+            }
+        
+        }   
     }
     
     @Override

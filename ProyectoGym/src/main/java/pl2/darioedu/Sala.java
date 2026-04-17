@@ -1,6 +1,8 @@
 package pl2.darioedu;
 
-public class Sala {
+import java.io.Serializable;
+
+public class Sala implements Serializable{
     private int aforo;
     private String nombre;
     private int personasApuntadas;
@@ -9,6 +11,12 @@ public class Sala {
         this.nombre = nombre;
         this.aforo = aforo;
         this.personasApuntadas = 0;
+    }
+    
+    public Sala(String nombre, int aforo, int personasApuntadas){
+        this.nombre = nombre;
+        this.aforo = aforo;
+        this.personasApuntadas = personasApuntadas;
     }
     public void setNombre(String nombre){
         this.nombre = nombre;
