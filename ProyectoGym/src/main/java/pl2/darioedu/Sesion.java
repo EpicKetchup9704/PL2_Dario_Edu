@@ -83,6 +83,46 @@ public class Sesion implements Serializable {
     public int getNumDiA(){
         return this.numDia;
     }
+    public String getSesionIdentificativo(){
+        //Creo esta clase para tema de la interfaz
+        if (this.numDia<10){
+          if (this.horaInicio<10){
+            if (this.horaFin<10){
+               return (anno + "" + mes + ":" + numDia + ":" + horaInicio + ":" + horaFin); 
+            }
+            else{
+                return (anno + "" + mes + ":" + numDia + ":" + horaInicio + ":" + horaFin);
+            }
+          }
+          else{
+              if (this.horaFin<10){
+                return (anno + "" + mes + ":" + numDia + ":" + horaInicio + ":" + horaFin);
+            }
+              else{
+                return (anno + "" + mes + ":" + numDia + ":" + horaInicio + ":" + horaFin);  
+              }
+          }
+        }
+        else{
+           if (this.horaInicio<10){
+            if (this.horaFin<10){
+                return (anno + "" + mes + ":" + numDia + ":" + horaInicio + ":" + horaFin);
+            }
+            else{
+                return (anno + "" + mes + ":" + numDia + ":" + horaInicio + ":" + horaFin);
+            }
+          }
+          else{
+              if (this.horaFin<10){
+                return (anno + "" + mes + ":" + numDia + ":" + horaInicio + ":" + horaFin);
+            }
+              else{
+                  return (anno + "" + mes + ":" + numDia + ":" + horaInicio + ":" + horaFin);
+              }
+            }
+        
+        }   
+    }
     
     @Override
     public String toString(){
