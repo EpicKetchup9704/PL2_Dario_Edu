@@ -9,16 +9,19 @@ import java.awt.Color;
  * @author Darío DP -> :)
  */
 public class JPanelCalendario extends javax.swing.JPanel {
+    private int contador = 0;
+    private int ultimoPulsado;
     private int mes;
     private String nombreMes;
     private int anno;
-    private final int diaMin = LocalDate.now().getDayOfWeek().getValue();
+    private final int diaMin = LocalDate.now().getDayOfMonth();
     private final int annoMin = LocalDate.now().getYear();
     private final int mesMin = LocalDate.now().getMonthValue();
     private final int annoMax = 2030; //Establecemos el valor máximo de los años a x.
     private final int mesMax = 12; //Establecemos el mes máximo
     private final int diaMax = 31; //Establecemos el día maximo
-    private final ArrayList<Integer> valoresBotones = crearValoresListaBotones(anno,mes);
+    private ArrayList<Integer> valoresBotones;
+    private final ArrayList<JToggleButton> listaBotones;
     /**
      * Creates new form CalendarioJPanel
      */
@@ -26,64 +29,55 @@ public class JPanelCalendario extends javax.swing.JPanel {
     public JPanelCalendario() {
         this.mes = LocalDate.now().getMonthValue(); //->int
         this.anno = LocalDate.now().getYear(); //->int
-        this.nombreMes = Globales.listaMeses[this.mes];
+        this.nombreMes = Globales.listaMeses[mes-1];
         initComponents(); //->Se inician componentes
+        this.listaBotones = new ArrayList<>(Arrays.asList(B1,B2,B3,B4,B5,B6,B7,B8,B9,B10,B11,B12,B13,B14,B15,B16,B17,B18,B19,B20,B21,B22,B23,B24,B25,B26,B27,B28,B29,B30,B31,B32,B33,B34,B35,B36,B37,B38,B39,B40,B41,B42));
         this.Anno.setText(this.nombreMes + " " + String.valueOf(this.anno)); //Se va a poner el texo como mes + + anno
-        ArrayList<Integer> valores = this.crearValoresListaBotonesMin(this.anno, this.mes);
-        this.setValorBotones(valores);
+        this.valoresBotones = this.crearValoresListaBotonesMin(this.anno, this.mes);
+        this.setValorBotones(this.valoresBotones);
+        this.jButton1.setEnabled(false);
+        this.jButton2.setEnabled(true);
     }
- //Me he quedado aquí revisando, mirar más tarde;
     public JPanelCalendario(int mes, String nombreMes, int anno) {
         //Creación del JPanelInicial
         this.mes = mes;
         this.nombreMes = nombreMes;
         this.anno = anno;
-        this.nombreMes = Globales.listaMeses[mes];
+        this.nombreMes = Globales.listaMeses[mes-1];
         initComponents();
-        this.Anno.setText(Globales.listaMeses[mes] + " " + String.valueOf(anno));
+        this.listaBotones = new ArrayList<>(Arrays.asList(B1,B2,B3,B4,B5,B6,B7,B8,B9,B10,B11,B12,B13,B14,B15,B16,B17,B18,B19,B20,B21,B22,B23,B24,B25,B26,B27,B28,B29,B30,B31,B32,B33,B34,B35,B36,B37,B38,B39,B40,B41,B42));
+        this.Anno.setText(Globales.listaMeses[mes-1] + " " + String.valueOf(anno));
         ArrayList<Integer> valores = JPanelCalendario.crearValoresListaBotones(anno, mes);
         this.setValorBotones(valores);
     }
-    public JPanelCalendario(int mes, int anno){
-        initComponents();
-        this.mes = mes;
-        this.nombreMes = Globales.listaMeses[mes-1];
-        this.anno = anno;
-    }
     public void setColorCelda(int dia, Color color){
         //Con este método hacemos que una celda (correspondiente con su posicion) se coloree de un color en concreto
-        this.listaBotones.get(valoresBotones.get(dia)).setForeground(color);
+        this.listaBotones.get(this.valoresBotones.get(dia)).setForeground(color);
     }
     public boolean[] setEstadoFlechas(int anno, int mes){
-        /*
-        * Vamos a devolver dos valores para las flechas, una lista de estilo boolean,boolean; donde el primero es para la izq y el otro para la derecha 
-        */
-        if (anno>annoMin ){
-            if (mes<=mesMin){
-                boolean[] devolver = {false,true};
-                return devolver;
-            }
-            boolean[] devolver = {true,false};
-            return devolver;
-        }
-        else{
-            if(mes>=mesMax){
-                boolean[] devolver = {true,false};
-                return devolver;
-            }
-            boolean[] devolver = {true,false};
-            return devolver;
-        }
+    if (anno == annoMin && mes == mesMin){
+        boolean [] devolver ={false, true};
+        return devolver;
     }
+    else if (anno == annoMax && mes == mesMax){
+        boolean [] devolver ={true,false};
+        return devolver;
+    }
+    else{
+        boolean [] devolver ={true, true};
+        return devolver;}
+}
     public void refrescarJPanel(int anno, int mes){
+        this.anno = anno;
+        this.mes = mes;
         this.jButton1.setEnabled(setEstadoFlechas(anno,mes)[0]);
         this.jButton2.setEnabled(setEstadoFlechas(anno,mes)[1]);
-        this.setTitulo(mes, anno);
         this.nombreMes = Globales.listaMeses[mes-1];
+        this.Anno.setText(this.nombreMes + " " + String.valueOf(this.anno));
         if (anno<=annoMin && mes <=mesMin){
             this.setValorBotones(this.crearValoresListaBotonesMin(anno, mes));
         }
-        else if (anno >=annoMax && mes >=annoMax){
+        else if (anno >=annoMax && mes >=mesMax){
             this.setValorBotones(this.crearValoresListaBotonesMax(anno, mes));
         }
         else{this.setValorBotones(crearValoresListaBotones(anno, mes));}
@@ -94,15 +88,18 @@ public class JPanelCalendario extends javax.swing.JPanel {
         Permite crear una lista de valores enteros para el estado de los botones (0 si no es visible y su correspondiente dia)
         */
         ArrayList<Integer> lista = new ArrayList<>();//Ponemos Integer (clase envoltura) ya que int se refiere al tipo de dato
-        int numero = LocalDate.of(anno,mes,1).getDayOfWeek().ordinal(); //Empezamos averiguando qué día empieza el mes y lo pasamos a su valor enter
-        int max = LocalDate.of(anno,mes,1).getMonth().maxLength(); //Devuelve el último día del mes
+        int numero = LocalDate.of(anno,mes,1).getDayOfWeek().getValue(); //Empezamos averiguando qué día empieza el mes y lo pasamos a su valor enter
+        int max = LocalDate.of(anno,mes,1).lengthOfMonth(); //Devuelve el último día del mes
         //Esta parte es para insertar los números correspondientes antes de la aparicion del uno
-        for (int i=0; i<(7-numero);i++){
+        for (int i=1; i<(numero);i++){
             lista.add(0);
         }
         //Esta parte es para añadir todos los días del mes
         for (int i = 1; i <= max; i++){
             lista.add(i);
+        }
+        while (lista.size() < 42){
+            lista.add(0);
         }
         return lista;
     }
@@ -118,7 +115,7 @@ public class JPanelCalendario extends javax.swing.JPanel {
     public final ArrayList<Integer> crearValoresListaBotonesMax(int anno, int mes){
         //Método para cuando el mes coincide con el mes max y anno max coinciden
         ArrayList<Integer> listaAuxiliar = crearValoresListaBotones(anno,mes);
-                for (int i = diaMax - 1; i<35;i++){
+                for (int i = diaMax - 1; i<listaAuxiliar.size();i++){
                     listaAuxiliar.set(i, 0);
                 }
         return listaAuxiliar;
@@ -127,19 +124,43 @@ public class JPanelCalendario extends javax.swing.JPanel {
     public void setPeriodo(int mes, int anno){
         this.mes = mes;
         this.anno = anno;
-        this.nombreMes = Globales.listaMeses[mes];
+        this.nombreMes = Globales.listaMeses[mes-1];
     }
     
     public void setTitulo(int mes, int anno){
-        this.Anno.setText(Globales.listaMeses[mes] + String.valueOf(anno));
+        this.Anno.setText(Globales.listaMeses[mes-1] +" "+ String.valueOf(anno));
     }
     
     public final void setValorBotones(ArrayList<Integer> listaNum){ //Lo llamamos en el constructor y puede hacer una sobrecarga de metodos = final
-        for (JToggleButton aux : listaBotones){
-            int posicion = Integer.parseInt(aux.getName().substring(1)) - 1; //Obtenemos el nombre de la variable, escogemos el numero y le restamos 1
-            aux.setText(String.valueOf(listaNum.get(posicion).intValue())); //Hay que pasar de Integer a int
-            aux.setVisible(!(posicion==0)); //Si el valor del ArrayList es 0, se oculta
+        for (int i = 0; i < this.listaBotones.size(); i++){
+        JToggleButton aux = this.listaBotones.get(i);
+        int valor = (int)listaNum.get(i);
+        if (valor==0){
+            aux.setText(" ");
+            aux.setEnabled(false);}
+        else{
+            if((this.mes == mesMin) && (this.anno == annoMin) && (valor<=diaMin)){
+                aux.setText(String.valueOf(valor));
+                aux.setEnabled(false);}
+            if((this.mes == mesMax) && (this.anno == annoMax) && (valor>=diaMax)){
+                aux.setText(String.valueOf(valor));
+                aux.setEnabled(false);}
+        else{
+            aux.setText(String.valueOf(valor));
+            aux.setEnabled(true);  }
+            }
         }
+        
+    }
+    public int getMesCalendario(){
+        return this.mes;
+    }
+    
+    public int getAnnoCalendario(){
+        return this.anno;
+    }
+    public int getDiaCalendarioPulsadoUltimo(){
+        return this.ultimoPulsado;
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -188,10 +209,17 @@ public class JPanelCalendario extends javax.swing.JPanel {
         B30 = new javax.swing.JToggleButton();
         B31 = new javax.swing.JToggleButton();
         B32 = new javax.swing.JToggleButton();
+        B36 = new javax.swing.JToggleButton();
+        B37 = new javax.swing.JToggleButton();
+        B38 = new javax.swing.JToggleButton();
+        B39 = new javax.swing.JToggleButton();
+        B40 = new javax.swing.JToggleButton();
+        B41 = new javax.swing.JToggleButton();
+        B42 = new javax.swing.JToggleButton();
 
         setMaximumSize(new java.awt.Dimension(210, 370));
         setMinimumSize(new java.awt.Dimension(210, 370));
-        setPreferredSize(new java.awt.Dimension(210, 370));
+        setPreferredSize(new java.awt.Dimension(210, 400));
 
         Anno.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
         Anno.setText("Septiembre 2026");
@@ -453,98 +481,158 @@ public class JPanelCalendario extends javax.swing.JPanel {
         B32.addChangeListener(this::B32StateChanged);
         B32.addActionListener(this::B32ActionPerformed);
 
+        B36.setText("1");
+        B36.setMaximumSize(new java.awt.Dimension(43, 30));
+        B36.setMinimumSize(new java.awt.Dimension(43, 30));
+        B36.setPreferredSize(new java.awt.Dimension(43, 30));
+        B36.addChangeListener(this::B36StateChanged);
+        B36.addActionListener(this::B36ActionPerformed);
+
+        B37.setText("1");
+        B37.setMaximumSize(new java.awt.Dimension(43, 30));
+        B37.setMinimumSize(new java.awt.Dimension(43, 30));
+        B37.setPreferredSize(new java.awt.Dimension(43, 30));
+        B37.addChangeListener(this::B37StateChanged);
+        B37.addActionListener(this::B37ActionPerformed);
+
+        B38.setText("1");
+        B38.setMaximumSize(new java.awt.Dimension(43, 30));
+        B38.setMinimumSize(new java.awt.Dimension(43, 30));
+        B38.setPreferredSize(new java.awt.Dimension(43, 30));
+        B38.addChangeListener(this::B38StateChanged);
+        B38.addActionListener(this::B38ActionPerformed);
+
+        B39.setText("1");
+        B39.setMaximumSize(new java.awt.Dimension(43, 30));
+        B39.setMinimumSize(new java.awt.Dimension(43, 30));
+        B39.setPreferredSize(new java.awt.Dimension(43, 30));
+        B39.addChangeListener(this::B39StateChanged);
+        B39.addActionListener(this::B39ActionPerformed);
+
+        B40.setText("1");
+        B40.setMaximumSize(new java.awt.Dimension(43, 30));
+        B40.setMinimumSize(new java.awt.Dimension(43, 30));
+        B40.setPreferredSize(new java.awt.Dimension(43, 30));
+        B40.addChangeListener(this::B40StateChanged);
+        B40.addActionListener(this::B40ActionPerformed);
+
+        B41.setText("1");
+        B41.setMaximumSize(new java.awt.Dimension(43, 30));
+        B41.setMinimumSize(new java.awt.Dimension(43, 30));
+        B41.setPreferredSize(new java.awt.Dimension(43, 30));
+        B41.addChangeListener(this::B41StateChanged);
+        B41.addActionListener(this::B41ActionPerformed);
+
+        B42.setText("1");
+        B42.setMaximumSize(new java.awt.Dimension(43, 30));
+        B42.setMinimumSize(new java.awt.Dimension(43, 30));
+        B42.setPreferredSize(new java.awt.Dimension(43, 30));
+        B42.addChangeListener(this::B42StateChanged);
+        B42.addActionListener(this::B42ActionPerformed);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap()
+                        .addComponent(Anno))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(Anno))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(B1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0)
-                                .addComponent(B2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0)
-                                .addComponent(B3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0)
-                                .addComponent(B4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0)
-                                .addComponent(B5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0)
-                                .addComponent(B6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0)
-                                .addComponent(B7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(B8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0)
-                                .addComponent(B9, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0)
-                                .addComponent(B10, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0)
-                                .addComponent(B11, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0)
-                                .addComponent(B12, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0)
-                                .addComponent(B13, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0)
-                                .addComponent(B14, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(B15, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0)
-                                .addComponent(B16, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0)
-                                .addComponent(B17, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0)
-                                .addComponent(B18, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0)
-                                .addComponent(B19, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0)
-                                .addComponent(B20, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0)
-                                .addComponent(B21, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(B22, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0)
-                                .addComponent(B23, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0)
-                                .addComponent(B24, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0)
-                                .addComponent(B25, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0)
-                                .addComponent(B26, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0)
-                                .addComponent(B27, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0)
-                                .addComponent(B28, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(B29, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0)
-                                .addComponent(B30, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0)
-                                .addComponent(B31, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0)
-                                .addComponent(B32, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0)
-                                .addComponent(B33, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0)
-                                .addComponent(B34, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0)
-                                .addComponent(B35, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(B1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(B2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(B3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(B4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(B5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(B6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(B7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(B8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(B9, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(B10, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(B11, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(B12, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(B13, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(B14, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(B15, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(B16, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(B17, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(B18, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(B19, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(B20, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(B21, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(B22, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(B23, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(B24, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(B25, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(B26, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(B27, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(B28, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(B29, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(B30, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(B31, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(B32, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(B33, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(B34, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(B35, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(B36, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(B38, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(B39, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(B40, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(B41, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(B42, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(B37, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(6, 6, 6)
                 .addComponent(Anno)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -604,7 +692,19 @@ public class JPanelCalendario extends javax.swing.JPanel {
                         .addComponent(B32, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(B33, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(B34, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(B35, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(B35, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(B36, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(B38, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(B39, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(B40, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(B41, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(B42, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(B37, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         B1.getAccessibleContext().setAccessibleName("Boton1");
@@ -613,25 +713,26 @@ public class JPanelCalendario extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if ((this.mes -1) < 1){ //O ==0, es lo mismo
-            this.refrescarJPanel(anno-1, 12);
+            refrescarJPanel(anno-1, 12);
         }
         else{
-            this.refrescarJPanel(anno,this.mes-1);
+            refrescarJPanel(anno,mes-1);
         }
              
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        if ((this.mes +1) > 12){ //O ==0, es lo mismo
-            this.refrescarJPanel(anno+1, 1);
+        if ((mes +1) > 12){ //O ==0, es lo mismo
+            refrescarJPanel(anno+1, 1);
         }
         else{
-            this.refrescarJPanel(anno,this.mes+1);
+            refrescarJPanel(anno,mes+1);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void B1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B1ActionPerformed
-        // TODO add your handling code here:
+        this.contador++;
+        this.ultimoPulsado = Integer.parseInt(B1.getText());
     }//GEN-LAST:event_B1ActionPerformed
 
     private void B1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B1StateChanged
@@ -910,6 +1011,62 @@ public class JPanelCalendario extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_B32ActionPerformed
 
+    private void B36StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B36StateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B36StateChanged
+
+    private void B36ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B36ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B36ActionPerformed
+
+    private void B37StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B37StateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B37StateChanged
+
+    private void B37ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B37ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B37ActionPerformed
+
+    private void B38StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B38StateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B38StateChanged
+
+    private void B38ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B38ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B38ActionPerformed
+
+    private void B39StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B39StateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B39StateChanged
+
+    private void B39ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B39ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B39ActionPerformed
+
+    private void B40StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B40StateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B40StateChanged
+
+    private void B40ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B40ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B40ActionPerformed
+
+    private void B41StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B41StateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B41StateChanged
+
+    private void B41ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B41ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B41ActionPerformed
+
+    private void B42StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B42StateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B42StateChanged
+
+    private void B42ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B42ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_B42ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Anno;
@@ -942,7 +1099,14 @@ public class JPanelCalendario extends javax.swing.JPanel {
     private javax.swing.JToggleButton B33;
     private javax.swing.JToggleButton B34;
     private javax.swing.JToggleButton B35;
+    private javax.swing.JToggleButton B36;
+    private javax.swing.JToggleButton B37;
+    private javax.swing.JToggleButton B38;
+    private javax.swing.JToggleButton B39;
     private javax.swing.JToggleButton B4;
+    private javax.swing.JToggleButton B40;
+    private javax.swing.JToggleButton B41;
+    private javax.swing.JToggleButton B42;
     private javax.swing.JToggleButton B5;
     private javax.swing.JToggleButton B6;
     private javax.swing.JToggleButton B7;
@@ -951,6 +1115,6 @@ public class JPanelCalendario extends javax.swing.JPanel {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     // End of variables declaration//GEN-END:variables
-    private final ArrayList<JToggleButton> listaBotones = new ArrayList<>(Arrays.asList(B1,B2,B3,B4,B5,B6,B7,B8,B9,B10,B11,B12,B13,B14,B15,B16,B17,B18,B19,B20,B21,B22,B23,B24,B25,B26,B27,B28,B29,B30,B31,B32,B33,B34,B35));
+   
     
 }
