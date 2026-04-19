@@ -7,6 +7,7 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.swing.JFrame;
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 //Estoy haciendo pruebas en general;
@@ -18,6 +19,7 @@ public class Main {
             ObjectInputStream aux = new ObjectInputStream(new FileInputStream("listaUsuarios.dat"));
             ArrayList<Usuario> user = (ArrayList<Usuario>) aux.readObject();
             aux.close();
+            if (user == null){user = new ArrayList<>();}
             return user;
         }
         catch (IOException | ClassNotFoundException error){
@@ -39,6 +41,7 @@ public class Main {
             ObjectInputStream aux = new ObjectInputStream(new FileInputStream("listaActividades.dat"));
             ArrayList<Actividad> actividades = (ArrayList<Actividad>) aux.readObject();
             aux.close();
+            if (actividades == null){actividades = new ArrayList<>();}
             return actividades;
         }
         catch (IOException | ClassNotFoundException error){
@@ -88,6 +91,18 @@ public class Main {
     }
     
     public static void main(String[] args) {
-       
+       ArrayList<Usuario> listaUsuario = setListaUsuarios();
+       ArrayList<Actividad> listaActividades = setListaActividades();
+       JFrame ventana = new JFrame("Hola, es una prueba");
+       JPanelCalendario panel = new JPanelCalendario();
+       ventana.add(panel);
+       ventana.setSize(500,500);
+       ventana.setVisible(true);
+       ventana.setDefaultCloseOperation(1);
+       while(ventana.isVisible()){
+       System.out.print(panel.getAnnoCalendario());
+       System.out.println(panel.getMesCalendario());
+       System.out.println(panel.getDiaCalendarioPulsadoUltimo());}
+    
     }
 }

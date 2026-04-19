@@ -37,7 +37,6 @@ public class Actividad implements Serializable{
     public void quitarClase(Sesion clase){
         this.listaSesiones.remove(clase);
     }
-
     public ArrayList<Sesion> getSesiones(){
         return listaSesiones ;
         // IMPORTANTE, he creado en Sesion un toString, tenemos que ver como integrarlo con la interfaz

@@ -8,6 +8,8 @@ import java.time.*;
 
 public class Sesion implements Serializable {
     //Voy a poner las horas como de tipo entero ya que con LocalTime es dificil operar
+    //Asimismo, para la búsqueda por días es más eficiente si creo un identificador estilo cadena
+    //y compararlas, antes que ir operando por todos los aspectos;
     private int anno;
     private int mes;
     private int numDia;
@@ -29,6 +31,17 @@ public class Sesion implements Serializable {
         this.horaInicio = horaInicio;
         this.horaFin = horaFin;
     }
+    
+    public String getSesionString(){ //Estandarización de longitud de cadena
+        String mesAux = mes<10 ? "0" + String.valueOf(mes) : String.valueOf(mes);
+        String diaAux = numDia<10 ? "0" + String.valueOf(numDia) : String.valueOf(numDia);
+        String horaIniAux = horaInicio<10 ? "0" +String.valueOf(horaInicio) : String.valueOf(horaInicio);
+        String horaFinAux = horaFin<10 ? "0" + String.valueOf(horaFin): String.valueOf(horaFin);
+        String annoAux = String.valueOf(anno);
+        return (annoAux+mesAux+diaAux+horaIniAux+horaFinAux);
+    }
+    
+    
     public void setNumDia(int num){
         this.numDia = num;
         //Hay que hacer algunos ajustes adicionales
