@@ -8,7 +8,7 @@ import java.awt.Color;
  *
  * @author Darío DP -> :)
  */
-public class CalendarioJPanel extends javax.swing.JPanel {
+public class JPanelCalendario extends javax.swing.JPanel {
     private int mes;
     private String nombreMes;
     private int anno;
@@ -23,7 +23,7 @@ public class CalendarioJPanel extends javax.swing.JPanel {
      * Creates new form CalendarioJPanel
      */
     
-    public CalendarioJPanel() {
+    public JPanelCalendario() {
         this.mes = LocalDate.now().getMonthValue(); //->int
         this.anno = LocalDate.now().getYear(); //->int
         this.nombreMes = Globales.listaMeses[this.mes];
@@ -33,7 +33,7 @@ public class CalendarioJPanel extends javax.swing.JPanel {
         this.setValorBotones(valores);
     }
  //Me he quedado aquí revisando, mirar más tarde;
-    public CalendarioJPanel(int mes, String nombreMes, int anno) {
+    public JPanelCalendario(int mes, String nombreMes, int anno) {
         //Creación del JPanelInicial
         this.mes = mes;
         this.nombreMes = nombreMes;
@@ -41,10 +41,10 @@ public class CalendarioJPanel extends javax.swing.JPanel {
         this.nombreMes = Globales.listaMeses[mes];
         initComponents();
         this.Anno.setText(Globales.listaMeses[mes] + " " + String.valueOf(anno));
-        ArrayList<Integer> valores = CalendarioJPanel.crearValoresListaBotones(anno, mes);
+        ArrayList<Integer> valores = JPanelCalendario.crearValoresListaBotones(anno, mes);
         this.setValorBotones(valores);
     }
-    public CalendarioJPanel(int mes, int anno){
+    public JPanelCalendario(int mes, int anno){
         initComponents();
         this.mes = mes;
         this.nombreMes = Globales.listaMeses[mes-1];
@@ -609,7 +609,6 @@ public class CalendarioJPanel extends javax.swing.JPanel {
 
         B1.getAccessibleContext().setAccessibleName("Boton1");
         B1.getAccessibleContext().setAccessibleDescription("");
-        B1.getAccessibleContext().setAccessibleParent(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

@@ -1,7 +1,8 @@
 package pl2.darioedu;
+import java.io.Serializable;
 import java.util.ArrayList;//Creamos un arrayList de nombre de dominios de correo válidos para que no haya usuarios con correos anónimos / desechables
 
-public class Usuario{
+public class Usuario implements Serializable{
     // Esto va a ser una clase padre, de aqui heredaran Administrador y Usuario Normal
     private final static ArrayList<String> dominioCorreo = Globales.dominios; //Modificar si se desea añadir alguno más
     protected final String nombre;
