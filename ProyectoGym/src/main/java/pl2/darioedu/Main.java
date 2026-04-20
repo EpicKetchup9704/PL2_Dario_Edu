@@ -17,7 +17,12 @@ import javax.swing.JScrollPane;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 //Estoy haciendo pruebas en general;
 public class Main {
-    public ArrayList<Actividad> listaActividades = setListaActividades();
+    public static ArrayList<Actividad> listaActividades = setListaActividades();
+    public static ArrayList<Usuario> listaUsuario = setListaUsuarios();
+    
+    public static ArrayList<Usuario> getListaUsuarioStatic(){return listaUsuario;}
+    public static ArrayList<Actividad> getListaActividadStatic(){return listaActividades;}
+    
     public static final ArrayList<Usuario> setListaUsuarios(){
         //Creamos este método ya que la clase Usuario no necesita de unArrayList para cada uno
         try{
@@ -117,7 +122,7 @@ public class Main {
        ArrayList<Usuario> listaUsuario = setListaUsuarios();
        ArrayList<Actividad> listaActividades = setListaActividades();
        //Ventana de prueba para crear el JScrolPane con separadores en una ventana
-       JPanel contenedor = new JPanel();
+       /*JPanel contenedor = new JPanel();
        contenedor.setSize(320,300);
        contenedor.setLayout(new BoxLayout(contenedor, BoxLayout.Y_AXIS));
        for (int i = 0; i<10;i++){
@@ -131,6 +136,12 @@ public class Main {
         ventana.add(scrollPane);
         ventana.setVisible(true);
         ventana.setSize(332,400);
-        ventana.setResizable(false);
+        ventana.setResizable(false);*/
+       /*JFrame ventana = new JFrame();
+       ventana.setSize(210,430);
+       JPanelCalendario calendario = new JPanelCalendario();
+       ventana.add(calendario);
+       ventana.setVisible(true);*/
+       PanelLogin inicio = new PanelLogin();
     }
 }

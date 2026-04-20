@@ -11,26 +11,59 @@ import javax.swing.ImageIcon;
  * @author Darío
  */
 public class JPanelMostrarInfo extends javax.swing.JPanel {
-    private Sesion sesion;
-    private Actividad actividad;
-    private Socio socio;
+    private boolean pulsado1 = false;
+    private boolean pulsado2 = false;
+    private Socio socio = null;
+    private Actividad actividad = null;
+    private Sesion sesion = null;
+    private boolean admin = false;
+
+    public Socio getSocio() {
+        return socio;
+    }
+
+    public Actividad getActividad() {
+        return actividad;
+    }
+
+    public Sesion getSesion() {
+        return sesion;
+    }
+
+    public boolean isAdmin() {
+        return admin;
+    }
+    
+    
+    public boolean getPulsadoB1(){
+        return this.pulsado1;
+    }
+    public boolean getPulsadoB2(){
+        return this.pulsado2;
+    }
+    
+    
     public JPanelMostrarInfo() {
         initComponents();
     }
     public JPanelMostrarInfo(Socio socio){
         initComponents();
+        this.socio = socio;
         this.Titulo.setText(socio.getNombre());
         this.AP1.setText("Correo: " + String.valueOf(socio.getCorreo()));
         this.AP2.setText("Telf: "+String.valueOf(socio.getTelefono()));
         this.AP3.setText("VIP: "+String.valueOf(socio.getVipStatus()));
         this.AP4.setText("Tarjeta: "+socio.getTarjeta());
         this.Imagen1.setVisible(false);
+        this.Imagen2.setVisible(true);
         if(socio.getVipStatus()==true){this.Imagen2.setIcon(new ImageIcon(("src/main/resources/Estrella.png")));}
-        else{this.Imagen2.setVisible(false);}
+        else{this.Imagen2.setVisible(true);
+            this.Imagen2.setIcon(new ImageIcon(("src/main/resources/Vacio.png")));}
     }
     public JPanelMostrarInfo(Actividad actividad){
         //Constructor para el admin, para mostrar actividades
         initComponents();
+        this.actividad = actividad;
             this.Titulo.setText(actividad.getTitulo());
             this.AP1.setText("Tipo: "+actividad.getTipo());
             this.AP2.setText("Sala: "+actividad.getSala().getNombre());
@@ -46,6 +79,10 @@ public class JPanelMostrarInfo extends javax.swing.JPanel {
     public JPanelMostrarInfo(Actividad actividad, Sesion clase, boolean esAdmin, Socio user){
         if(esAdmin){
             //Constructor para el admin, para mostrar reservas
+            this.actividad = actividad;
+            this.sesion = clase;
+            this.admin = true;
+            this.socio = user;
             this.Titulo.setText(actividad.getTitulo());
             this.AP1.setText("Tipo: "+actividad.getTipo());
             this.AP2.setText("Sala: "+actividad.getSala().getNombre());
@@ -61,6 +98,10 @@ public class JPanelMostrarInfo extends javax.swing.JPanel {
         else{
             if(user == null){
                 //Constructor para el usuario, para consulta de búsqueda (tema de Sesion)
+            this.actividad = actividad;
+            this.sesion = clase;
+            this.admin = false;
+            this.socio = null;
             this.Titulo.setText(actividad.getTitulo());
             this.AP1.setText("Tipo: "+actividad.getTipo());
             this.AP2.setText("Sala: "+actividad.getSala().getNombre());
@@ -74,6 +115,10 @@ public class JPanelMostrarInfo extends javax.swing.JPanel {
             }
             else{
                 //Constructor para el usuario, para consulta de reservas (tema de Sesion)
+                this.actividad = actividad;
+                this.sesion = clase;
+                this.admin = false;
+                this.socio = user;
                 this.Titulo.setText(actividad.getTitulo());
                 this.AP1.setText("Tipo: "+actividad.getTipo());
                 this.AP2.setText("Sala: "+actividad.getSala().getNombre());
@@ -162,11 +207,11 @@ public class JPanelMostrarInfo extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void Imagen2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Imagen2ActionPerformed
-        // TODO add your handling code here:
+        this.pulsado2 = true;
     }//GEN-LAST:event_Imagen2ActionPerformed
 
     private void Imagen1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Imagen1ActionPerformed
-        // TODO add your handling code here:
+       this.pulsado1 = true;
     }//GEN-LAST:event_Imagen1ActionPerformed
 
 

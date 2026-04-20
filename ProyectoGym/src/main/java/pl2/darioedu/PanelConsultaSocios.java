@@ -30,6 +30,8 @@ public class PanelConsultaSocios extends javax.swing.JFrame {
     private void initComponents() {
 
         jButtonVolverAtras = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        ButtonAddUsuario = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -38,21 +40,35 @@ public class PanelConsultaSocios extends javax.swing.JFrame {
         jButtonVolverAtras.setText("<-");
         jButtonVolverAtras.addActionListener(this::jButtonVolverAtrasActionPerformed);
 
+        ButtonAddUsuario.setBackground(new java.awt.Color(255, 153, 51));
+        ButtonAddUsuario.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        ButtonAddUsuario.setText("Añadir Socio");
+        ButtonAddUsuario.addActionListener(this::ButtonAddUsuarioActionPerformed);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButtonVolverAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(305, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButtonVolverAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ButtonAddUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButtonVolverAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(258, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonVolverAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ButtonAddUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -64,6 +80,10 @@ public class PanelConsultaSocios extends javax.swing.JFrame {
         new PanelAdmin(usuario).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButtonVolverAtrasActionPerformed
+
+    private void ButtonAddUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonAddUsuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ButtonAddUsuarioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -97,6 +117,8 @@ public class PanelConsultaSocios extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ButtonAddUsuario;
     private javax.swing.JButton jButtonVolverAtras;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

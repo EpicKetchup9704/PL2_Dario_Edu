@@ -9,7 +9,6 @@ import java.awt.Color;
  * @author Darío DP -> :)
  */
 public class JPanelCalendario extends javax.swing.JPanel {
-    private int contador = 0;
     private int ultimoPulsado;
     private int mes;
     private String nombreMes;
@@ -68,6 +67,8 @@ public class JPanelCalendario extends javax.swing.JPanel {
         return devolver;}
 }
     public void refrescarJPanel(int anno, int mes){
+        this.modificarEstadoResto("null");
+        this.ultimoPulsado = 0;
         this.anno = anno;
         this.mes = mes;
         this.jButton1.setEnabled(setEstadoFlechas(anno,mes)[0]);
@@ -131,6 +132,8 @@ public class JPanelCalendario extends javax.swing.JPanel {
         this.Anno.setText(Globales.listaMeses[mes-1] +" "+ String.valueOf(anno));
     }
     
+    
+    
     public final void setValorBotones(ArrayList<Integer> listaNum){ //Lo llamamos en el constructor y puede hacer una sobrecarga de metodos = final
         for (int i = 0; i < this.listaBotones.size(); i++){
         JToggleButton aux = this.listaBotones.get(i);
@@ -152,6 +155,13 @@ public class JPanelCalendario extends javax.swing.JPanel {
         }
         
     }
+    
+    public void modificarEstadoResto(String identificador){
+        for (JToggleButton aux : this.listaBotones){
+             aux.setSelected(aux.getText().equals(identificador));
+                     }
+    }
+    
     public int getMesCalendario(){
         return this.mes;
     }
@@ -161,6 +171,14 @@ public class JPanelCalendario extends javax.swing.JPanel {
     }
     public int getDiaCalendarioPulsadoUltimo(){
         return this.ultimoPulsado;
+    }
+    
+    public String getFechaSelecionada(){
+        String mesAux = this.mes<10 ? "0" + String.valueOf(mes) : String.valueOf(mes);
+        String diaAux = this.ultimoPulsado<10 ? "0" + String.valueOf(this.ultimoPulsado) : String.valueOf(this.ultimoPulsado);
+        String annoAux = String.valueOf(this.Anno);
+        if(!(this.ultimoPulsado == 0)){return (annoAux+mesAux+diaAux);}
+        else{return (annoAux+mesAux+"1");}
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -731,8 +749,8 @@ public class JPanelCalendario extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void B1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B1ActionPerformed
-        this.contador++;
         this.ultimoPulsado = Integer.parseInt(B1.getText());
+        this.modificarEstadoResto(this.B1.getText());
     }//GEN-LAST:event_B1ActionPerformed
 
     private void B1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B1StateChanged
@@ -744,7 +762,8 @@ public class JPanelCalendario extends javax.swing.JPanel {
     }//GEN-LAST:event_B2StateChanged
 
     private void B2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B2ActionPerformed
-        // TODO add your handling code here:
+        this.ultimoPulsado = Integer.parseInt(B2.getText());
+        this.modificarEstadoResto(this.B2.getText());
     }//GEN-LAST:event_B2ActionPerformed
 
     private void B3StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B3StateChanged
@@ -752,7 +771,8 @@ public class JPanelCalendario extends javax.swing.JPanel {
     }//GEN-LAST:event_B3StateChanged
 
     private void B3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B3ActionPerformed
-        // TODO add your handling code here:
+        this.ultimoPulsado = Integer.parseInt(B3.getText());
+        this.modificarEstadoResto(this.B3.getText());
     }//GEN-LAST:event_B3ActionPerformed
 
     private void B4StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B4StateChanged
@@ -760,7 +780,8 @@ public class JPanelCalendario extends javax.swing.JPanel {
     }//GEN-LAST:event_B4StateChanged
 
     private void B4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B4ActionPerformed
-        // TODO add your handling code here:
+        this.ultimoPulsado = Integer.parseInt(B4.getText());
+        this.modificarEstadoResto(this.B4.getText());
     }//GEN-LAST:event_B4ActionPerformed
 
     private void B5StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B5StateChanged
@@ -768,7 +789,8 @@ public class JPanelCalendario extends javax.swing.JPanel {
     }//GEN-LAST:event_B5StateChanged
 
     private void B5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B5ActionPerformed
-        // TODO add your handling code here:
+        this.ultimoPulsado = Integer.parseInt(this.B5.getText());
+        this.modificarEstadoResto(this.B5.getText());
     }//GEN-LAST:event_B5ActionPerformed
 
     private void B6StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B6StateChanged
@@ -776,7 +798,8 @@ public class JPanelCalendario extends javax.swing.JPanel {
     }//GEN-LAST:event_B6StateChanged
 
     private void B6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B6ActionPerformed
-        // TODO add your handling code here:
+        this.ultimoPulsado = Integer.parseInt(this.B6.getText());
+        this.modificarEstadoResto(this.B6.getText());
     }//GEN-LAST:event_B6ActionPerformed
 
     private void B7StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B7StateChanged
@@ -784,7 +807,8 @@ public class JPanelCalendario extends javax.swing.JPanel {
     }//GEN-LAST:event_B7StateChanged
 
     private void B7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B7ActionPerformed
-        // TODO add your handling code here:
+        this.ultimoPulsado = Integer.parseInt(this.B7.getText());
+        this.modificarEstadoResto(this.B7.getText());
     }//GEN-LAST:event_B7ActionPerformed
 
     private void B14StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B14StateChanged
@@ -792,7 +816,8 @@ public class JPanelCalendario extends javax.swing.JPanel {
     }//GEN-LAST:event_B14StateChanged
 
     private void B14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B14ActionPerformed
-        // TODO add your handling code here:
+        this.ultimoPulsado = Integer.parseInt(this.B14.getText());
+        this.modificarEstadoResto(this.B14.getText());
     }//GEN-LAST:event_B14ActionPerformed
 
     private void B9StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B9StateChanged
@@ -800,7 +825,8 @@ public class JPanelCalendario extends javax.swing.JPanel {
     }//GEN-LAST:event_B9StateChanged
 
     private void B9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B9ActionPerformed
-        // TODO add your handling code here:
+        this.ultimoPulsado = Integer.parseInt(this.B9.getText());
+        this.modificarEstadoResto(this.B9.getText());
     }//GEN-LAST:event_B9ActionPerformed
 
     private void B10StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B10StateChanged
@@ -808,23 +834,26 @@ public class JPanelCalendario extends javax.swing.JPanel {
     }//GEN-LAST:event_B10StateChanged
 
     private void B10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B10ActionPerformed
-        // TODO add your handling code here:
+        this.ultimoPulsado = Integer.parseInt(this.B10.getText());
+        this.modificarEstadoResto(this.B10.getText());
     }//GEN-LAST:event_B10ActionPerformed
 
     private void B11StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B11StateChanged
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_B11StateChanged
 
     private void B11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B11ActionPerformed
-        // TODO add your handling code here:
+        this.ultimoPulsado = Integer.parseInt(this.B11.getText());
+        this.modificarEstadoResto(this.B11.getText());
     }//GEN-LAST:event_B11ActionPerformed
 
     private void B12StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B12StateChanged
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_B12StateChanged
 
     private void B12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B12ActionPerformed
-        // TODO add your handling code here:
+        this.ultimoPulsado = Integer.parseInt(this.B12.getText());
+        this.modificarEstadoResto(this.B12.getText());
     }//GEN-LAST:event_B12ActionPerformed
 
     private void B13StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B13StateChanged
@@ -832,31 +861,35 @@ public class JPanelCalendario extends javax.swing.JPanel {
     }//GEN-LAST:event_B13StateChanged
 
     private void B13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B13ActionPerformed
-        // TODO add your handling code here:
+        this.ultimoPulsado = Integer.parseInt(this.B13.getText());
+        this.modificarEstadoResto(this.B13.getText());
     }//GEN-LAST:event_B13ActionPerformed
 
     private void B8StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B8StateChanged
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_B8StateChanged
 
     private void B8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B8ActionPerformed
-        // TODO add your handling code here:
+        this.ultimoPulsado = Integer.parseInt(this.B8.getText());
+        this.modificarEstadoResto(this.B8.getText());
     }//GEN-LAST:event_B8ActionPerformed
 
     private void B21StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B21StateChanged
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_B21StateChanged
 
     private void B21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B21ActionPerformed
-        // TODO add your handling code here:
+        this.ultimoPulsado = Integer.parseInt(this.B12.getText());
+        this.modificarEstadoResto(this.B12.getText());
     }//GEN-LAST:event_B21ActionPerformed
 
     private void B16StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B16StateChanged
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_B16StateChanged
 
     private void B16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B16ActionPerformed
-        // TODO add your handling code here:
+        this.ultimoPulsado = Integer.parseInt(this.B16.getText());
+        this.modificarEstadoResto(this.B16.getText());
     }//GEN-LAST:event_B16ActionPerformed
 
     private void B17StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B17StateChanged
@@ -864,15 +897,16 @@ public class JPanelCalendario extends javax.swing.JPanel {
     }//GEN-LAST:event_B17StateChanged
 
     private void B17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B17ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_B17ActionPerformed
+        this.ultimoPulsado = Integer.parseInt(this.B17.getText());
+        this.modificarEstadoResto(this.B17.getText());    }//GEN-LAST:event_B17ActionPerformed
 
     private void B18StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B18StateChanged
         // TODO add your handling code here:
     }//GEN-LAST:event_B18StateChanged
 
     private void B18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B18ActionPerformed
-        // TODO add your handling code here:
+        this.ultimoPulsado = Integer.parseInt(this.B18.getText());
+        this.modificarEstadoResto(this.B18.getText());
     }//GEN-LAST:event_B18ActionPerformed
 
     private void B19StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B19StateChanged
@@ -880,7 +914,8 @@ public class JPanelCalendario extends javax.swing.JPanel {
     }//GEN-LAST:event_B19StateChanged
 
     private void B19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B19ActionPerformed
-        // TODO add your handling code here:
+        this.ultimoPulsado = Integer.parseInt(this.B19.getText());
+        this.modificarEstadoResto(this.B19.getText());
     }//GEN-LAST:event_B19ActionPerformed
 
     private void B20StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B20StateChanged
@@ -888,7 +923,8 @@ public class JPanelCalendario extends javax.swing.JPanel {
     }//GEN-LAST:event_B20StateChanged
 
     private void B20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B20ActionPerformed
-        // TODO add your handling code here:
+        this.ultimoPulsado = Integer.parseInt(this.B20.getText());
+        this.modificarEstadoResto(this.B20.getText());
     }//GEN-LAST:event_B20ActionPerformed
 
     private void B15StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B15StateChanged
@@ -896,7 +932,8 @@ public class JPanelCalendario extends javax.swing.JPanel {
     }//GEN-LAST:event_B15StateChanged
 
     private void B15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B15ActionPerformed
-        // TODO add your handling code here:
+        this.ultimoPulsado = Integer.parseInt(this.B15.getText());
+        this.modificarEstadoResto(this.B15.getText());
     }//GEN-LAST:event_B15ActionPerformed
 
     private void B26StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B26StateChanged
@@ -904,7 +941,8 @@ public class JPanelCalendario extends javax.swing.JPanel {
     }//GEN-LAST:event_B26StateChanged
 
     private void B26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B26ActionPerformed
-        // TODO add your handling code here:
+        this.ultimoPulsado = Integer.parseInt(this.B26.getText());
+        this.modificarEstadoResto(this.B26.getText());
     }//GEN-LAST:event_B26ActionPerformed
 
     private void B27StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B27StateChanged
@@ -912,7 +950,8 @@ public class JPanelCalendario extends javax.swing.JPanel {
     }//GEN-LAST:event_B27StateChanged
 
     private void B27ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B27ActionPerformed
-        // TODO add your handling code here:
+        this.ultimoPulsado = Integer.parseInt(this.B27.getText());
+        this.modificarEstadoResto(this.B27.getText());
     }//GEN-LAST:event_B27ActionPerformed
 
     private void B22StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B22StateChanged
@@ -920,7 +959,8 @@ public class JPanelCalendario extends javax.swing.JPanel {
     }//GEN-LAST:event_B22StateChanged
 
     private void B22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B22ActionPerformed
-        // TODO add your handling code here:
+        this.ultimoPulsado = Integer.parseInt(this.B22.getText());
+        this.modificarEstadoResto(this.B22.getText());
     }//GEN-LAST:event_B22ActionPerformed
 
     private void B28StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B28StateChanged
@@ -928,7 +968,8 @@ public class JPanelCalendario extends javax.swing.JPanel {
     }//GEN-LAST:event_B28StateChanged
 
     private void B28ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B28ActionPerformed
-        // TODO add your handling code here:
+        this.ultimoPulsado = Integer.parseInt(this.B28.getText());
+        this.modificarEstadoResto(this.B28.getText());
     }//GEN-LAST:event_B28ActionPerformed
 
     private void B23StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B23StateChanged
@@ -936,7 +977,8 @@ public class JPanelCalendario extends javax.swing.JPanel {
     }//GEN-LAST:event_B23StateChanged
 
     private void B23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B23ActionPerformed
-        // TODO add your handling code here:
+        this.ultimoPulsado = Integer.parseInt(this.B23.getText());
+        this.modificarEstadoResto(this.B23.getText());
     }//GEN-LAST:event_B23ActionPerformed
 
     private void B24StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B24StateChanged
@@ -944,7 +986,8 @@ public class JPanelCalendario extends javax.swing.JPanel {
     }//GEN-LAST:event_B24StateChanged
 
     private void B24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B24ActionPerformed
-        // TODO add your handling code here:
+        this.ultimoPulsado = Integer.parseInt(this.B24.getText());
+        this.modificarEstadoResto(this.B24.getText());
     }//GEN-LAST:event_B24ActionPerformed
 
     private void B25StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B25StateChanged
@@ -952,7 +995,8 @@ public class JPanelCalendario extends javax.swing.JPanel {
     }//GEN-LAST:event_B25StateChanged
 
     private void B25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B25ActionPerformed
-        // TODO add your handling code here:
+        this.ultimoPulsado = Integer.parseInt(this.B25.getText());
+        this.modificarEstadoResto(this.B25.getText());
     }//GEN-LAST:event_B25ActionPerformed
 
     private void B33StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B33StateChanged
@@ -960,7 +1004,8 @@ public class JPanelCalendario extends javax.swing.JPanel {
     }//GEN-LAST:event_B33StateChanged
 
     private void B33ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B33ActionPerformed
-        // TODO add your handling code here:
+        this.ultimoPulsado = Integer.parseInt(this.B33.getText());
+        this.modificarEstadoResto(this.B33.getText());
     }//GEN-LAST:event_B33ActionPerformed
 
     private void B34StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B34StateChanged
@@ -968,7 +1013,8 @@ public class JPanelCalendario extends javax.swing.JPanel {
     }//GEN-LAST:event_B34StateChanged
 
     private void B34ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B34ActionPerformed
-        // TODO add your handling code here:
+        this.ultimoPulsado = Integer.parseInt(this.B34.getText());
+        this.modificarEstadoResto(this.B34.getText());
     }//GEN-LAST:event_B34ActionPerformed
 
     private void B29StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B29StateChanged
@@ -976,7 +1022,8 @@ public class JPanelCalendario extends javax.swing.JPanel {
     }//GEN-LAST:event_B29StateChanged
 
     private void B29ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B29ActionPerformed
-        // TODO add your handling code here:
+        this.ultimoPulsado = Integer.parseInt(this.B29.getText());
+        this.modificarEstadoResto(this.B29.getText());
     }//GEN-LAST:event_B29ActionPerformed
 
     private void B35StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B35StateChanged
@@ -984,7 +1031,8 @@ public class JPanelCalendario extends javax.swing.JPanel {
     }//GEN-LAST:event_B35StateChanged
 
     private void B35ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B35ActionPerformed
-        // TODO add your handling code here:
+        this.ultimoPulsado = Integer.parseInt(this.B35.getText());
+        this.modificarEstadoResto(this.B35.getText());
     }//GEN-LAST:event_B35ActionPerformed
 
     private void B30StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B30StateChanged
@@ -992,7 +1040,8 @@ public class JPanelCalendario extends javax.swing.JPanel {
     }//GEN-LAST:event_B30StateChanged
 
     private void B30ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B30ActionPerformed
-        // TODO add your handling code here:
+        this.ultimoPulsado = Integer.parseInt(this.B30.getText());
+        this.modificarEstadoResto(this.B30.getText());
     }//GEN-LAST:event_B30ActionPerformed
 
     private void B31StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B31StateChanged
@@ -1000,15 +1049,16 @@ public class JPanelCalendario extends javax.swing.JPanel {
     }//GEN-LAST:event_B31StateChanged
 
     private void B31ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B31ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_B31ActionPerformed
+        this.ultimoPulsado = Integer.parseInt(this.B31.getText());
+        this.modificarEstadoResto(this.B31.getText());    }//GEN-LAST:event_B31ActionPerformed
 
     private void B32StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B32StateChanged
         // TODO add your handling code here:
     }//GEN-LAST:event_B32StateChanged
 
     private void B32ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B32ActionPerformed
-        // TODO add your handling code here:
+        this.ultimoPulsado = Integer.parseInt(this.B32.getText());
+        this.modificarEstadoResto(this.B32.getText());  
     }//GEN-LAST:event_B32ActionPerformed
 
     private void B36StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B36StateChanged
@@ -1016,7 +1066,8 @@ public class JPanelCalendario extends javax.swing.JPanel {
     }//GEN-LAST:event_B36StateChanged
 
     private void B36ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B36ActionPerformed
-        // TODO add your handling code here:
+        this.ultimoPulsado = Integer.parseInt(this.B36.getText());
+        this.modificarEstadoResto(this.B36.getText());  
     }//GEN-LAST:event_B36ActionPerformed
 
     private void B37StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B37StateChanged
@@ -1024,7 +1075,8 @@ public class JPanelCalendario extends javax.swing.JPanel {
     }//GEN-LAST:event_B37StateChanged
 
     private void B37ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B37ActionPerformed
-        // TODO add your handling code here:
+        this.ultimoPulsado = Integer.parseInt(this.B37.getText());
+        this.modificarEstadoResto(this.B37.getText());  
     }//GEN-LAST:event_B37ActionPerformed
 
     private void B38StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B38StateChanged
@@ -1032,7 +1084,8 @@ public class JPanelCalendario extends javax.swing.JPanel {
     }//GEN-LAST:event_B38StateChanged
 
     private void B38ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B38ActionPerformed
-        // TODO add your handling code here:
+        this.ultimoPulsado = Integer.parseInt(this.B38.getText());
+        this.modificarEstadoResto(this.B38.getText());  
     }//GEN-LAST:event_B38ActionPerformed
 
     private void B39StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B39StateChanged
@@ -1040,7 +1093,8 @@ public class JPanelCalendario extends javax.swing.JPanel {
     }//GEN-LAST:event_B39StateChanged
 
     private void B39ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B39ActionPerformed
-        // TODO add your handling code here:
+        this.ultimoPulsado = Integer.parseInt(this.B39.getText());
+        this.modificarEstadoResto(this.B39.getText());  
     }//GEN-LAST:event_B39ActionPerformed
 
     private void B40StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B40StateChanged
@@ -1048,7 +1102,8 @@ public class JPanelCalendario extends javax.swing.JPanel {
     }//GEN-LAST:event_B40StateChanged
 
     private void B40ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B40ActionPerformed
-        // TODO add your handling code here:
+        this.ultimoPulsado = Integer.parseInt(this.B40.getText());
+        this.modificarEstadoResto(this.B40.getText());  
     }//GEN-LAST:event_B40ActionPerformed
 
     private void B41StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B41StateChanged
@@ -1056,7 +1111,8 @@ public class JPanelCalendario extends javax.swing.JPanel {
     }//GEN-LAST:event_B41StateChanged
 
     private void B41ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B41ActionPerformed
-        // TODO add your handling code here:
+        this.ultimoPulsado = Integer.parseInt(this.B41.getText());
+        this.modificarEstadoResto(this.B41.getText()); 
     }//GEN-LAST:event_B41ActionPerformed
 
     private void B42StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_B42StateChanged
@@ -1064,7 +1120,8 @@ public class JPanelCalendario extends javax.swing.JPanel {
     }//GEN-LAST:event_B42StateChanged
 
     private void B42ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B42ActionPerformed
-        // TODO add your handling code here:
+        this.ultimoPulsado = Integer.parseInt(this.B42.getText());
+        this.modificarEstadoResto(this.B42.getText()); 
     }//GEN-LAST:event_B42ActionPerformed
 
 

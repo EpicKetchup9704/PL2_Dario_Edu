@@ -23,10 +23,17 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jButtonVolverAtras" min="-2" pref="89" max="-2" attributes="0"/>
-              <EmptySpace pref="305" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="jButtonVolverAtras" min="-2" pref="89" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="ButtonAddUsuario" pref="293" max="32767" attributes="0"/>
+                  </Group>
+                  <Component id="jScrollPane1" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -34,8 +41,13 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jButtonVolverAtras" min="-2" pref="36" max="-2" attributes="0"/>
-              <EmptySpace pref="258" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jButtonVolverAtras" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
+                  <Component id="ButtonAddUsuario" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jScrollPane1" pref="246" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -53,6 +65,24 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonVolverAtrasActionPerformed"/>
+      </Events>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+    </Container>
+    <Component class="javax.swing.JButton" name="ButtonAddUsuario">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="33" green="99" red="ff" type="rgb"/>
+        </Property>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="24" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="A&#xf1;adir Socio"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ButtonAddUsuarioActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

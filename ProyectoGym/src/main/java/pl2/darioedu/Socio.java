@@ -10,6 +10,8 @@ public class Socio extends Usuario implements Serializable{
     private int telefono;
     private boolean isVip;
     private ArrayList<Actividad> listaActividades;
+    private ArrayList<Sesion> listaSesiones;
+    
     public Socio(String nombre, String correo, String contra, String direccion, int telefono, String tarjeta, boolean vip) {
         super(nombre, correo, contra);
         this.direccion = direccion;
@@ -18,6 +20,20 @@ public class Socio extends Usuario implements Serializable{
         this.isVip = vip;
 
     }
+    
+    public ArrayList<Sesion> getListaSesion(){
+        return this.listaSesiones;
+    }
+    
+    public void addSesion(Sesion clase){
+        this.listaSesiones.add(clase);
+    }
+    
+    public void removeSesion(Sesion clase){
+        this.listaSesiones.remove(clase);
+    }
+    
+    
     public void cambiarDireccion(String direccion){
         this.direccion = direccion;
     }
