@@ -50,12 +50,7 @@ public class Usuario implements Serializable{
         return this.hasheo ;
     }
 
-    public boolean autenticar(String contra){
-        String tempHash = contra + this.getSal();
-        return (GestorSeguridad.hashearContra(tempHash).equals(this.getHash()));
-
-
-    }
+    
     public static boolean validarCorreo(String correo){
         return((correo.length() != 0)&&(correo.split("@").length == 2)&&(dominioCorreo.contains((correo.split("@")[1]))));
     }

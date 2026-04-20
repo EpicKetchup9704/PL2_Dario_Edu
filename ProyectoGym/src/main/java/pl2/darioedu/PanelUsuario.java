@@ -15,7 +15,7 @@ public class PanelUsuario extends javax.swing.JFrame {
     /**
      * Creates new form PanelUsuario
      */
-    public PanelUsuario() {
+    public PanelUsuario(Socio soci) {
         initComponents();
     }
 
