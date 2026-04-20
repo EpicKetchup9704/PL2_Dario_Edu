@@ -40,6 +40,14 @@ public class Sesion implements Serializable {
         String annoAux = String.valueOf(anno);
         return (annoAux+mesAux+diaAux+horaIniAux+horaFinAux);
     }
+    public String getSesionStringFormateado(char separador){ //Estandarización de longitud de cadena
+        String mesAux = mes<10 ? "0" + String.valueOf(mes) : String.valueOf(mes);
+        String diaAux = numDia<10 ? "0" + String.valueOf(numDia) : String.valueOf(numDia);
+        String horaIniAux = horaInicio<10 ? "0" +String.valueOf(horaInicio) : String.valueOf(horaInicio);
+        String horaFinAux = horaFin<10 ? "0" + String.valueOf(horaFin): String.valueOf(horaFin);
+        String annoAux = String.valueOf(anno);
+        return (annoAux+separador+mesAux+separador+diaAux+separador+horaIniAux+separador+horaFinAux);
+    }
     
     
     public void setNumDia(int num){

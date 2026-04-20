@@ -12,7 +12,8 @@ public class Actividad implements Serializable{
     // Por ahora he creado una clase Sesion para tener bien empaquetadas las sesiones con sus horas correspondientes
 
     private ArrayList<Sesion> listaSesiones ;
-
+    private Sesion sesionUsuario;
+    
     public Actividad(String titulo, String tipo,String monitor, Sala sala, boolean extra){
         this.titulo = titulo ;
         this.tipo = tipo ;
@@ -29,8 +30,12 @@ public class Actividad implements Serializable{
         // Primero creamos la actividad, despues se le añaden o quitan sesiones
         this.esExtraordinaria = extra ;
     }
-    
-    
+    public String getSesionUser(){
+        return this.sesionUsuario.getSesionString();
+    }
+    public void setSesionUser(Sesion cad){
+       this.sesionUsuario = cad;
+    }
     public void addSesion(Sesion clase){
         this.listaSesiones.add(clase) ;
     }
@@ -57,6 +62,13 @@ public class Actividad implements Serializable{
     }
     public Sala getSala(){
         return this.sala;
+    }
+    public void setTitulo(String titulo){
+        this.titulo = titulo;
+    }
+    
+    public String getTitulo(){
+        return this.titulo;
     }
     
     @Override
