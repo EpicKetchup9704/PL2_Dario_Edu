@@ -119,8 +119,12 @@ public class PanelLogin extends javax.swing.JFrame {
         if (GestorSeguridad.autenticar1(correo, passString)){
             if (GestorSeguridad.autenticarEsAdmin(GestorSeguridad.autenticar2(correo))){
                 PanelAdmin ventanaAdmin = new PanelAdmin((Administrador) GestorSeguridad.autenticar2(correo));
+                this.setVisible(false);
+                this.dispose();
             } else {
                 PanelUsuario ventanaSocio = new PanelUsuario((Socio) GestorSeguridad.autenticar2(correo));
+                this.setVisible(false);
+                this.dispose();
             }
         } else{
             this.jLabel1.setVisible(true);
@@ -151,29 +155,10 @@ public class PanelLogin extends javax.swing.JFrame {
         String hash = GestorSeguridad.hashearContra(contra);
         return hash;
     }
-    public void autenticar(){
-        // POR HACER
-    }
-    public void crearPanel(Usuario usuarioEncontrado){
-        if (usuarioEncontrado instanceof Administrador) {
     
     
-    Administrador elAdmin = (Administrador) usuarioEncontrado;
     
-    
-    PanelAdmin panelAdmin = new PanelAdmin(elAdmin);
-    panelAdmin.setVisible(true);
-    
-} else if (usuarioEncontrado instanceof Socio) {
-    
-    // IMPORTANTE, ESTA PUESTO LAS BARRAS PARA QUE COMPILE, HAY QUE QUITARLAS CUANDO ESO
-    Socio elSocio = (Socio) usuarioEncontrado;
-    // PanelSocio panelSocio = new PanelSocio(elSocio);
-    this.setVisible(false);
-    //panelSocio.setVisible(true);
-    this.dispose();
-    
-}
+
     }
     public void cerrarVentana(){
         //Cerrar ventana en forma de código: https://stackoverflow.com/questions/1234912/how-to-programmatically-close-a-jframe
