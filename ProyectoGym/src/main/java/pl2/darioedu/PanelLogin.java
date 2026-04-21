@@ -31,34 +31,6 @@ public class PanelLogin extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 204, 102));
 
-<<<<<<< HEAD
-        jLabel1.setFont(new java.awt.Font("Caladea", 0, 48)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("JavaFit");
-        jLabel1.setPreferredSize(new java.awt.Dimension(140, 60));
-        getContentPane().add(jLabel1);
-
-        jPasswordField1.setBackground(new java.awt.Color(255, 204, 102));
-        jPasswordField1.addActionListener(this::jPasswordField1ActionPerformed);
-        getContentPane().add(jPasswordField1);
-
-        jButtonAcceder.setBackground(new java.awt.Color(255, 153, 0));
-        jButtonAcceder.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
-        jButtonAcceder.setText("Acceder");
-        jButtonAcceder.setMaximumSize(new java.awt.Dimension(70, 20));
-        jButtonAcceder.setMinimumSize(new java.awt.Dimension(70, 20));
-        jButtonAcceder.setPreferredSize(new java.awt.Dimension(70, 20));
-        jButtonAcceder.addActionListener(this::jButtonAccederActionPerformed);
-        getContentPane().add(jButtonAcceder);
-
-        jButtonAyuda.setBackground(new java.awt.Color(255, 153, 0));
-        jButtonAyuda.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
-        jButtonAyuda.setText("Ayuda");
-        jButtonAyuda.addActionListener(this::jButtonAyudaActionPerformed);
-        getContentPane().add(jButtonAyuda);
-
-        jTextFieldUsuario.setBackground(new java.awt.Color(255, 204, 102));
-=======
         jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 48)); // NOI18N
         jLabel1.setText("JavaGym");
 
@@ -69,27 +41,8 @@ public class PanelLogin extends javax.swing.JFrame {
         jLabel3.setText("Contraseña");
 
         jTextFieldUsuario.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
->>>>>>> 11b963b9cc3bdcab44aaaedbde46a6370f014177
         jTextFieldUsuario.addActionListener(this::jTextFieldUsuarioActionPerformed);
-        getContentPane().add(jTextFieldUsuario);
 
-<<<<<<< HEAD
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 0, 0));
-        jLabel2.setText("La contraseña / usuario introducido es incorrecta.");
-        jLabel2.setEnabled(false);
-        getContentPane().add(jLabel2);
-
-        jButton3.setText("jButton3");
-        jButton3.addActionListener(this::jButton3ActionPerformed);
-        getContentPane().add(jButton3);
-
-        jLabel3.setText("Usuario:");
-        getContentPane().add(jLabel3);
-
-        jLabel4.setText("Contraseña:");
-        getContentPane().add(jLabel4);
-=======
         jPasswordField1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         jButtonAcceder.setBackground(new java.awt.Color(255, 102, 0));
@@ -154,7 +107,6 @@ public class PanelLogin extends javax.swing.JFrame {
                     .addComponent(jButtonAyuda, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(34, 34, 34))
         );
->>>>>>> 11b963b9cc3bdcab44aaaedbde46a6370f014177
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -184,10 +136,6 @@ public class PanelLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldUsuarioActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-<<<<<<< HEAD
-    private javax.swing.JButton jButton3;
-=======
->>>>>>> 11b963b9cc3bdcab44aaaedbde46a6370f014177
     private javax.swing.JButton jButtonAcceder;
     private javax.swing.JButton jButtonAyuda;
     private javax.swing.JLabel jLabel1;
@@ -211,7 +159,7 @@ public class PanelLogin extends javax.swing.JFrame {
     
     
 
-    }
+    
     public void cerrarVentana(){
         //Cerrar ventana en forma de código: https://stackoverflow.com/questions/1234912/how-to-programmatically-close-a-jframe
             this.setVisible(false);
