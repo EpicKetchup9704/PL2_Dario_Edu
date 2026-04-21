@@ -5,6 +5,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 // este lo importo para manejar el posible error si Java no consigue tener acceso al algoritmo de antes
 import java.security.SecureRandom;
+import java.util.ArrayList;
 // tecnicamente puedo importar el random a secas, pero tras buscar, en ciberseguridad se recomienda hacer este Random, es mas seguro
 import java.util.Base64;
 // va de la mano con el anterior, el random anterior nos mete una serie de bits (0 y 1s), esto los traduce al caracter o lo que sea que corresponda
@@ -61,6 +62,35 @@ public class GestorSeguridad {
 
         // Convertimos los bytes a texto (Base64) para poder guardarlo bien
         return Base64.getEncoder().encodeToString(sal);
+    }
+    public static boolean autenticar1(String intentoCorreo, String Contra){
+        ArrayList<Usuario> todosLosUsuarios = Main.setListaUsuarios();
+        boolean encontrado = false;
+        String saleado = "";
+        for (Usuario usuarioActual : todosLosUsuarios){
+            if (usuarioActual.getCorreo().equals(intentoCorreo)){
+                saleado = usuarioActual.getSal() + Contra;
+                if (usuarioActual.getHash().equals(saleado)){
+                    encontrado = true;
+                    break;
+                }
+            }
+        }
+        return encontrado;
+    }
+    public static Usuario autenticar2(String intentoCorreo){
+        ArrayList<Usuario> todosLosUsuarios = Main.setListaUsuarios();
+        Usuario encontrado = null;
+        
+        for (Usuario usuarioActual : todosLosUsuarios){
+            if (usuarioActual.getCorreo().equals(intentoCorreo)){
+                encontrado = usuarioActual;
+            }
+        }
+        return encontrado;
+    }
+    public static boolean autenticarEsAdmin(Usuario usu){
+        return (usu instanceof Administrador);
     }
 
 }
