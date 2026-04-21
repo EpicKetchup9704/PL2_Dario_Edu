@@ -38,8 +38,8 @@ public class PanelNuevoUsuario extends javax.swing.JFrame {
 
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jButtonAcceder = new javax.swing.JButton();
+        jButtonAyuda = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -48,6 +48,7 @@ public class PanelNuevoUsuario extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jPasswordField2 = new javax.swing.JPasswordField();
         jLabel6 = new javax.swing.JLabel();
+        jButtonVolverLogin = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -55,11 +56,15 @@ public class PanelNuevoUsuario extends javax.swing.JFrame {
 
         jTextField2.addActionListener(this::jTextField2ActionPerformed);
 
-        jButton1.setText("Acceder");
-        jButton1.addActionListener(this::jButton1ActionPerformed);
+        jButtonAcceder.setBackground(new java.awt.Color(255, 153, 51));
+        jButtonAcceder.setFont(new java.awt.Font("Segoe UI", 3, 24)); // NOI18N
+        jButtonAcceder.setText("Acceder");
+        jButtonAcceder.addActionListener(this::jButtonAccederActionPerformed);
 
-        jButton2.setText("Ayuda");
-        jButton2.addActionListener(this::jButton2ActionPerformed);
+        jButtonAyuda.setBackground(new java.awt.Color(255, 153, 51));
+        jButtonAyuda.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+        jButtonAyuda.setText("Ayuda");
+        jButtonAyuda.addActionListener(this::jButtonAyudaActionPerformed);
 
         jLabel2.setForeground(new java.awt.Color(255, 0, 0));
         jLabel2.setText("Nombre:");
@@ -88,6 +93,11 @@ public class PanelNuevoUsuario extends javax.swing.JFrame {
         jLabel6.setText("Repita la Contraseña:");
         jLabel6.setEnabled(false);
 
+        jButtonVolverLogin.setBackground(new java.awt.Color(255, 153, 51));
+        jButtonVolverLogin.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+        jButtonVolverLogin.setText("<html><center>Volver a<br>Login<center></html>");
+        jButtonVolverLogin.addActionListener(this::jButtonVolverLoginActionPerformed);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -98,9 +108,11 @@ public class PanelNuevoUsuario extends javax.swing.JFrame {
                     .addComponent(jTextField1)
                     .addComponent(jTextField2)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)
+                        .addComponent(jButtonVolverLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonAcceder, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton2))
+                        .addComponent(jButtonAyuda))
                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPasswordField2)
@@ -135,13 +147,15 @@ public class PanelNuevoUsuario extends javax.swing.JFrame {
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButtonAcceder, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButtonAyuda, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButtonVolverLogin))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         pack();
@@ -155,13 +169,16 @@ public class PanelNuevoUsuario extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButtonAccederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAccederActionPerformed
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButtonAccederActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void jButtonAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAyudaActionPerformed
+        PanelAyuda ventanaAyuda = new PanelAyuda();
+        this.setVisible(false);
+        ventanaAyuda.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButtonAyudaActionPerformed
 
     private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
         this.jLabel2.setVisible(false);
@@ -171,9 +188,17 @@ public class PanelNuevoUsuario extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jPasswordField2ActionPerformed
 
+    private void jButtonVolverLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVolverLoginActionPerformed
+        PanelLogin ventanaLog = new PanelLogin();
+        this.setVisible(false);
+        ventanaLog.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButtonVolverLoginActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButtonAcceder;
+    private javax.swing.JButton jButtonAyuda;
+    private javax.swing.JButton jButtonVolverLogin;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
