@@ -73,51 +73,6 @@ public class Main {
             listaUsuarios.add(user);
         }
     }
-    
-    public final List<Actividad> buscarActividadMonitor(ArrayList<Actividad> listaActividad, String nombre){
-        try{
-        List<Actividad> listaDevolver = listaActividad.stream().filter(act -> act.getMonitor().equals(nombre)).collect(Collectors.toList());
-            return listaDevolver;}
-        catch (Exception error){
-            return null;
-        } 
-    }
-    public final List<Actividad> buscarActividadTipo(ArrayList<Actividad> listaActividad, String tipo){
-        try{
-        List<Actividad> listaDevolver = listaActividad.stream().filter(act -> act.getTipo().equals(tipo)).collect(Collectors.toList());
-            return listaDevolver;}
-        catch (Exception error){
-            return null;
-        } 
-    }
-    public final List<Actividad> buscarActividadDia(ArrayList<Actividad> listaActividad, int anno, int mes, int dia){
-        try{
-        List<Actividad> listaDevolver = listaActividad.stream().filter(act -> act.getSala().hayHueco()).collect(Collectors.toList()); //Filtramos la primera parte, es decir, si hay huehco o no
-        listaDevolver = listaDevolver.stream().filter(act -> act.getSesiones().stream().anyMatch(s->s.getNumDiA() == dia && s.getMes() == mes && s.getAnno() == anno)).collect(Collectors.toList()); //Filtramos la segunda parte, si coincide con dia, mes y fecha
-            return listaDevolver;}
-        catch (Exception error){
-            return null;
-        } 
-    }
-    
-    public final List<Socio> buscarSocioNombre(ArrayList<Socio> listaSocio, String nombre){
-        try{
-        List<Socio> listaDevolver = listaSocio.stream().filter(so -> so.getNombre().equals(nombre)).collect(Collectors.toList()); //Filtramos la primera parte, es decir, si hay huehco o no
-            return listaDevolver;}
-        catch (Exception error){
-            return null;
-        }
-    }
-    public final List<Socio> buscarSocioVip(ArrayList<Socio> listaSocio){
-        try{
-        List<Socio> listaDevolver = listaSocio.stream().filter(so -> so.getVipStatus()==true).collect(Collectors.toList()); //Filtramos la primera parte, es decir, si hay huehco o no
-            return listaDevolver;}
-        catch (Exception error){
-            return null;
-        }
-    }
-    
-    
     public static void main(String[] args) {
        ArrayList<Usuario> listaUsuario = setListaUsuarios();
        ArrayList<Actividad> listaActividades = setListaActividades();
@@ -142,6 +97,6 @@ public class Main {
        JPanelCalendario calendario = new JPanelCalendario();
        ventana.add(calendario);
        ventana.setVisible(true);*/
-       PanelLogin inicio = new PanelLogin();
+       
     }
 }

@@ -16,6 +16,7 @@ public class JPanelLista extends javax.swing.JPanel{
     private final ArrayList<Usuario> listaUser = Main.getListaUsuarioStatic();
     private final ArrayList<Actividad> listaActividad = Main.getListaActividadStatic();
     private ArrayList<JPanelMostrarInfo> listaCeldas = new ArrayList<>();
+    
     public final void setLayout(){
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
     }
@@ -23,12 +24,22 @@ public class JPanelLista extends javax.swing.JPanel{
         aux.setBorder(BorderFactory.createLineBorder(Color.BLACK));
     }
     
-    public JPanelLista(int modo){
+    public JPanelLista(){
         this.setLayout();
     }
     public void modoAdminListaUsuarios(){
         this.setLayout();
         for(Usuario user: listaUser){
+            JPanelMostrarInfo aux = new JPanelMostrarInfo((Socio) user);
+            listaCeldas.add(aux);
+            this.setContorno(aux);
+            this.add(aux);
+        }
+    }
+    
+    public void modoAdminListaUsuariosFiltrado(List<Usuario> listaUs){
+        this.setLayout();
+        for(Usuario user: listaUs){
             JPanelMostrarInfo aux = new JPanelMostrarInfo((Socio) user);
             listaCeldas.add(aux);
             this.setContorno(aux);
@@ -46,6 +57,16 @@ public class JPanelLista extends javax.swing.JPanel{
         }
     }
     
+    public void modoAdminListaActividadesFiltrado(List<Actividad> listaAct){
+        
+        this.setLayout();
+        for(Actividad act: listaAct){
+            JPanelMostrarInfo aux = new JPanelMostrarInfo(act);
+            listaCeldas.add(aux);
+            this.setContorno(aux);
+            this.add(aux);
+        }
+    } 
     public void modoAdminListaReservas(){
         this.setLayout();
         for (Usuario user: listaUser){
@@ -61,6 +82,21 @@ public class JPanelLista extends javax.swing.JPanel{
             }
         }
     }
+        public void modoAdminListaReservasFiltrado(List<Sesion> listaSesiones){
+        this.setLayout();
+        for (Usuario user: listaUser){
+            Socio soc = (Socio) user; //Casting para socio
+            ArrayList<Actividad> listaActividades = soc.getListaActividades();
+            for (Sesion ses : listaSesiones){
+               List<Actividad> resultado= listaActividades.stream().filter(act->act.getSesiones().stream().anyMatch(se->se.equals(ses))).collect(Collectors.toList());
+               JPanelMostrarInfo aux = new JPanelMostrarInfo(resultado.get(0),ses,true,soc);
+               listaCeldas.add(aux);
+               this.setContorno(aux);
+               this.add(aux);
+            }
+        }
+    }
+    
     public void modoUsuarioListaBusqueda(List<Actividad> listaAct){
         /*
         Este método tiene que añadir un List<Actividad>, se presupone que viene filtrado de los métodos de búsqueda de la clase main

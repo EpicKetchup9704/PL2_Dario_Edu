@@ -235,9 +235,9 @@ public class JPanelCalendario extends javax.swing.JPanel {
         B41 = new javax.swing.JToggleButton();
         B42 = new javax.swing.JToggleButton();
 
-        setMaximumSize(new java.awt.Dimension(210, 370));
-        setMinimumSize(new java.awt.Dimension(210, 370));
-        setPreferredSize(new java.awt.Dimension(210, 400));
+        setMaximumSize(new java.awt.Dimension(210, 425));
+        setMinimumSize(new java.awt.Dimension(210, 425));
+        setPreferredSize(new java.awt.Dimension(210, 425));
 
         Anno.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
         Anno.setText("Septiembre 2026");

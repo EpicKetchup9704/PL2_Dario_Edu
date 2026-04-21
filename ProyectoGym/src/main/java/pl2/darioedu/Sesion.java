@@ -32,6 +32,24 @@ public class Sesion implements Serializable {
         this.horaFin = horaFin;
     }
     
+    public Sesion(int anno, int mes, int dia, int horaInicio, int horaFin) {
+        this.anno = anno;
+        this.mes = mes;
+        this.numDia = dia;
+        this.dia = LocalDate.of(anno, mes, dia).getDayOfWeek();
+        this.horaInicio = horaInicio;
+        this.horaFin = horaFin;
+    }
+    
+    public Sesion(int anno, int mes, int dia) {
+        this.anno = anno;
+        this.mes = mes;
+        this.numDia = dia;
+        this.dia = LocalDate.of(anno, mes, dia).getDayOfWeek();
+        this.horaInicio = 9;
+        this.horaFin = 10;
+    }
+    
     public String getSesionString(){ //Estandarización de longitud de cadena
         String mesAux = mes<10 ? "0" + String.valueOf(mes) : String.valueOf(mes);
         String diaAux = numDia<10 ? "0" + String.valueOf(numDia) : String.valueOf(numDia);
