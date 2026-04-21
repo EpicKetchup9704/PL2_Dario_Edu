@@ -159,7 +159,7 @@ public class PanelLogin extends javax.swing.JFrame {
     
     
 
-    }
+    
     public void cerrarVentana(){
         //Cerrar ventana en forma de código: https://stackoverflow.com/questions/1234912/how-to-programmatically-close-a-jframe
             this.setVisible(false);
