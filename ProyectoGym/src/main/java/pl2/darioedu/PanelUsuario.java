@@ -13,12 +13,15 @@ import java.util.ArrayList;
 public class PanelUsuario extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(PanelUsuario.class.getName());
-    
+    private static Socio socio;
     /**
      * Creates new form PanelUsuario
      */
     public PanelUsuario(Socio soci) {
         initComponents();
+        this.socio = soci;
+        this.jLabel2.setText(this.socio.getNombre());
+        
     }
 
     /**
@@ -30,21 +33,89 @@ public class PanelUsuario extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        jLabelNomUsuario = new javax.swing.JLabel();
+        jButtonActividades = new javax.swing.JButton();
+        jButtonReservas = new javax.swing.JButton();
+        jButtonDatosPersonales = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel1.setText("Bienvenido,");
+
+        jLabelNomUsuario.setText("jLabel2");
+
+        jButtonActividades.setBackground(new java.awt.Color(255, 153, 51));
+        jButtonActividades.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        jButtonActividades.setText("<html><center>Calendario<br>de<br>Actividades<center></html>");
+        jButtonActividades.addActionListener(this::jButtonActividadesActionPerformed);
+
+        jButtonReservas.setBackground(new java.awt.Color(255, 153, 51));
+        jButtonReservas.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        jButtonReservas.setText("<html><center>Gestionar<br>Reservas<center></html>");
+
+        jButtonDatosPersonales.setBackground(new java.awt.Color(255, 153, 51));
+        jButtonDatosPersonales.setText("<html><center>Modificar<br>Datos personales<center></html>");
+
+        jLabel2.setText("<html><div style='text-align: center; font-family: sans-serif; color: #333333;'>\n        Consulta las <b>próximas actividades</b> del gimnasio,<br>\n        y <font color='#2E86C1'><b>reserva tu plaza</b></font> para tu siguiente aventura 🚀\n        </div></html>");
+
+        jLabel3.setText("<html><div style='text-align: center; font-family: sans-serif; color: #333333;'>\n        <b>Consulta</b>, <b>modifica</b> o <font color='#CB4335'><b>elimina</b></font><br>\n        tus reservas de actividades futuras 📅\n        </div></html>");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabelNomUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(99, 99, 99)
+                        .addComponent(jButtonDatosPersonales, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButtonActividades, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonReservas, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(63, 63, 63)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jButtonDatosPersonales, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabelNomUsuario))))
+                .addGap(38, 38, 38)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel2)
+                    .addComponent(jButtonActividades, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButtonReservas)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE))
+                .addGap(39, 39, 39))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButtonActividadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActividadesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonActividadesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -66,7 +137,7 @@ public class PanelUsuario extends javax.swing.JFrame {
             logger.log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
     // 1. Creamos un socio falso solo para esta prueba de diseño
@@ -78,7 +149,15 @@ public class PanelUsuario extends javax.swing.JFrame {
     // 2. Se lo pasamos a la ventana para que nos permita construirla
     new PanelUsuario(socioDummy).setVisible(true);
     });
-
+        
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonActividades;
+    private javax.swing.JButton jButtonDatosPersonales;
+    private javax.swing.JButton jButtonReservas;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabelNomUsuario;
     // End of variables declaration//GEN-END:variables
-}}
+}
