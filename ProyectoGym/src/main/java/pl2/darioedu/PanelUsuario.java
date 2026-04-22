@@ -4,6 +4,8 @@
  */
 package pl2.darioedu;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author User
@@ -11,7 +13,7 @@ package pl2.darioedu;
 public class PanelUsuario extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(PanelUsuario.class.getName());
-
+    
     /**
      * Creates new form PanelUsuario
      */
@@ -68,7 +70,10 @@ public class PanelUsuario extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
     // 1. Creamos un socio falso solo para esta prueba de diseño
-    Socio socioDummy = new Socio("Socio Prueba", "socio@prueba.com", "1234", "DireccionPrueba", 959699444, "Tarjeta prueba", false);
+    ArrayList<String> prueba = new ArrayList<>();
+    prueba.add("5555666677778888");
+    prueba.add("04/27");
+    Socio socioDummy = new Socio("Socio Prueba", "socio@prueba.com", "1234", "DireccionPrueba", "959699444", prueba, false);
     
     // 2. Se lo pasamos a la ventana para que nos permita construirla
     new PanelUsuario(socioDummy).setVisible(true);
