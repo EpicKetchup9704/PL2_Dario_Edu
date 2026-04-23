@@ -128,18 +128,22 @@ public class PanelLogin extends javax.swing.JFrame {
         String passString = new String(passArray);
         
         if (GestorSeguridad.autenticar1(correo, passString)){
+            System.out.println("Primer IF");
             if (GestorSeguridad.autenticarEsAdmin(GestorSeguridad.autenticar2(correo))){
+                System.out.println("Segundo IF");
                 PanelAdmin ventanaAdmin = new PanelAdmin((Administrador) GestorSeguridad.autenticar2(correo));
                 this.setVisible(false);
                 ventanaAdmin.setVisible(true);
                 this.dispose();
             } else {
+                System.out.println("Primer ELSE");
                 PanelUsuario ventanaSocio = new PanelUsuario((Socio) GestorSeguridad.autenticar2(correo));
                 this.setVisible(false);
                 ventanaSocio.setVisible(true);
                 this.dispose();
             }
         } else{
+            System.out.println("Segundo IF");
             this.jLabel1.setVisible(true);
         }
     }//GEN-LAST:event_jButtonAccederActionPerformed

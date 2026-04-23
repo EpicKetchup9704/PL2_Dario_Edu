@@ -23,7 +23,7 @@ public class PanelPago extends javax.swing.JFrame {
     private String contra;
     private String direccion;
     private String telefono;
-    private ArrayList<String> tarjeta;
+    private ArrayList<String> tarjeta = new ArrayList<String>();
     /**
      * Creates new form PanelPago
      */

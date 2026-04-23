@@ -70,13 +70,22 @@ public class GestorSeguridad {
         String saleado = "";
         for (Usuario usuarioActual : todosLosUsuarios){
             if (usuarioActual.getCorreo().equals(intentoCorreo)){
-                saleado = usuarioActual.getSal() + Contra;
-                if (usuarioActual.getHash().equals(saleado)){
+                System.out.println("Usuario Encontrado" + usuarioActual.getNombre());
+                saleado = Contra + usuarioActual.getSal();
+                String saleo = GestorSeguridad.hashearContra(saleado);
+                System.out.println(saleo);
+                System.out.println(usuarioActual.getHash());
+                if (usuarioActual.getHash().equals(saleo)){
+                    System.out.println("Hash coincide");
                     encontrado = true;
                     break;
+                } else {
+                    System.out.println("Hash NO coincide");
                 }
             }
-        }
+         else {
+                System.out.println("Usuario no encontrado");
+                }}
         return encontrado;
     }
     public static Usuario autenticar2(String intentoCorreo){
