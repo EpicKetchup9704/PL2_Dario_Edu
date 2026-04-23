@@ -64,7 +64,6 @@ public class GestorSeguridad {
         // Convertimos los bytes a texto (Base64) para poder guardarlo bien
         return Base64.getEncoder().encodeToString(sal);
     }
-    
     public static boolean autenticar1(String intentoCorreo, String Contra){
         ArrayList<Usuario> todosLosUsuarios = Main.setListaUsuarios();
         boolean encontrado = false;

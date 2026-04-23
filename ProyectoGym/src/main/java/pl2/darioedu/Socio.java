@@ -6,13 +6,13 @@ import java.util.ArrayList;
 
 public class Socio extends Usuario implements Serializable{
     private String direccion;
-    private String tarjeta;
-    private int telefono;
+    private ArrayList<String> tarjeta;
+    private String telefono;
     private boolean isVip;
     private ArrayList<Actividad> listaActividades;
     private ArrayList<Sesion> listaSesiones;
     
-    public Socio(String nombre, String correo, String contra, String direccion, int telefono, String tarjeta, boolean vip) {
+    public Socio(String nombre, String correo, String contra, String direccion, String telefono, ArrayList<String> tarjeta, boolean vip) {
         super(nombre, correo, contra);
         this.direccion = direccion;
         this.telefono = telefono;
@@ -40,19 +40,19 @@ public class Socio extends Usuario implements Serializable{
     public String getDireccion(){
         return this.direccion;
     }
-    public void cambiarTelefono(int telefono){
+    public void cambiarTelefono(String telefono){
         this.telefono = telefono;
     }
-    public int getTelefono(){
+    public String getTelefono(){
         return this.telefono;
     }
     // IMPORTANTE: DEBERIAMOS PLANTEARNOS SI PONER LA TARJETA EN FORMATO ****-****-****-1234, ES DECIR QUE SOLO SE VEAN LOS ULTIMOS 4 DIGITOS
     // La tarjeta no la vamos a encriptar porque lo he visto y me parece muy laborioso, se puede intentar si nos sobran tiempo y ganas.
 
-   public void cambiarTarjeta(String Tarjeta){
+   public void cambiarTarjeta(ArrayList<String> Tarjeta){
         this.tarjeta= Tarjeta;
    }
-   public String getTarjeta(){
+   public ArrayList<String> getTarjeta(){
         return this.tarjeta;
    }
    public boolean getVipStatus(){
