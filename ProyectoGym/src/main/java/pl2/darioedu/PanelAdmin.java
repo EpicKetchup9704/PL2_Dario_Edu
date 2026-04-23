@@ -56,14 +56,17 @@ public class PanelAdmin extends javax.swing.JFrame {
         jButtonConsAct.setBackground(new java.awt.Color(255, 153, 0));
         jButtonConsAct.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         jButtonConsAct.setText("<html><center>Consultar<br>Actividades<center></html>");
+        jButtonConsAct.addActionListener(this::jButtonConsActActionPerformed);
 
         jButtonReservas.setBackground(new java.awt.Color(255, 153, 0));
         jButtonReservas.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         jButtonReservas.setText("<html><center>Consultar<br>Reservas<center></html>");
+        jButtonReservas.addActionListener(this::jButtonReservasActionPerformed);
 
         jButtonSocios.setBackground(new java.awt.Color(255, 153, 0));
         jButtonSocios.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         jButtonSocios.setText("<html><center>Consultar<br>Socios<center></html>");
+        jButtonSocios.addActionListener(this::jButtonSociosActionPerformed);
 
         jButtonCrearAdmin.setBackground(new java.awt.Color(255, 204, 51));
         jButtonCrearAdmin.setText("Crear Admin");
@@ -120,7 +123,10 @@ public class PanelAdmin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonGestActActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGestActActionPerformed
-        // TODO add your handling code here:
+        PanelGestionActividades panel1 = new PanelGestionActividades(this.usuario);
+        this.setVisible(false);
+        panel1.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButtonGestActActionPerformed
 
     private void jButtonCrearAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCrearAdminActionPerformed
@@ -129,6 +135,27 @@ public class PanelAdmin extends javax.swing.JFrame {
         panel.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButtonCrearAdminActionPerformed
+
+    private void jButtonConsActActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConsActActionPerformed
+        PanelConsultaActividades panel2 = new PanelConsultaActividades(this.usuario);
+        this.setVisible(false);
+        panel2.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButtonConsActActionPerformed
+
+    private void jButtonSociosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSociosActionPerformed
+        PanelConsultaSocios panel3 = new PanelConsultaSocios(this.usuario);
+        this.setVisible(false);
+        panel3.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButtonSociosActionPerformed
+
+    private void jButtonReservasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReservasActionPerformed
+        PanelConsultaReservas panel4 = new PanelConsultaReservas(this.usuario);
+        this.setVisible(false);
+        panel4.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButtonReservasActionPerformed
 
     /**
      * @param args the command line arguments
