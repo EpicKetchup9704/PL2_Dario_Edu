@@ -5,7 +5,7 @@ import java.util.ArrayList;//Creamos un arrayList de nombre de dominios de corre
 public class Usuario implements Serializable{
     // Esto va a ser una clase padre, de aqui heredaran Administrador y Usuario Normal
     private final static ArrayList<String> dominioCorreo = Globales.dominios; //Modificar si se desea añadir alguno más
-    protected final String nombre;
+    protected String nombre;
     protected String correo;
     protected String sal;
     protected String hasheo;
@@ -33,7 +33,9 @@ public class Usuario implements Serializable{
     
     // SE PRESUPONE PARA LOS DOS SIGUIENTES METODOS QUE EL USUARIO SE DEBE AUTENTICAR ANTES DE PODER CAMBIAR LAS COSAS
     // ESO CREO QUE SE HARÁ EN LA INTERFAZ
-
+    public void setNombre(String nombre){
+        this.nombre = nombre;
+    }
     public void cambiarCorreo(String correoNuevo){
         this.correo = correoNuevo;
     }
@@ -41,7 +43,7 @@ public class Usuario implements Serializable{
         this.sal = GestorSeguridad.generarSal();
         this.hasheo = GestorSeguridad.hashearContra((contra + this.getSal()));
     }
-
+    
 
     public String getSal(){
         return this.sal ;

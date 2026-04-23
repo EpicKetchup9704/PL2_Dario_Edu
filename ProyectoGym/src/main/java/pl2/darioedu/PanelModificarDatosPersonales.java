@@ -4,7 +4,9 @@
  */
 package pl2.darioedu;
 
+import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  *
@@ -18,11 +20,13 @@ public class PanelModificarDatosPersonales extends javax.swing.JFrame {
     private ArrayList<String> tarjeta;
     private String telefono;
     private boolean isVip;
-    protected final String nombre;
+    protected String nombre;
     protected String correo;
     protected String correoIni;
     protected String sal;
     protected String hasheo;
+    
+    private String nuevaContra;
     /**
      * Creates new form PanelModificarDatosPersonales
      */
@@ -37,6 +41,7 @@ public class PanelModificarDatosPersonales extends javax.swing.JFrame {
         this.sal = soci.getSal();
         this.hasheo = soci.getHash();
         this.isVip = soci.getVipStatus();
+        this.jLabelErrorContra.setVisible(false);
         // SOLO HE HECHO ESTE CONSTRUCTOR, QUEDA EL RESTO DE FUNCIONES DE LOS BOTONES
     }
 
@@ -59,7 +64,7 @@ public class PanelModificarDatosPersonales extends javax.swing.JFrame {
         jPasswordField2 = new javax.swing.JPasswordField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
+        jFormattedTextFieldTLF = new javax.swing.JFormattedTextField();
         jLabel6 = new javax.swing.JLabel();
         jFormattedTextFieldNumTarjeta = new javax.swing.JFormattedTextField();
         jFormattedTextFieldCad = new javax.swing.JFormattedTextField();
@@ -74,6 +79,8 @@ public class PanelModificarDatosPersonales extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         jButtonVolverAtras = new javax.swing.JButton();
         jButtonCambiarDatos = new javax.swing.JButton();
+        jLabelErrorContra = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -94,7 +101,7 @@ public class PanelModificarDatosPersonales extends javax.swing.JFrame {
         jLabel5.setText("Confirmar Nueva Contraseña");
 
         try {
-            jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#########")));
+            jFormattedTextFieldTLF.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#########")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -129,9 +136,11 @@ public class PanelModificarDatosPersonales extends javax.swing.JFrame {
 
         jButtonSI.setBackground(new java.awt.Color(204, 204, 204));
         jButtonSI.setText("Si");
+        jButtonSI.addActionListener(this::jButtonSIActionPerformed);
 
         jButton1.setBackground(new java.awt.Color(204, 204, 204));
         jButton1.setText("No");
+        jButton1.addActionListener(this::jButton1ActionPerformed);
 
         jLabel11.setText(" (Dejar en blanco si no se desea cambiar)");
 
@@ -141,11 +150,17 @@ public class PanelModificarDatosPersonales extends javax.swing.JFrame {
         jButtonVolverAtras.setBackground(new java.awt.Color(255, 153, 51));
         jButtonVolverAtras.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         jButtonVolverAtras.setText("<html><center>Volver<br>Atras<center></html>");
+        jButtonVolverAtras.addActionListener(this::jButtonVolverAtrasActionPerformed);
 
         jButtonCambiarDatos.setBackground(new java.awt.Color(255, 153, 51));
         jButtonCambiarDatos.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         jButtonCambiarDatos.setText("Cambiar Datos");
         jButtonCambiarDatos.addActionListener(this::jButtonCambiarDatosActionPerformed);
+
+        jLabelErrorContra.setForeground(new java.awt.Color(255, 51, 51));
+        jLabelErrorContra.setText("Las contraseñas deben coincidir");
+
+        jLabel13.setText("Nota: Al cambiar los datos, se cerrará la sesión actual");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -158,7 +173,7 @@ public class PanelModificarDatosPersonales extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(jTextFieldDireccion)
-                                .addComponent(jPasswordField1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE)
+                                .addComponent(jPasswordField1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 381, Short.MAX_VALUE)
                                 .addComponent(jTextFieldCorreo, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jTextFieldNombre, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
@@ -166,7 +181,10 @@ public class PanelModificarDatosPersonales extends javax.swing.JFrame {
                                 .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jPasswordField2))
                             .addComponent(jLabel4)
-                            .addComponent(jLabel5)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabelErrorContra))
                             .addComponent(jLabel6)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
@@ -180,31 +198,35 @@ public class PanelModificarDatosPersonales extends javax.swing.JFrame {
                                     .addComponent(jFormattedTextFieldNumTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                         .addGroup(layout.createSequentialGroup()
-                                            .addGap(1, 1, 1)
-                                            .addComponent(jButtonVolverAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jButtonVolverAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addGap(18, 18, 18)
                                             .addComponent(jButtonCambiarDatos, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGroup(layout.createSequentialGroup()
                                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                 .addGroup(layout.createSequentialGroup()
-                                                    .addGap(1, 1, 1)
-                                                    .addComponent(jFormattedTextFieldCad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addComponent(jLabel8))
-                                            .addGap(18, 18, 18)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(jLabel9)
-                                                .addComponent(jFormattedTextFieldCVV, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGap(25, 25, 25)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(jLabel10)
+                                                    .addComponent(jLabel8)
+                                                    .addGap(18, 18, 18)
+                                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(jLabel9)
+                                                        .addComponent(jFormattedTextFieldCVV, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addGroup(layout.createSequentialGroup()
+                                                            .addGap(25, 25, 25)
+                                                            .addComponent(jLabel10))
+                                                        .addGroup(layout.createSequentialGroup()
+                                                            .addGap(18, 18, 18)
+                                                            .addComponent(jButtonSI, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                                 .addGroup(layout.createSequentialGroup()
-                                                    .addComponent(jButtonSI, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                            .addGap(18, 18, 18)
+                                                    .addGap(1, 1, 1)
+                                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(jFormattedTextFieldCad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(jLabel13))))
+                                            .addGap(10, 10, 10)
                                             .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addGap(0, 7, Short.MAX_VALUE))
-                            .addComponent(jFormattedTextField1))))
+                                .addGap(0, 9, Short.MAX_VALUE))
+                            .addComponent(jFormattedTextFieldTLF))))
                 .addGap(13, 13, 13))
         );
         layout.setVerticalGroup(
@@ -227,20 +249,26 @@ public class PanelModificarDatosPersonales extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel5)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabelErrorContra))
                 .addGap(5, 5, 5)
                 .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(3, 3, 3)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jFormattedTextFieldTLF, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(jLabel11))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jFormattedTextFieldNumTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(23, 23, 23))
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -253,14 +281,13 @@ public class PanelModificarDatosPersonales extends javax.swing.JFrame {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jButtonSI, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jFormattedTextFieldCad)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(23, 23, 23)
+                            .addComponent(jFormattedTextFieldCad))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel13)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButtonCambiarDatos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonVolverAtras, javax.swing.GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE))
+                    .addComponent(jButtonVolverAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 59, Short.MAX_VALUE))
                 .addContainerGap(33, Short.MAX_VALUE))
         );
 
@@ -272,8 +299,71 @@ public class PanelModificarDatosPersonales extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldDireccionActionPerformed
 
     private void jButtonCambiarDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCambiarDatosActionPerformed
-        // TODO add your handling code here:
+    ArrayList<Usuario> listaUser = Main.setListaUsuarios();
+    Socio usuarioEncontrado = (Socio) listaUser.stream()
+    .filter(u -> u.getCorreo().equals(this.correoIni))
+    .findFirst()
+    .orElse(null);
+    
+    if (Arrays.equals(this.jPasswordField1.getPassword(), jPasswordField2.getPassword())){        
+        if (!(this.jTextFieldNombre.getText().equals(""))){
+                this.nombre = this.jTextFieldNombre.getText();
+                usuarioEncontrado.setNombre(this.nombre);
+            }
+            if (!(this.jTextFieldCorreo.getText().equals(""))){
+                this.correo = this.jTextFieldCorreo.getText();
+                usuarioEncontrado.cambiarCorreo(this.correo);
+            }
+            if (!(this.jTextFieldDireccion.getText().equals(""))){
+                this.direccion = this.jTextFieldDireccion.getText();
+                usuarioEncontrado.cambiarDireccion(this.direccion);
+            }
+            if (!(this.jFormattedTextFieldTLF.getText().equals(""))){
+                this.telefono = this.jFormattedTextFieldTLF.getText();
+                usuarioEncontrado.cambiarTelefono(this.telefono);
+            }
+            if (!(this.jPasswordField1.getPassword() == null)){
+                this.nuevaContra = String.valueOf(this.jPasswordField1.getPassword());
+                usuarioEncontrado.cambiarContra(this.nuevaContra);
+            }
+            if (!(this.jFormattedTextFieldNumTarjeta.getText().equals(""))){
+                this.tarjeta.clear();
+                this.tarjeta.add(jFormattedTextFieldNumTarjeta.getText());
+                this.tarjeta.add(jFormattedTextFieldCad.getText());
+                usuarioEncontrado.cambiarTarjeta(this.tarjeta);
+            }
+            usuarioEncontrado.cambiarStatusVip(this.isVip);
+            Main.guardarListaUsuarios(listaUser);
+            
+            PanelLogin ventanaLogueo = new PanelLogin();
+            this.setVisible(false);
+            ventanaLogueo.setVisible(true);
+            this.dispose();
+            
+        }
+    else{
+        this.jLabelErrorContra.setVisible(true);
+    }
     }//GEN-LAST:event_jButtonCambiarDatosActionPerformed
+
+    private void jButtonVolverAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVolverAtrasActionPerformed
+        PanelUsuario ventanaUSU = new PanelUsuario(socio);
+        this.setVisible(false);
+        ventanaUSU.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButtonVolverAtrasActionPerformed
+
+    private void jButtonSIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSIActionPerformed
+        this.isVip = true;
+        this.jButtonSI.setBackground(Color.GREEN);
+        this.jButton1.setBackground(Color.LIGHT_GRAY);
+    }//GEN-LAST:event_jButtonSIActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.isVip = false;
+        this.jButtonSI.setBackground(Color.LIGHT_GRAY);
+        this.jButton1.setBackground(Color.RED);
+    }//GEN-LAST:event_jButton1ActionPerformed
     
     /**
      * @param args the command line arguments
@@ -314,14 +404,15 @@ public class PanelModificarDatosPersonales extends javax.swing.JFrame {
     private javax.swing.JButton jButtonCambiarDatos;
     private javax.swing.JButton jButtonSI;
     private javax.swing.JButton jButtonVolverAtras;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JFormattedTextField jFormattedTextFieldCVV;
     private javax.swing.JFormattedTextField jFormattedTextFieldCad;
     private javax.swing.JFormattedTextField jFormattedTextFieldNumTarjeta;
+    private javax.swing.JFormattedTextField jFormattedTextFieldTLF;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -330,6 +421,7 @@ public class PanelModificarDatosPersonales extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabelErrorContra;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JPasswordField jPasswordField2;
     private javax.swing.JTextField jTextFieldCorreo;
