@@ -8,7 +8,7 @@ import java.awt.Color;
  *
  * @author Darío DP -> :)
  */
-public class JPanelCalendario extends javax.swing.JPanel {
+public final class JPanelCalendario extends javax.swing.JPanel {
     private int ultimoPulsado;
     private int mes;
     private String nombreMes;
@@ -29,6 +29,7 @@ public class JPanelCalendario extends javax.swing.JPanel {
         this.mes = LocalDate.now().getMonthValue(); //->int
         this.anno = LocalDate.now().getYear(); //->int
         this.nombreMes = Globales.listaMeses[mes-1];
+        this.ultimoPulsado = this.diaMax;
         initComponents(); //->Se inician componentes
         this.listaBotones = new ArrayList<>(Arrays.asList(B1,B2,B3,B4,B5,B6,B7,B8,B9,B10,B11,B12,B13,B14,B15,B16,B17,B18,B19,B20,B21,B22,B23,B24,B25,B26,B27,B28,B29,B30,B31,B32,B33,B34,B35,B36,B37,B38,B39,B40,B41,B42));
         this.Anno.setText(this.nombreMes + " " + String.valueOf(this.anno)); //Se va a poner el texo como mes + + anno
@@ -36,6 +37,7 @@ public class JPanelCalendario extends javax.swing.JPanel {
         this.setValorBotones(this.valoresBotones);
         this.jButton1.setEnabled(false);
         this.jButton2.setEnabled(true);
+        this.jLabel1.setText("Fecha : "+ this.getFechaSelecionada('-'));
     }
     public JPanelCalendario(int mes, String nombreMes, int anno) {
         //Creación del JPanelInicial
@@ -68,7 +70,8 @@ public class JPanelCalendario extends javax.swing.JPanel {
 }
     public void refrescarJPanel(int anno, int mes){
         this.modificarEstadoResto("null");
-        this.ultimoPulsado = 0;
+        this.ultimoPulsado = 1;
+        this.jLabel1.setText("Fecha : "+ this.getFechaSelecionada('-'));
         this.anno = anno;
         this.mes = mes;
         this.jButton1.setEnabled(setEstadoFlechas(anno,mes)[0]);
@@ -178,7 +181,14 @@ public class JPanelCalendario extends javax.swing.JPanel {
         String diaAux = this.ultimoPulsado<10 ? "0" + String.valueOf(this.ultimoPulsado) : String.valueOf(this.ultimoPulsado);
         String annoAux = String.valueOf(this.Anno);
         if(!(this.ultimoPulsado == 0)){return (annoAux+mesAux+diaAux);}
-        else{return (annoAux+mesAux+"1");}
+        else{return (annoAux+mesAux+diaAux);}
+    }
+        public String getFechaSelecionada(char separador){
+        String mesAux = this.mes<10 ? "0" + String.valueOf(mes) : String.valueOf(mes);
+        String diaAux = this.ultimoPulsado<10 ? "0" + String.valueOf(this.ultimoPulsado) : String.valueOf(this.ultimoPulsado);
+        String annoAux = String.valueOf(this.Anno);
+        if(!(this.ultimoPulsado == 0)){return (annoAux+mesAux+diaAux);}
+        else{return (annoAux+separador+mesAux+separador+diaAux);}
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -234,10 +244,12 @@ public class JPanelCalendario extends javax.swing.JPanel {
         B40 = new javax.swing.JToggleButton();
         B41 = new javax.swing.JToggleButton();
         B42 = new javax.swing.JToggleButton();
+        jLabel1 = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
 
-        setMaximumSize(new java.awt.Dimension(210, 425));
-        setMinimumSize(new java.awt.Dimension(210, 425));
-        setPreferredSize(new java.awt.Dimension(210, 425));
+        setMaximumSize(new java.awt.Dimension(210, 450));
+        setMinimumSize(new java.awt.Dimension(210, 450));
+        setPreferredSize(new java.awt.Dimension(210, 450));
 
         Anno.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
         Anno.setText("Septiembre 2026");
@@ -548,6 +560,11 @@ public class JPanelCalendario extends javax.swing.JPanel {
         B42.addChangeListener(this::B42StateChanged);
         B42.addActionListener(this::B42ActionPerformed);
 
+        jLabel1.setText("Fecha: ");
+
+        jButton3.setText("OK");
+        jButton3.addActionListener(this::jButton3ActionPerformed);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -556,7 +573,12 @@ public class JPanelCalendario extends javax.swing.JPanel {
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
@@ -644,8 +666,7 @@ public class JPanelCalendario extends javax.swing.JPanel {
                         .addGap(0, 0, 0)
                         .addComponent(B42, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
-                        .addComponent(B37, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(B37, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -722,7 +743,11 @@ public class JPanelCalendario extends javax.swing.JPanel {
                         .addComponent(B41, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(B42, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(B37, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jButton3))
+                .addContainerGap(1, Short.MAX_VALUE))
         );
 
         B1.getAccessibleContext().setAccessibleName("Boton1");
@@ -1124,6 +1149,10 @@ public class JPanelCalendario extends javax.swing.JPanel {
         this.modificarEstadoResto(this.B42.getText()); 
     }//GEN-LAST:event_B42ActionPerformed
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Anno;
@@ -1171,6 +1200,8 @@ public class JPanelCalendario extends javax.swing.JPanel {
     private javax.swing.JToggleButton B9;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
    
     

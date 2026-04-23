@@ -92,11 +92,11 @@ public class Main {
         ventana.setVisible(true);
         ventana.setSize(332,400);
         ventana.setResizable(false);*/
-       /*JFrame ventana = new JFrame();
+       JFrame ventana = new JFrame();
        ventana.setSize(210,430);
        JPanelCalendario calendario = new JPanelCalendario();
        ventana.add(calendario);
-       ventana.setVisible(true);*/
+       ventana.setVisible(true);
        
     }
 }

@@ -17,7 +17,13 @@ public class JPanelMostrarInfo extends javax.swing.JPanel {
     private Actividad actividad = null;
     private Sesion sesion = null;
     private boolean admin = false;
-
+    
+    public final String reducirCadena(String cadena){
+        String devolver = cadena.length() > 25 ? cadena.substring(0,20) + "..." : cadena;
+        return devolver;
+    }
+    
+    
     public Socio getSocio() {
         return socio;
     }
@@ -50,7 +56,7 @@ public class JPanelMostrarInfo extends javax.swing.JPanel {
         initComponents();
         this.socio = socio;
         this.Titulo.setText(socio.getNombre());
-        this.AP1.setText("Correo: " + String.valueOf(socio.getCorreo()));
+        this.AP1.setText("Correo: " + this.reducirCadena(socio.getCorreo()));
         this.AP2.setText("Telf: "+String.valueOf(socio.getTelefono()));
         this.AP3.setText("VIP: "+String.valueOf(socio.getVipStatus()));
         this.AP4.setText("Tarjeta: "+socio.getTarjeta());

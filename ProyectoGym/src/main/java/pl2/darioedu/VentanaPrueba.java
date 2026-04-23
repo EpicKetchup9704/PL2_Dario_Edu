@@ -10,26 +10,25 @@ import javax.swing.JLabel;
 public class VentanaPrueba extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VentanaPrueba.class.getName());
-
+    private JPanelBusqueda barraBusqueda;
+    private JPanelLista listaPanel;
     /**
      * 
      */
     public VentanaPrueba() {
         initComponents();
-        JPanelBusqueda barraBusqueda = new JPanelBusqueda();
-        barraBusqueda.setBusquedaAdminSocio();
-        this.jPanel1.add(barraBusqueda);
-        JPanelLista listaPanel = new JPanelLista();
-        listaPanel.modoAdminListaUsuarios();
-        if (barraBusqueda.busquedaValida()){
-            List<Usuario> listaUs = barraBusqueda.getBusquedaAdminSocio();
-            listaPanel.modoAdminListaUsuariosFiltrado(listaUs);
+        this.barraBusqueda = new JPanelBusqueda();
+        this.barraBusqueda.setBusquedaAdminSocio();
+        this.jPanel1.add(this.barraBusqueda);
+        this.listaPanel = new JPanelLista();
+        this.listaPanel.modoAdminListaUsuarios();
+        this.jScrollPane1.setViewportView(this.listaPanel);
+    }
+    public void busqueda(){
+        if (this.barraBusqueda.busquedaValida()){
+            List<Usuario> listaUs = this.barraBusqueda.getBusquedaAdminSocio();
+            this.listaPanel.modoAdminListaUsuariosFiltrado(listaUs);
         }
-        else{
-            JLabel mensaje = new JLabel();
-            listaPanel.add(mensaje);
-        }
-        this.jScrollPane1.add(listaPanel);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -41,6 +40,7 @@ public class VentanaPrueba extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -50,7 +50,29 @@ public class VentanaPrueba extends javax.swing.JFrame {
         jPanel1.setMaximumSize(new java.awt.Dimension(300, 70));
         jPanel1.setMinimumSize(new java.awt.Dimension(300, 70));
         jPanel1.setPreferredSize(new java.awt.Dimension(300, 70));
-        jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.LINE_AXIS));
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Buscar.png"))); // NOI18N
+        jButton1.setMaximumSize(new java.awt.Dimension(50, 50));
+        jButton1.setMinimumSize(new java.awt.Dimension(50, 50));
+        jButton1.setPreferredSize(new java.awt.Dimension(50, 50));
+        jButton1.addActionListener(this::jButton1ActionPerformed);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(264, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(14, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
 
         jScrollPane1.setMaximumSize(new java.awt.Dimension(320, 300));
         jScrollPane1.setMinimumSize(new java.awt.Dimension(320, 300));
@@ -80,15 +102,13 @@ public class VentanaPrueba extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        VentanaPrueba aux = new VentanaPrueba();
-        aux.setVisible(true);
-    }
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
