@@ -25,6 +25,9 @@ public class PanelNuevoAdmin extends javax.swing.JFrame {
     public PanelNuevoAdmin(Administrador Admin) {
         initComponents();
         this.admin = Admin;
+        this.jLabelContra.setVisible(false);
+        this.jLabelNomCor.setVisible(false);
+        this.jLabelCorrecto.setVisible(false);
     }
 
     /**
@@ -149,9 +152,9 @@ public class PanelNuevoAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonVolverAtrasActionPerformed
 
     private void RegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistrarActionPerformed
-        if ((this.jTextFieldNombre.getText() == (null)) || (this.jTextFieldCorreo.getText() == (null))){
+        if ((this.jTextFieldNombre.getText().equals("")) || (this.jTextFieldCorreo.getText().equals(""))){
             this.jLabelNomCor.setVisible(true);
-        } else if (!(Arrays.equals(this.jPasswordField1.getPassword(), this.jPasswordField1.getPassword()))){
+        } else if (!(Arrays.equals(this.jPasswordField1.getPassword(), this.jPasswordField2.getPassword()))){
             this.jLabelContra.setVisible(true);
         } else {
             String contTemp = String.valueOf(this.jPasswordField1.getPassword());
