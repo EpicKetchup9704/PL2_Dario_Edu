@@ -4,6 +4,8 @@
  */
 package pl2.darioedu;
 
+import java.util.List;
+
 /**
  *
  * @author User
@@ -12,14 +14,43 @@ public class PanelConsultaSocios extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(PanelConsultaSocios.class.getName());
     private final Administrador usuario;
+    private JPanelBusqueda barraBusqueda;
+    private JPanelLista listaPanel;
     /**
      * Creates new form PanelConsultaSocios
      */
     public PanelConsultaSocios(Administrador admin) {
         initComponents();
         this.usuario = admin;
+        iniciarNuevo();
     }
-
+    
+    public final void iniciarNuevo(){
+        this.barraBusqueda = new JPanelBusqueda();
+        this.barraBusqueda.setBusquedaAdminSocio();
+        this.jPanel1.add(this.barraBusqueda);
+        this.listaPanel = new JPanelLista();
+        this.listaPanel.modoAdminListaUsuarios();
+        this.jScrollPane1.setViewportView(this.listaPanel);
+   }
+    public void busqueda(){
+        if (this.barraBusqueda.busquedaValida()){
+            //Parte cuando la búsqueda es Exitosa,
+            this.barraBusqueda.setTextArea(null);
+            List<Usuario> listaUs = this.barraBusqueda.getBusquedaAdminSocio();
+            this.listaPanel = new JPanelLista();
+            this.listaPanel.modoAdminListaUsuariosFiltrado(listaUs);
+            this.jScrollPane1.setViewportView(this.listaPanel);
+            this.jScrollPane1.revalidate();
+            this.jScrollPane1.repaint();
+        }else{
+            if(this.barraBusqueda.getTextoBusqueda().equals("")){
+                iniciarNuevo();
+            }
+        }
+        
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -30,10 +61,13 @@ public class PanelConsultaSocios extends javax.swing.JFrame {
     private void initComponents() {
 
         jButtonVolverAtras = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
         ButtonAddUsuario = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jPanel1 = new javax.swing.JPanel();
+        ButonBusqueda = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("JavaFit - Panel Administrador - Consulta Socios");
 
         jButtonVolverAtras.setBackground(new java.awt.Color(255, 153, 51));
         jButtonVolverAtras.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -45,6 +79,18 @@ public class PanelConsultaSocios extends javax.swing.JFrame {
         ButtonAddUsuario.setText("Añadir Socio");
         ButtonAddUsuario.addActionListener(this::ButtonAddUsuarioActionPerformed);
 
+        jPanel1.setMaximumSize(new java.awt.Dimension(300, 70));
+        jPanel1.setMinimumSize(new java.awt.Dimension(300, 70));
+        jPanel1.setPreferredSize(new java.awt.Dimension(300, 70));
+        jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.LINE_AXIS));
+
+        ButonBusqueda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Buscar.png"))); // NOI18N
+        ButonBusqueda.setMaximumSize(new java.awt.Dimension(50, 50));
+        ButonBusqueda.setMinimumSize(new java.awt.Dimension(50, 50));
+        ButonBusqueda.setPreferredSize(new java.awt.Dimension(50, 50));
+        ButonBusqueda.addActionListener(this::ButonBusquedaActionPerformed);
+        jPanel1.add(ButonBusqueda);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -55,9 +101,13 @@ public class PanelConsultaSocios extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButtonVolverAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(ButtonAddUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE))
+                        .addComponent(ButtonAddUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jScrollPane1))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -67,8 +117,10 @@ public class PanelConsultaSocios extends javax.swing.JFrame {
                     .addComponent(jButtonVolverAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ButtonAddUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -84,6 +136,10 @@ public class PanelConsultaSocios extends javax.swing.JFrame {
     private void ButtonAddUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonAddUsuarioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ButtonAddUsuarioActionPerformed
+
+    private void ButonBusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButonBusquedaActionPerformed
+        this.busqueda();
+    }//GEN-LAST:event_ButonBusquedaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -117,8 +173,10 @@ public class PanelConsultaSocios extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ButonBusqueda;
     private javax.swing.JButton ButtonAddUsuario;
     private javax.swing.JButton jButtonVolverAtras;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

@@ -9,9 +9,9 @@ import javax.swing.JScrollPane;
  *
  * @author Darío :)
  */
-public class VentanaPrueba extends javax.swing.JFrame {
+public class VentanaPrueba1 extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VentanaPrueba.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VentanaPrueba1.class.getName());
     private JPanelBusqueda barraBusqueda;
     private JPanelLista listaPanel;
     private Socio socio;
@@ -20,24 +20,32 @@ public class VentanaPrueba extends javax.swing.JFrame {
      */
    public final void iniciarNuevo(){
         this.barraBusqueda = new JPanelBusqueda();
-        this.barraBusqueda.setBusquedaAdminSocio();
+        this.barraBusqueda.setBusquedaUsuarioActividad();
         this.jPanel1.add(this.barraBusqueda);
         this.listaPanel = new JPanelLista();
-        this.listaPanel.modoAdminListaUsuarios();
+        this.listaPanel.modoUsuarioListaBusqueda(Main.getListaActividadStatic());
         this.jScrollPane1.setViewportView(this.listaPanel);
    }
     
+       public void ventanaEmergenteSeleccionado(){
+        JFrame ventana = new JFrame("Calendario");
+        JPanelCalendario aux = new JPanelCalendario();
+        ventana.add(aux);
+        ventana.setSize(250,480);
+        ventana.setVisible(true);
+        
+    }
     
-    public VentanaPrueba() {
+    public VentanaPrueba1() {
         initComponents();
         iniciarNuevo();
     }
     public void busqueda(){
         if (this.barraBusqueda.busquedaValida()){
             this.barraBusqueda.setTextArea(null);
-            List<Usuario> listaUs = this.barraBusqueda.getBusquedaAdminSocio();
+            List<Actividad> listaAct = this.barraBusqueda.getBusquedaUsuarioActividad();
             this.listaPanel = new JPanelLista();
-            this.listaPanel.modoAdminListaUsuariosFiltrado(listaUs);
+            this.listaPanel.modoUsuarioListaBusqueda(listaAct);
             this.jScrollPane1.setViewportView(this.listaPanel);
             this.jScrollPane1.revalidate();
             this.jScrollPane1.repaint();
@@ -48,7 +56,6 @@ public class VentanaPrueba extends javax.swing.JFrame {
         this.listaPanel.ResetearInformacionObtenida();
         this.listaPanel.ResetearListaInformacionBotones();
     }
-    
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -118,7 +125,9 @@ public class VentanaPrueba extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jScrollPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jScrollPane1MouseClicked
-
+    if (this.barraBusqueda.getSeleccionado().equals("Dia")){
+          this.ventanaEmergenteSeleccionado();
+        }
     }//GEN-LAST:event_jScrollPane1MouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

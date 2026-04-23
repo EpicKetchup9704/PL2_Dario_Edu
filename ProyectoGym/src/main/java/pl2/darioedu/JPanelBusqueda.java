@@ -3,6 +3,7 @@ package pl2.darioedu;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 
 /**
@@ -10,9 +11,8 @@ import javax.swing.JComboBox;
  * @author Darío
  */
 public class JPanelBusqueda extends javax.swing.JPanel {
-    private boolean pulsado = false;
     private String busqueda = "";
-    private String seleccionado = null;
+    private String seleccionado = "";
     private final String[] listaPosibilidadesUsario = {"Dia","Monitor","Tipo"};
     private final String[] listaPosibilidadesAdminActividades = {"Dia","Monitor","Tipo"};
     private final String[] listaPosibilidadesAdminSocios = {"Nombre","Correo"};
@@ -20,23 +20,35 @@ public class JPanelBusqueda extends javax.swing.JPanel {
     public JPanelBusqueda() {
         initComponents();
     }
+    public String getSeleccionado(){
+        return this.seleccionado;
+    }
+    
+    public String getTextoBusqueda(){
+        return this.busqueda;
+    }
+    
     public void setTextArea(String texto){
         this.jTextField1.setText(texto);
     }
     
     public void setBusquedaUsuarioActividad(){
-        this.jComboBox1 = new JComboBox(listaPosibilidadesUsario);
+        this.jComboBox1.setModel(new DefaultComboBoxModel<>(listaPosibilidadesUsario));
+        this.seleccionado = listaPosibilidadesUsario[0];
     }
     
     public void setBusquedaAdminActividad(){
-        this.jComboBox1 = new JComboBox(listaPosibilidadesAdminActividades);
+        this.jComboBox1.setModel(new DefaultComboBoxModel<>(listaPosibilidadesAdminActividades));
+        this.seleccionado = listaPosibilidadesAdminActividades[0];
     }
     
     public void setBusquedaAdminSocio(){
-        this.jComboBox1 = new JComboBox(listaPosibilidadesAdminSocios);
+        this.jComboBox1.setModel(new DefaultComboBoxModel<>(listaPosibilidadesAdminSocios));
+        this.seleccionado = listaPosibilidadesAdminSocios[0];
     }
     public void setBusquedaAdminReserva(){
-        this.jComboBox1 = new JComboBox(listaPosibilidadesAdminReservas);
+        this.jComboBox1.setModel(new DefaultComboBoxModel<>(listaPosibilidadesAdminReservas));
+        this.seleccionado = listaPosibilidadesAdminReservas[0];
     }
     
     public List<Actividad> getBusquedaUsuarioActividad(){
@@ -139,7 +151,7 @@ public class JPanelBusqueda extends javax.swing.JPanel {
     
     public boolean busquedaValida(){
         //Nos aseguramos de que la búsqueda es válida, si no no podemos realizar la consulta
-        return ((this.seleccionado!=null)&&(this.pulsado)&&(!this.busqueda.equals("")));
+        return (this.seleccionado != null)&& (this.busqueda != null) && (!this.busqueda.isEmpty());
     }
     
     public final List<Actividad> buscarActividadTipo(ArrayList<Actividad> listaActividad, String tipo){
@@ -199,19 +211,12 @@ public class JPanelBusqueda extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Buscar = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox<>();
         jTextField1 = new javax.swing.JTextField();
 
-        setMaximumSize(new java.awt.Dimension(300, 70));
-        setMinimumSize(new java.awt.Dimension(300, 70));
-        setPreferredSize(new java.awt.Dimension(300, 70));
-
-        Buscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Buscar.png"))); // NOI18N
-        Buscar.setMaximumSize(new java.awt.Dimension(50, 50));
-        Buscar.setMinimumSize(new java.awt.Dimension(50, 50));
-        Buscar.setPreferredSize(new java.awt.Dimension(50, 50));
-        Buscar.addActionListener(this::BuscarActionPerformed);
+        setMaximumSize(new java.awt.Dimension(220, 70));
+        setMinimumSize(new java.awt.Dimension(220, 70));
+        setPreferredSize(new java.awt.Dimension(220, 70));
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBox1.setMaximumSize(new java.awt.Dimension(75, 50));
@@ -220,19 +225,22 @@ public class JPanelBusqueda extends javax.swing.JPanel {
         jComboBox1.addActionListener(this::jComboBox1ActionPerformed);
 
         jTextField1.addActionListener(this::jTextField1ActionPerformed);
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField1KeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(6, 6, 6)
+                .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
+                .addGap(6, 6, 6)
                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addComponent(Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -240,27 +248,25 @@ public class JPanelBusqueda extends javax.swing.JPanel {
                 .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(10, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarActionPerformed
-        this.pulsado = true;
-    }//GEN-LAST:event_BuscarActionPerformed
-
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        this.seleccionado = String.valueOf(this.jComboBox1.getSelectedItem());
+        this.seleccionado = (String) this.jComboBox1.getSelectedItem();
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         this.busqueda = this.jTextField1.getText();
     }//GEN-LAST:event_jTextField1ActionPerformed
 
+    private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
+        this.busqueda = this.jTextField1.getText();
+    }//GEN-LAST:event_jTextField1KeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Buscar;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables

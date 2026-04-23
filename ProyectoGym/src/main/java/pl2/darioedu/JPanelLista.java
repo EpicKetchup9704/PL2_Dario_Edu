@@ -16,6 +16,46 @@ public class JPanelLista extends javax.swing.JPanel{
     private final ArrayList<Usuario> listaUser = Main.getListaUsuarioStatic();
     private final ArrayList<Actividad> listaActividad = Main.getListaActividadStatic();
     private ArrayList<JPanelMostrarInfo> listaCeldas = new ArrayList<>();
+    //Parte para almacenamiento de información de un botón pulsados
+    private Socio socioSeleccionado;
+    private Actividad actividadSeleccionada;
+    private Sesion sesionSeleccionada;
+    private boolean pulsado1;
+    private boolean pulsado2;
+
+    public boolean isPulsado1() {
+        return pulsado1;
+    }
+
+    public boolean isPulsado2() {
+        return pulsado2;
+    }
+
+    public ArrayList<JPanelMostrarInfo> getListaCeldas() {
+        return listaCeldas;
+    }
+    
+    
+    public Sesion getSesionSeleccionada() {
+        return sesionSeleccionada;
+    }
+    
+    public Socio getSocioSeleccionado() {
+        return socioSeleccionado;
+    }
+
+    public void setSocioSeleccionado(Socio socioSeleccionado) {
+        this.socioSeleccionado = socioSeleccionado;
+    }
+
+    public Actividad getActividadSeleccionada() {
+        return actividadSeleccionada;
+    }
+
+    public void setActividadSeleccionada(Actividad actividadSeleccionada) {
+        this.actividadSeleccionada = actividadSeleccionada;
+    }
+    
     
     public final void setLayout(){
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -27,6 +67,8 @@ public class JPanelLista extends javax.swing.JPanel{
     public JPanelLista(){
         this.setLayout();
     }
+    
+    
     public void modoAdminListaUsuarios(){
         this.setLayout();
         for(Usuario user: listaUser){
@@ -38,6 +80,7 @@ public class JPanelLista extends javax.swing.JPanel{
     }
     
     public void modoAdminListaUsuariosFiltrado(List<Usuario> listaUs){
+        listaCeldas = new ArrayList<>();
         this.setLayout();
         for(Usuario user: listaUs){
             JPanelMostrarInfo aux = new JPanelMostrarInfo((Socio) user);
@@ -58,7 +101,7 @@ public class JPanelLista extends javax.swing.JPanel{
     }
     
     public void modoAdminListaActividadesFiltrado(List<Actividad> listaAct){
-        
+        listaCeldas = new ArrayList<>();
         this.setLayout();
         for(Actividad act: listaAct){
             JPanelMostrarInfo aux = new JPanelMostrarInfo(act);
@@ -83,6 +126,7 @@ public class JPanelLista extends javax.swing.JPanel{
         }
     }
         public void modoAdminListaReservasFiltrado(List<Sesion> listaSesiones){
+        listaCeldas = new ArrayList<>();
         this.setLayout();
         for (Usuario user: listaUser){
             Socio soc = (Socio) user; //Casting para socio
@@ -101,6 +145,7 @@ public class JPanelLista extends javax.swing.JPanel{
         /*
         Este método tiene que añadir un List<Actividad>, se presupone que viene filtrado de los métodos de búsqueda de la clase main
         */
+        listaCeldas = new ArrayList<>();
         this.setLayout();
             for (Actividad act : listaAct){
                for (Sesion ses: act.getSesiones()){
@@ -112,6 +157,7 @@ public class JPanelLista extends javax.swing.JPanel{
     }
     
     public void modoUsuarioListaReservas(Usuario user){
+        listaCeldas = new ArrayList<>();
         this.setLayout();
         Socio soc = (Socio) user;
         ArrayList<Actividad> listaAct = soc.getListaActividades();
@@ -218,5 +264,42 @@ public class JPanelLista extends javax.swing.JPanel{
             }
         }
         return null; //Si no ha pulsado todavía el usuario, devuelve null, mirar para su implementacion
+    }
+    
+    public void ResetearListaInformacionBotones(){
+        for (JPanelMostrarInfo info : listaCeldas){
+            info.setPulsado1(false);
+            info.setPulsado2(false);
+            info.setActividad(null);
+            info.setAdmin(false);
+            info.setSocio(null);
+            info.setSesion(null);
+        }
+    }
+    public void ResetearInformacionObtenida(){
+        this.pulsado1 = false;
+        this.pulsado2 = false;
+        this.actividadSeleccionada = null;
+        this.sesionSeleccionada = null;
+        this.socioSeleccionado = null;
+    }
+    public void getInformacion(){
+        for (JPanelMostrarInfo info : listaCeldas){
+            if(info.getPulsadoB1()){
+                this.pulsado1 = true;
+                this.actividadSeleccionada = info.getActividad();
+                this.sesionSeleccionada = info.getSesion();
+                this.socioSeleccionado = info.getSocio();
+            }
+            else if (info.getPulsadoB2()){
+                this.pulsado2 = true;
+                this.actividadSeleccionada = info.getActividad();
+                this.sesionSeleccionada = info.getSesion();
+                this.socioSeleccionado = info.getSocio();
+            }
+        }
+    }
+    public void setBusquedaNula(){
+        
     }
 }

@@ -1,8 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package pl2.darioedu;
+
+import java.util.List;
 
 /**
  *
@@ -12,9 +10,38 @@ public class PanelConsultaReservas extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(PanelConsultaReservas.class.getName());
     private final Administrador usuario;
+    private JPanelBusqueda barraBusqueda;
+    private JPanelLista listaPanel;
     /**
      * Creates new form PanelConsultaSocios
      */
+    
+    public final void iniciarNuevo(){
+        this.barraBusqueda = new JPanelBusqueda();
+        this.barraBusqueda.setBusquedaAdminReserva();
+        this.jPanel1.add(this.barraBusqueda);
+        this.listaPanel = new JPanelLista();
+        this.listaPanel.modoAdminListaReservas();
+        this.jScrollPane1.setViewportView(this.listaPanel);
+   }
+    public void busqueda(){
+        if (this.barraBusqueda.busquedaValida()){
+            //Parte cuando la búsqueda es Exitosa,
+            this.barraBusqueda.setTextArea(null);
+            List<Sesion> listaSes = this.barraBusqueda.getBusquedaAdminReserva();
+            this.listaPanel = new JPanelLista();
+            this.listaPanel.modoAdminListaReservasFiltrado(listaSes);
+            this.jScrollPane1.setViewportView(this.listaPanel);
+            this.jScrollPane1.revalidate();
+            this.jScrollPane1.repaint();
+        }else{
+            if(this.barraBusqueda.getTextoBusqueda().equals("")){
+                iniciarNuevo();
+            }
+        }
+        
+    }
+    
     public PanelConsultaReservas(Administrador admin) {
         initComponents();
         this.usuario = admin;
@@ -30,6 +57,9 @@ public class PanelConsultaReservas extends javax.swing.JFrame {
     private void initComponents() {
 
         jButtonVolverAtras = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        ButonBusqueda = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -38,21 +68,48 @@ public class PanelConsultaReservas extends javax.swing.JFrame {
         jButtonVolverAtras.setText("<-");
         jButtonVolverAtras.addActionListener(this::jButtonVolverAtrasActionPerformed);
 
+        jPanel1.setMaximumSize(new java.awt.Dimension(300, 70));
+        jPanel1.setMinimumSize(new java.awt.Dimension(300, 70));
+        jPanel1.setPreferredSize(new java.awt.Dimension(300, 70));
+        jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.LINE_AXIS));
+
+        ButonBusqueda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Buscar.png"))); // NOI18N
+        ButonBusqueda.setMaximumSize(new java.awt.Dimension(50, 50));
+        ButonBusqueda.setMinimumSize(new java.awt.Dimension(50, 50));
+        ButonBusqueda.setPreferredSize(new java.awt.Dimension(50, 50));
+        ButonBusqueda.addActionListener(this::ButonBusquedaActionPerformed);
+        jPanel1.add(ButonBusqueda);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButtonVolverAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(305, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jButtonVolverAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(45, 45, 45)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 49, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jButtonVolverAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(258, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -64,6 +121,10 @@ public class PanelConsultaReservas extends javax.swing.JFrame {
         new PanelAdmin(usuario).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButtonVolverAtrasActionPerformed
+
+    private void ButonBusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButonBusquedaActionPerformed
+        this.busqueda();
+    }//GEN-LAST:event_ButonBusquedaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -97,6 +158,9 @@ public class PanelConsultaReservas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ButonBusqueda;
     private javax.swing.JButton jButtonVolverAtras;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

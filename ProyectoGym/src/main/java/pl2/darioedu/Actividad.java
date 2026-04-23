@@ -21,6 +21,7 @@ public class Actividad implements Serializable{
         // Por ahora creo que de cara a la interfaz es mejor no meter las sesiones en el constructor
         // Primero creamos la actividad, despues se le añaden o quitan sesiones
         this.esExtraordinaria = extra ;
+        this.listaSesiones = new ArrayList<>();
     }
     public Actividad(String titulo, String tipo,String monitor,String nombreSala,int aforo,  boolean extra){
         this.titulo = titulo ;
@@ -29,6 +30,7 @@ public class Actividad implements Serializable{
         // Por ahora creo que de cara a la interfaz es mejor no meter las sesiones en el constructor
         // Primero creamos la actividad, despues se le añaden o quitan sesiones
         this.esExtraordinaria = extra ;
+        this.listaSesiones = new ArrayList<>();
     }
     public String getSesionUser(){
         return this.sesionUsuario.getSesionString();
@@ -43,8 +45,12 @@ public class Actividad implements Serializable{
         this.listaSesiones.remove(clase);
     }
     public ArrayList<Sesion> getSesiones(){
-        return listaSesiones ;
-        // IMPORTANTE, he creado en Sesion un toString, tenemos que ver como integrarlo con la interfaz
+        if (this.listaSesiones == null){
+            this.listaSesiones = new ArrayList<>();
+            return this.listaSesiones;
+        }
+        else{
+            return this.listaSesiones;}
     }
     public void setExtraordinario(boolean estado){this.esExtraordinaria=estado;}
     

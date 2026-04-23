@@ -5,22 +5,48 @@
 package pl2.darioedu;
 
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
- *
+ * 
  * @author Darío
+ * Hay que añadir ventanas emergentes para cada accion / deseada
  */
 public class JPanelMostrarInfo extends javax.swing.JPanel {
-    private boolean pulsado1 = false;
-    private boolean pulsado2 = false;
-    private Socio socio = null;
-    private Actividad actividad = null;
-    private Sesion sesion = null;
-    private boolean admin = false;
-    
+    private boolean pulsado1;
+    private boolean pulsado2;
+    private Socio socio;
+    private Actividad actividad;
+    private Sesion sesion;
+    private boolean admin;
+
     public final String reducirCadena(String cadena){
         String devolver = cadena.length() > 25 ? cadena.substring(0,20) + "..." : cadena;
         return devolver;
+    }
+
+    public void setPulsado1(boolean pulsado1) {
+        this.pulsado1 = pulsado1;
+    }
+
+    public void setPulsado2(boolean pulsado2) {
+        this.pulsado2 = pulsado2;
+    }
+
+    public void setSocio(Socio socio) {
+        this.socio = socio;
+    }
+
+    public void setActividad(Actividad actividad) {
+        this.actividad = actividad;
+    }
+
+    public void setSesion(Sesion sesion) {
+        this.sesion = sesion;
+    }
+
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
     }
     
     
@@ -54,6 +80,9 @@ public class JPanelMostrarInfo extends javax.swing.JPanel {
     }
     public JPanelMostrarInfo(Socio socio){
         initComponents();
+        this.actividad = null;
+        this.sesion = null;
+        this.admin = false;
         this.socio = socio;
         this.Titulo.setText(socio.getNombre());
         this.AP1.setText("Correo: " + this.reducirCadena(socio.getCorreo()));
@@ -70,6 +99,9 @@ public class JPanelMostrarInfo extends javax.swing.JPanel {
         //Constructor para el admin, para mostrar actividades
         initComponents();
         this.actividad = actividad;
+        this.sesion = null;
+        this.admin = false;
+        this.socio = null;
             this.Titulo.setText(actividad.getTitulo());
             this.AP1.setText("Tipo: "+actividad.getTipo());
             this.AP2.setText("Sala: "+actividad.getSala().getNombre());
@@ -214,10 +246,40 @@ public class JPanelMostrarInfo extends javax.swing.JPanel {
 
     private void Imagen2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Imagen2ActionPerformed
         this.pulsado2 = true;
+        if ((this.actividad==null)&&(this.sesion==null)&&!(this.socio==null)&&(this.admin==false)){
+            JOptionPane.showMessageDialog(null,"Implementar cuadro para editar VIP estado","None",JOptionPane.INFORMATION_MESSAGE);
+            }
+        if (!(this.actividad==null)&&(this.sesion==null)&&!(this.socio==null)&&(this.admin==false)){
+            JOptionPane.showMessageDialog(null,"Implementar para el editor Admin de BorrarActividad","None",JOptionPane.INFORMATION_MESSAGE);
+            }
+        if (!(this.actividad==null)&&!(this.sesion==null)&&!(this.socio==null)&&(this.admin==true)){
+            JOptionPane.showMessageDialog(null,"Implementar para el editor Admin de BorrarReservas","None",JOptionPane.INFORMATION_MESSAGE);
+            }
+         if (!(this.actividad==null)&&!(this.sesion==null)&&(this.socio==null)&&(this.admin==false)){
+            JOptionPane.showMessageDialog(null,"Implementar para el usuario,mostrar Actividades Busqueda OK","None",JOptionPane.INFORMATION_MESSAGE);
+            }
+         if (!(this.actividad==null)&&!(this.sesion==null)&&!(this.socio==null)&&(this.admin==false)){
+            JOptionPane.showMessageDialog(null,"Implementar para el usuario,mostrarReservas Cancelar","None",JOptionPane.INFORMATION_MESSAGE);
+            }
     }//GEN-LAST:event_Imagen2ActionPerformed
 
     private void Imagen1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Imagen1ActionPerformed
        this.pulsado1 = true;
+        if ((this.actividad==null)&&(this.sesion==null)&&!(this.socio==null)&&(this.admin==false)){
+            JOptionPane.showMessageDialog(null,"Implementar cuadro para editar VIP estado","None",JOptionPane.INFORMATION_MESSAGE);
+            }
+        if (!(this.actividad==null)&&(this.sesion==null)&&!(this.socio==null)&&(this.admin==false)){
+            JOptionPane.showMessageDialog(null,"Implementar para el editor Admin de BorrarActividad","None",JOptionPane.INFORMATION_MESSAGE);
+            }
+        if (!(this.actividad==null)&&!(this.sesion==null)&&!(this.socio==null)&&(this.admin==true)){
+            JOptionPane.showMessageDialog(null,"Implementar para el editor Admin de BorrarReservas","None",JOptionPane.INFORMATION_MESSAGE);
+            }
+         if (!(this.actividad==null)&&!(this.sesion==null)&&(this.socio==null)&&(this.admin==false)){
+            JOptionPane.showMessageDialog(null,"Implementar para el usuario,mostrar Actividades Busqueda OK","None",JOptionPane.INFORMATION_MESSAGE);
+            }
+         if (!(this.actividad==null)&&!(this.sesion==null)&&!(this.socio==null)&&(this.admin==false)){
+            JOptionPane.showMessageDialog(null,"Implementar para el usuario,mostrarReservas Cancelar","None",JOptionPane.INFORMATION_MESSAGE);
+            }
     }//GEN-LAST:event_Imagen1ActionPerformed
 
 
