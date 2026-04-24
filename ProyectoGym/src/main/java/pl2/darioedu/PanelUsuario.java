@@ -56,6 +56,8 @@ public class PanelUsuario extends javax.swing.JFrame {
         jButtonReservas.setBackground(new java.awt.Color(255, 153, 51));
         jButtonReservas.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         jButtonReservas.setText("<html><center>Gestionar<br>Reservas<center></html>");
+        jButtonReservas.setMinimumSize(new java.awt.Dimension(134, 86));
+        jButtonReservas.setPreferredSize(new java.awt.Dimension(134, 86));
         jButtonReservas.addActionListener(this::jButtonReservasActionPerformed);
 
         jButtonDatosPersonales.setBackground(new java.awt.Color(255, 153, 51));
@@ -63,8 +65,12 @@ public class PanelUsuario extends javax.swing.JFrame {
         jButtonDatosPersonales.addActionListener(this::jButtonDatosPersonalesActionPerformed);
 
         jLabel2.setText("<html><div style='text-align: center; font-family: sans-serif; color: #333333;'>\n        Consulta las <b>próximas actividades</b> del gimnasio,<br>\n        y <font color='#2E86C1'><b>reserva tu plaza</b></font> para tu siguiente aventura 🚀\n        </div></html>");
+        jLabel2.setMinimumSize(new java.awt.Dimension(145, 86));
+        jLabel2.setPreferredSize(new java.awt.Dimension(145, 86));
 
         jLabel3.setText("<html><div style='text-align: center; font-family: sans-serif; color: #333333;'>\n        <b>Consulta</b>, <b>modifica</b> o <font color='#CB4335'><b>elimina</b></font><br>\n        tus reservas de actividades futuras 📅\n        </div></html>");
+        jLabel3.setMinimumSize(new java.awt.Dimension(145, 86));
+        jLabel3.setPreferredSize(new java.awt.Dimension(145, 86));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -80,13 +86,13 @@ public class PanelUsuario extends javax.swing.JFrame {
                         .addGap(99, 99, 99)
                         .addComponent(jButtonDatosPersonales, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButtonActividades, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButtonReservas, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButtonActividades)
+                            .addComponent(jButtonReservas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(63, 63, 63)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE))))
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -102,13 +108,13 @@ public class PanelUsuario extends javax.swing.JFrame {
                             .addComponent(jLabel1)
                             .addComponent(jLabelNomUsuario))))
                 .addGap(38, 38, 38)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jButtonActividades, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButtonActividades)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
-                    .addComponent(jButtonReservas))
+                    .addComponent(jButtonReservas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(39, 39, 39))
         );
 
