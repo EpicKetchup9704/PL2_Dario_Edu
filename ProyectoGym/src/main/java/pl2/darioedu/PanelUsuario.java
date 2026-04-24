@@ -20,7 +20,7 @@ public class PanelUsuario extends javax.swing.JFrame {
     public PanelUsuario(Socio soci) {
         initComponents();
         this.socio = soci;
-        this.jLabel2.setText(this.socio.getNombre());
+        this.jLabelNomUsuario.setText(this.socio.getNombre());
         
     }
 
@@ -56,9 +56,11 @@ public class PanelUsuario extends javax.swing.JFrame {
         jButtonReservas.setBackground(new java.awt.Color(255, 153, 51));
         jButtonReservas.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         jButtonReservas.setText("<html><center>Gestionar<br>Reservas<center></html>");
+        jButtonReservas.addActionListener(this::jButtonReservasActionPerformed);
 
         jButtonDatosPersonales.setBackground(new java.awt.Color(255, 153, 51));
         jButtonDatosPersonales.setText("<html><center>Modificar<br>Datos personales<center></html>");
+        jButtonDatosPersonales.addActionListener(this::jButtonDatosPersonalesActionPerformed);
 
         jLabel2.setText("<html><div style='text-align: center; font-family: sans-serif; color: #333333;'>\n        Consulta las <b>próximas actividades</b> del gimnasio,<br>\n        y <font color='#2E86C1'><b>reserva tu plaza</b></font> para tu siguiente aventura 🚀\n        </div></html>");
 
@@ -105,8 +107,8 @@ public class PanelUsuario extends javax.swing.JFrame {
                     .addComponent(jButtonActividades, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButtonReservas)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE))
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
+                    .addComponent(jButtonReservas))
                 .addGap(39, 39, 39))
         );
 
@@ -114,8 +116,25 @@ public class PanelUsuario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonActividadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActividadesActionPerformed
-        // TODO add your handling code here:
+        PanelUsuActividades panel = new PanelUsuActividades(this.socio);
+        this.setVisible(false);
+        panel.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButtonActividadesActionPerformed
+
+    private void jButtonDatosPersonalesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDatosPersonalesActionPerformed
+        PanelModificarDatosPersonales panel = new PanelModificarDatosPersonales(this.socio);
+        this.setVisible(false);
+        panel.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButtonDatosPersonalesActionPerformed
+
+    private void jButtonReservasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReservasActionPerformed
+        PanelUsuReservas panel2 = new PanelUsuReservas(this.socio);
+        this.setVisible(false);
+        panel2.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButtonReservasActionPerformed
 
     /**
      * @param args the command line arguments
