@@ -12,12 +12,15 @@ public class PanelModificarAct extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(PanelModificarAct.class.getName());
     private final Administrador usuario;
+    private Actividad actividadPrevia;
+    private Actividad actividadNueva;
     /**
      * Creates new form PanelConsultaSocios
      */
-    public PanelModificarAct(Administrador admin) {
+    public PanelModificarAct(Administrador admin, Actividad actPrevia) {
         initComponents();
         this.usuario = admin;
+        this.actividadPrevia = actPrevia;
     }
 
     /**

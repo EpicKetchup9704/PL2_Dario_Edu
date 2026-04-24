@@ -18,7 +18,9 @@ public class Socio extends Usuario implements Serializable{
         this.telefono = telefono;
         this.tarjeta = tarjeta;
         this.isVip = vip;
-
+        
+        this.listaActividades = new ArrayList<>();
+        this.listaSesiones = new ArrayList<>();
     }
     
     public ArrayList<Sesion> getListaSesion(){

@@ -5,6 +5,7 @@
 package pl2.darioedu;
 
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 /**
@@ -13,8 +14,6 @@ import javax.swing.JOptionPane;
  * Hay que añadir ventanas emergentes para cada accion / deseada
  */
 public class JPanelMostrarInfo extends javax.swing.JPanel {
-    private boolean pulsado1;
-    private boolean pulsado2;
     private Socio socio;
     private Actividad actividad;
     private Sesion sesion;
@@ -23,14 +22,6 @@ public class JPanelMostrarInfo extends javax.swing.JPanel {
     public final String reducirCadena(String cadena){
         String devolver = cadena.length() > 25 ? cadena.substring(0,20) + "..." : cadena;
         return devolver;
-    }
-
-    public void setPulsado1(boolean pulsado1) {
-        this.pulsado1 = pulsado1;
-    }
-
-    public void setPulsado2(boolean pulsado2) {
-        this.pulsado2 = pulsado2;
     }
 
     public void setSocio(Socio socio) {
@@ -67,16 +58,9 @@ public class JPanelMostrarInfo extends javax.swing.JPanel {
     }
     
     
-    public boolean getPulsadoB1(){
-        return this.pulsado1;
-    }
-    public boolean getPulsadoB2(){
-        return this.pulsado2;
-    }
-    
-    
     public JPanelMostrarInfo() {
         initComponents();
+        this.Titulo = new JLabel("No hay título introducido");
     }
     public JPanelMostrarInfo(Socio socio){
         initComponents();
@@ -115,7 +99,9 @@ public class JPanelMostrarInfo extends javax.swing.JPanel {
             this.Imagen2.setIcon(new ImageIcon("src/main/resources/Editar.png"));
     }
     public JPanelMostrarInfo(Actividad actividad, Sesion clase, boolean esAdmin, Socio user){
+        initComponents();
         if(esAdmin){
+            if (!(clase==null)){
             //Constructor para el admin, para mostrar reservas
             this.actividad = actividad;
             this.sesion = clase;
@@ -125,13 +111,29 @@ public class JPanelMostrarInfo extends javax.swing.JPanel {
             this.AP1.setText("Tipo: "+actividad.getTipo());
             this.AP2.setText("Sala: "+actividad.getSala().getNombre());
             this.AP3.setText("Reserva: "+clase.getSesionStringFormateado(':'));
-            this.AP4.setText("Socio +"+user.getNombre());
+            this.AP4.setText("Socio: "+user.getNombre());
             this.Imagen1.setVisible(true);
             this.Imagen1.setEnabled(true);
             this.Imagen1.setIcon(new ImageIcon("src/main/resources/Cruz.png"));
             this.Imagen2.setVisible(true);
             this.Imagen2.setEnabled(true);
-            this.Imagen2.setIcon(new ImageIcon("src/main/resources/Editar.png"));
+            this.Imagen2.setIcon(new ImageIcon("src/main/resources/Editar.png"));}
+            else{
+                //Constructor admin mostrar Actividades sin poder editar
+                this.actividad = actividad;
+                this.sesion = null;
+                this.admin = true;
+                this.socio = null;
+                this.Titulo.setText(actividad.getTitulo());
+                this.AP1.setText("Tipo: "+actividad.getTipo());
+                this.AP2.setText("Sala: "+actividad.getSala().getNombre());
+                this.AP3.setText("Aforo: "+actividad.getSala().getAforo() + " | Plazas: "+actividad.getSala().aforoRestante());
+                this.AP4.setText("Monitor: " +actividad.getMonitor());
+                this.Imagen1.setVisible(false);
+                this.Imagen1.setEnabled(false);
+                this.Imagen2.setVisible(false);
+                this.Imagen2.setEnabled(false);
+            }
         }
         else{
             if(user == null){
@@ -245,7 +247,7 @@ public class JPanelMostrarInfo extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void Imagen2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Imagen2ActionPerformed
-        this.pulsado2 = true;
+
         if ((this.actividad==null)&&(this.sesion==null)&&!(this.socio==null)&&(this.admin==false)){
             JOptionPane.showMessageDialog(null,"Implementar cuadro para editar VIP estado","None",JOptionPane.INFORMATION_MESSAGE);
             }
@@ -253,7 +255,7 @@ public class JPanelMostrarInfo extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null,"Implementar para el editor Admin de BorrarActividad","None",JOptionPane.INFORMATION_MESSAGE);
             }
         if (!(this.actividad==null)&&!(this.sesion==null)&&!(this.socio==null)&&(this.admin==true)){
-            JOptionPane.showMessageDialog(null,"Implementar para el editor Admin de BorrarReservas","None",JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null,"Implementar para el editor Admin de Editar Reservas","None",JOptionPane.INFORMATION_MESSAGE);
             }
          if (!(this.actividad==null)&&!(this.sesion==null)&&(this.socio==null)&&(this.admin==false)){
             JOptionPane.showMessageDialog(null,"Implementar para el usuario,mostrar Actividades Busqueda OK","None",JOptionPane.INFORMATION_MESSAGE);
@@ -264,7 +266,7 @@ public class JPanelMostrarInfo extends javax.swing.JPanel {
     }//GEN-LAST:event_Imagen2ActionPerformed
 
     private void Imagen1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Imagen1ActionPerformed
-       this.pulsado1 = true;
+
         if ((this.actividad==null)&&(this.sesion==null)&&!(this.socio==null)&&(this.admin==false)){
             JOptionPane.showMessageDialog(null,"Implementar cuadro para editar VIP estado","None",JOptionPane.INFORMATION_MESSAGE);
             }

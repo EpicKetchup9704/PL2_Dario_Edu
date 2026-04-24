@@ -23,30 +23,38 @@ public class PanelConsultaSocios extends javax.swing.JFrame {
         initComponents();
         this.usuario = admin;
         iniciarNuevo();
-    }
-    
-    public final void iniciarNuevo(){
         this.barraBusqueda = new JPanelBusqueda();
         this.barraBusqueda.setBusquedaAdminSocio();
         this.jPanel1.add(this.barraBusqueda);
+    }
+    
+    public final void iniciarNuevo(){
         this.listaPanel = new JPanelLista();
         this.listaPanel.modoAdminListaUsuarios();
         this.jScrollPane1.setViewportView(this.listaPanel);
+        this.jScrollPane1.revalidate();
+        this.jScrollPane1.repaint();
+        
    }
     public void busqueda(){
+        this.barraBusqueda.setBusqueda();
         if (this.barraBusqueda.busquedaValida()){
             //Parte cuando la búsqueda es Exitosa,
-            this.barraBusqueda.setTextArea(null);
             List<Usuario> listaUs = this.barraBusqueda.getBusquedaAdminSocio();
+            if (!listaUs.isEmpty()){
+            this.barraBusqueda.setTextArea("");
             this.listaPanel = new JPanelLista();
             this.listaPanel.modoAdminListaUsuariosFiltrado(listaUs);
             this.jScrollPane1.setViewportView(this.listaPanel);
             this.jScrollPane1.revalidate();
-            this.jScrollPane1.repaint();
-        }else{
-            if(this.barraBusqueda.getTextoBusqueda().equals("")){
-                iniciarNuevo();
+            this.jScrollPane1.repaint();}
+            else{
+                this.barraBusqueda.setTextArea("");
             }
+        }else{
+                this.barraBusqueda.setTextArea("");
+                iniciarNuevo();
+            
         }
         
     }
@@ -134,7 +142,7 @@ public class PanelConsultaSocios extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonVolverAtrasActionPerformed
 
     private void ButtonAddUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonAddUsuarioActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_ButtonAddUsuarioActionPerformed
 
     private void ButonBusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButonBusquedaActionPerformed

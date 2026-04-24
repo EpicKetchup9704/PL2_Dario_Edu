@@ -17,34 +17,44 @@ public class PanelConsultaActividades extends javax.swing.JFrame {
     private JPanelBusqueda barraBusqueda;
     private JPanelLista listaPanel;
     /**
-     * Creates new form PanelConsultaSocios
+     * Creates new form PanelConsultaActividades
      */
     public PanelConsultaActividades(Administrador admin) {
         initComponents();
         this.usuario = admin;
-    }
-     public final void iniciarNuevo(){
+        iniciarNuevo();
         this.barraBusqueda = new JPanelBusqueda();
         this.barraBusqueda.setBusquedaUsuarioActividad();
         this.jPanel1.add(this.barraBusqueda);
+    }
+    
+    public final void iniciarNuevo(){
         this.listaPanel = new JPanelLista();
-        this.listaPanel.modoUsuarioListaBusqueda(Main.getListaActividadStatic());
+        this.listaPanel.modoAdminListaActividadesBusqueda();
         this.jScrollPane1.setViewportView(this.listaPanel);
+        this.jScrollPane1.revalidate();
+        this.jScrollPane1.repaint();
+        
    }
     public void busqueda(){
+        this.barraBusqueda.setBusqueda();
         if (this.barraBusqueda.busquedaValida()){
             //Parte cuando la búsqueda es Exitosa,
-            this.barraBusqueda.setTextArea(null);
-            List<Actividad> listaAct = this.barraBusqueda.getBusquedaUsuarioActividad();
+            List<Actividad> listaAct = this.barraBusqueda.getBusquedaAdminActividad();
+            if (!listaAct.isEmpty()){
+            this.barraBusqueda.setTextArea("");
             this.listaPanel = new JPanelLista();
-            this.listaPanel.modoUsuarioListaBusqueda(listaAct);
+            this.listaPanel.modoAdminListaActividadesBusquedaFiltrado(listaAct);
             this.jScrollPane1.setViewportView(this.listaPanel);
             this.jScrollPane1.revalidate();
-            this.jScrollPane1.repaint();
-        }else{
-            if(this.barraBusqueda.getTextoBusqueda().equals("")){
-                iniciarNuevo();
+            this.jScrollPane1.repaint();}
+            else{
+                this.barraBusqueda.setTextArea("");
             }
+        }else{
+                this.barraBusqueda.setTextArea("");
+                iniciarNuevo();
+            
         }
         
     }

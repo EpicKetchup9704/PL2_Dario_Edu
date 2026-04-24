@@ -4,28 +4,47 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JComboBox;
 
 /**
  *
  * @author Darío
  */
 public class JPanelBusqueda extends javax.swing.JPanel {
+    public JFrameCalendario calendario = new JFrameCalendario();
     private String busqueda = "";
     private String seleccionado = "";
     private final String[] listaPosibilidadesUsario = {"Dia","Monitor","Tipo"};
     private final String[] listaPosibilidadesAdminActividades = {"Dia","Monitor","Tipo"};
     private final String[] listaPosibilidadesAdminSocios = {"Nombre","Correo"};
     private final String[] listaPosibilidadesAdminReservas = {"Dia"};
+    
+    
     public JPanelBusqueda() {
         initComponents();
     }
+    public void setBusqueda(){
+    this.busqueda = this.jTextField1.getText();
+    }
+    public void aparecerCalendario(){
+        this.calendario.setArea(this.jTextField1);
+        this.calendario.setVisible(true);
+    }
+    
+    public void ocultarCalendario(){
+        this.calendario.setVisible(false);
+    }
+    
+    public void eliminarCalendario(){
+        this.calendario.setVisible(false);
+        this.calendario.dispose();
+    }
+    
     public String getSeleccionado(){
         return this.seleccionado;
     }
     
-    public String getTextoBusqueda(){
-        return this.busqueda;
+    public void resetTextoBusqueda(){
+        this.busqueda = null;
     }
     
     public void setTextArea(String texto){
@@ -52,12 +71,14 @@ public class JPanelBusqueda extends javax.swing.JPanel {
     }
     
     public List<Actividad> getBusquedaUsuarioActividad(){
+        this.busqueda = jTextField1.getText();
         //Cuando la barra de búsqueda se ha seleccionado con 
         ArrayList<Actividad> listaActividad = Main.getListaActividadStatic();
+        try{
         if (this.busquedaValida()){
           int anno = Integer.parseInt(this.busqueda.substring(0, 4));
-          int mes = Integer.parseInt(this.busqueda.substring(4,6));
-          int dia = Integer.parseInt(this.busqueda.substring(6,8));
+          int mes = Integer.parseInt(this.busqueda.substring(5,7));
+          int dia = Integer.parseInt(this.busqueda.substring(8,10));
           List<Actividad> devolver;
           switch (this.seleccionado){
               case "Dia" -> 
@@ -73,15 +94,22 @@ public class JPanelBusqueda extends javax.swing.JPanel {
         }else{
         List<Actividad> devolver = new ArrayList<>();
         return devolver;}
+        }
+        catch (NumberFormatException | IndexOutOfBoundsException error1){
+            ArrayList<Actividad> devolver = new ArrayList();
+            return devolver;
+        }
     }
     
     public List<Actividad> getBusquedaAdminActividad(){
+        this.busqueda = jTextField1.getText();
         //Cuando la barra de búsqueda se ha seleccionado con 
         ArrayList<Actividad> listaActividad = Main.getListaActividadStatic();
+        try{
         if (this.busquedaValida()){
           int anno = Integer.parseInt(this.busqueda.substring(0, 4));
-          int mes = Integer.parseInt(this.busqueda.substring(4,6));
-          int dia = Integer.parseInt(this.busqueda.substring(6,8));
+          int mes = Integer.parseInt(this.busqueda.substring(5,7));
+          int dia = Integer.parseInt(this.busqueda.substring(8,10));
           List<Actividad> devolver;
           switch (this.seleccionado){
               case "Dia" -> 
@@ -97,10 +125,14 @@ public class JPanelBusqueda extends javax.swing.JPanel {
         }else{
         List<Actividad> devolver = new ArrayList<>();
         return devolver;}
+        }catch (NumberFormatException | IndexOutOfBoundsException error1){
+            ArrayList<Actividad> devolver = new ArrayList();
+            return devolver;
+        }
     }
 
     public List<Usuario> getBusquedaAdminSocio(){
-        //Cuando la barra de búsqueda se ha seleccionado con 
+        this.busqueda = jTextField1.getText();
         ArrayList<Usuario> listaUsuario = Main.getListaUsuarioStatic();
         List<Socio> listaSocio =listaUsuario.stream().filter(us -> us instanceof Socio).map(us -> (Socio) us).toList();
         if (this.busquedaValida()){
@@ -120,12 +152,14 @@ public class JPanelBusqueda extends javax.swing.JPanel {
     }
     
     public List<Sesion> getBusquedaAdminReserva(){
+        this.busqueda = jTextField1.getText();
         ArrayList<Usuario> listaUsuario = Main.getListaUsuarioStatic();
         List<Socio> listaSocio =listaUsuario.stream().filter(us -> us instanceof Socio).map(us -> (Socio) us).toList();
+        try{
         if (this.busquedaValida()){
           int anno = Integer.parseInt(this.busqueda.substring(0, 4));
-          int mes = Integer.parseInt(this.busqueda.substring(4,6));
-          int dia = Integer.parseInt(this.busqueda.substring(6,8));
+          int mes = Integer.parseInt(this.busqueda.substring(5,7));
+          int dia = Integer.parseInt(this.busqueda.substring(8,10));
           List<Sesion> devolver;
           switch (this.seleccionado){
               case "Dia" -> 
@@ -137,6 +171,10 @@ public class JPanelBusqueda extends javax.swing.JPanel {
         }else{
         List<Sesion> devolver = new ArrayList<>();
         return devolver;}
+        }catch (NumberFormatException | IndexOutOfBoundsException error1){
+            List<Sesion> devolver = new ArrayList();
+            return devolver;
+        }
     }
     
     public final List<Actividad> buscarActividadMonitor(ArrayList<Actividad> listaActividad, String nombre){
@@ -151,7 +189,7 @@ public class JPanelBusqueda extends javax.swing.JPanel {
     
     public boolean busquedaValida(){
         //Nos aseguramos de que la búsqueda es válida, si no no podemos realizar la consulta
-        return (this.seleccionado != null)&& (this.busqueda != null) && (!this.busqueda.isEmpty());
+        return this.seleccionado != null && this.busqueda != null && !this.busqueda.trim().isEmpty();
     }
     
     public final List<Actividad> buscarActividadTipo(ArrayList<Actividad> listaActividad, String tipo){
@@ -202,6 +240,7 @@ public class JPanelBusqueda extends javax.swing.JPanel {
             return listaDevolver;
         }
     }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -224,6 +263,16 @@ public class JPanelBusqueda extends javax.swing.JPanel {
         jComboBox1.setPreferredSize(new java.awt.Dimension(75, 50));
         jComboBox1.addActionListener(this::jComboBox1ActionPerformed);
 
+        jTextField1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTextField1FocusGained(evt);
+            }
+        });
+        jTextField1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextField1MouseClicked(evt);
+            }
+        });
         jTextField1.addActionListener(this::jTextField1ActionPerformed);
         jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -265,6 +314,17 @@ public class JPanelBusqueda extends javax.swing.JPanel {
         this.busqueda = this.jTextField1.getText();
     }//GEN-LAST:event_jTextField1KeyReleased
 
+    private void jTextField1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField1MouseClicked
+        if (((String)this.jComboBox1.getSelectedItem()).equals("Dia")){
+           this.aparecerCalendario();
+       }
+       this.busqueda = (String)this.jTextField1.getText();
+       this.seleccionado = (String) this.jComboBox1.getSelectedItem();
+    }//GEN-LAST:event_jTextField1MouseClicked
+
+    private void jTextField1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField1FocusGained
+
+    }//GEN-LAST:event_jTextField1FocusGained
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> jComboBox1;

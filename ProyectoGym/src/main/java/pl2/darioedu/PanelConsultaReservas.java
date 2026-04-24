@@ -9,44 +9,51 @@ import java.util.List;
 public class PanelConsultaReservas extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(PanelConsultaReservas.class.getName());
-    private final Administrador usuario;
+     private final Administrador usuario;
     private JPanelBusqueda barraBusqueda;
     private JPanelLista listaPanel;
     /**
-     * Creates new form PanelConsultaSocios
+     * Creates new form PanelConsultaReservas
      */
-    
-    public final void iniciarNuevo(){
+    public PanelConsultaReservas(Administrador admin) {
+        initComponents();
+        this.usuario = admin;
+        iniciarNuevo();
         this.barraBusqueda = new JPanelBusqueda();
         this.barraBusqueda.setBusquedaAdminReserva();
         this.jPanel1.add(this.barraBusqueda);
+    }
+    
+    public final void iniciarNuevo(){
         this.listaPanel = new JPanelLista();
         this.listaPanel.modoAdminListaReservas();
         this.jScrollPane1.setViewportView(this.listaPanel);
+        this.jScrollPane1.revalidate();
+        this.jScrollPane1.repaint();
+        
    }
     public void busqueda(){
+        this.barraBusqueda.setBusqueda();
         if (this.barraBusqueda.busquedaValida()){
             //Parte cuando la búsqueda es Exitosa,
-            this.barraBusqueda.setTextArea(null);
             List<Sesion> listaSes = this.barraBusqueda.getBusquedaAdminReserva();
+            if (!listaSes.isEmpty()){
+            this.barraBusqueda.setTextArea("");
             this.listaPanel = new JPanelLista();
             this.listaPanel.modoAdminListaReservasFiltrado(listaSes);
             this.jScrollPane1.setViewportView(this.listaPanel);
             this.jScrollPane1.revalidate();
-            this.jScrollPane1.repaint();
-        }else{
-            if(this.barraBusqueda.getTextoBusqueda().equals("")){
-                iniciarNuevo();
+            this.jScrollPane1.repaint();}
+            else{
+                this.barraBusqueda.setTextArea("");
             }
+        }else{
+                this.barraBusqueda.setTextArea("");
+                iniciarNuevo();
+            
         }
         
     }
-    
-    public PanelConsultaReservas(Administrador admin) {
-        initComponents();
-        this.usuario = admin;
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
