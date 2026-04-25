@@ -51,21 +51,29 @@ public class PanelAdmin extends javax.swing.JFrame {
         jButtonGestAct.setBackground(new java.awt.Color(255, 153, 0));
         jButtonGestAct.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         jButtonGestAct.setText("<html><center>Gestionar<br>Actividades<center></html>");
+        jButtonGestAct.setMinimumSize(new java.awt.Dimension(132, 80));
+        jButtonGestAct.setPreferredSize(new java.awt.Dimension(132, 80));
         jButtonGestAct.addActionListener(this::jButtonGestActActionPerformed);
 
         jButtonConsAct.setBackground(new java.awt.Color(255, 153, 0));
         jButtonConsAct.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         jButtonConsAct.setText("<html><center>Consultar<br>Actividades<center></html>");
+        jButtonConsAct.setMinimumSize(new java.awt.Dimension(132, 80));
+        jButtonConsAct.setPreferredSize(new java.awt.Dimension(132, 80));
         jButtonConsAct.addActionListener(this::jButtonConsActActionPerformed);
 
         jButtonReservas.setBackground(new java.awt.Color(255, 153, 0));
         jButtonReservas.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         jButtonReservas.setText("<html><center>Consultar<br>Reservas<center></html>");
+        jButtonReservas.setMinimumSize(new java.awt.Dimension(132, 80));
+        jButtonReservas.setPreferredSize(new java.awt.Dimension(132, 80));
         jButtonReservas.addActionListener(this::jButtonReservasActionPerformed);
 
         jButtonSocios.setBackground(new java.awt.Color(255, 153, 0));
         jButtonSocios.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         jButtonSocios.setText("<html><center>Consultar<br>Socios<center></html>");
+        jButtonSocios.setMinimumSize(new java.awt.Dimension(132, 80));
+        jButtonSocios.setPreferredSize(new java.awt.Dimension(132, 80));
         jButtonSocios.addActionListener(this::jButtonSociosActionPerformed);
 
         jButtonCrearAdmin.setBackground(new java.awt.Color(255, 204, 51));
@@ -82,9 +90,9 @@ public class PanelAdmin extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(46, 46, 46)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButtonGestAct, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButtonSocios, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jButtonSocios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButtonGestAct, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(49, 49, 49)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jButtonReservas, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -110,12 +118,12 @@ public class PanelAdmin extends javax.swing.JFrame {
                     .addComponent(NombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButtonGestAct, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
-                    .addComponent(jButtonConsAct))
+                    .addComponent(jButtonGestAct, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonConsAct, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButtonReservas)
-                    .addComponent(jButtonSocios, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE))
+                    .addComponent(jButtonReservas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonSocios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(50, Short.MAX_VALUE))
         );
 

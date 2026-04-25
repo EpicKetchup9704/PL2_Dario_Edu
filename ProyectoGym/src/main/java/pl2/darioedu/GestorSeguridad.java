@@ -102,5 +102,20 @@ public class GestorSeguridad {
     public static boolean autenticarEsAdmin(Usuario usu){
         return (usu instanceof Administrador);
     }
+    public static String codificar(String palabra, int numAsteriscos){
+        String texto = "";
+        String textoFinal = "";
+        String ultimosCuatro = "";
+
+        if (texto.length() >= 4) {
+            // Si tiene 4 caracteres o más, lo recortamos normal
+            ultimosCuatro = texto.substring(texto.length() - 4);
+            } else {
+             // Si tiene menos de 4, pues nos quedamos con el texto tal cual está
+                ultimosCuatro = texto; 
+            }
+        textoFinal = "*".repeat(numAsteriscos) + ultimosCuatro;
+        return textoFinal;
+        }
 
 }
