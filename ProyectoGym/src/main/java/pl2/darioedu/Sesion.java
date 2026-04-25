@@ -17,12 +17,6 @@ public class Sesion implements Serializable {
     private int horaInicio;
     private int horaFin;
     
-    public Sesion(DayOfWeek dia, int horaIni, int horaFin){
-        this.dia = dia;
-        this.horaInicio = horaIni;
-        this.horaFin = horaFin;
-    }
-
     public Sesion(int anno, int mes, DayOfWeek dia, int horaInicio, int horaFin) {
         this.anno = anno;
         this.mes = mes;
@@ -109,49 +103,9 @@ public class Sesion implements Serializable {
     public int getNumDiA(){
         return this.numDia;
     }
-    public String getSesionIdentificativo(){
-        //Creo esta clase para tema de la interfaz
-        if (this.numDia<10){
-          if (this.horaInicio<10){
-            if (this.horaFin<10){
-               return (anno + "" + mes + ":" + numDia + ":" + horaInicio + ":" + horaFin); 
-            }
-            else{
-                return (anno + "" + mes + ":" + numDia + ":" + horaInicio + ":" + horaFin);
-            }
-          }
-          else{
-              if (this.horaFin<10){
-                return (anno + "" + mes + ":" + numDia + ":" + horaInicio + ":" + horaFin);
-            }
-              else{
-                return (anno + "" + mes + ":" + numDia + ":" + horaInicio + ":" + horaFin);  
-              }
-          }
-        }
-        else{
-           if (this.horaInicio<10){
-            if (this.horaFin<10){
-                return (anno + "" + mes + ":" + numDia + ":" + horaInicio + ":" + horaFin);
-            }
-            else{
-                return (anno + "" + mes + ":" + numDia + ":" + horaInicio + ":" + horaFin);
-            }
-          }
-          else{
-              if (this.horaFin<10){
-                return (anno + "" + mes + ":" + numDia + ":" + horaInicio + ":" + horaFin);
-            }
-              else{
-                  return (anno + "" + mes + ":" + numDia + ":" + horaInicio + ":" + horaFin);
-              }
-            }
-        
-        }   
-    }
     
     @Override
     public String toString(){
-        return (dia + "de " + horaInicio + " a " + horaFin) ;
+        return (anno + "-" + mes + "-" + numDia + "-" + dia + "de" + horaInicio + "a" + horaFin);
     }
 }

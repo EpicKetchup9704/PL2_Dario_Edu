@@ -41,16 +41,14 @@ public class PanelConsultaSocios extends javax.swing.JFrame {
         if (this.barraBusqueda.busquedaValida()){
             //Parte cuando la búsqueda es Exitosa,
             List<Usuario> listaUs = this.barraBusqueda.getBusquedaAdminSocio();
-            if (!listaUs.isEmpty()){
             this.barraBusqueda.setTextArea("");
             this.listaPanel = new JPanelLista();
             this.listaPanel.modoAdminListaUsuariosFiltrado(listaUs);
             this.jScrollPane1.setViewportView(this.listaPanel);
             this.jScrollPane1.revalidate();
-            this.jScrollPane1.repaint();}
-            else{
+            this.jScrollPane1.repaint();
                 this.barraBusqueda.setTextArea("");
-            }
+            
         }else{
                 this.barraBusqueda.setTextArea("");
                 iniciarNuevo();

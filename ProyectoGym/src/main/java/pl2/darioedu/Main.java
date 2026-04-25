@@ -4,7 +4,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.time.DayOfWeek;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 //Estoy haciendo pruebas en general;
@@ -78,7 +81,7 @@ public class Main {
     public static void main(String[] args) {
        ArrayList<Usuario> listaUsuario = setListaUsuarios();
        ArrayList<Actividad> listaActividades = setListaActividades();
-       /*
+       Actividad act = new Actividad("Tu no mete cabra","Atletismo","Torrente Perez","Pistas UAH",102,false,DayOfWeek.MONDAY,8,13);
        ArrayList<String> tarjeta1 = new ArrayList<>(Arrays.asList("1234123412341234","12/90"));
        ArrayList<String> tarjeta2 = new ArrayList<>(Arrays.asList("1123213212341234","12/10"));
        Socio socio1 = new Socio("PepeLusi","tumadre@yahoo.es","9029e0q2e0","no","9128121231",tarjeta1,true);
@@ -93,36 +96,13 @@ public class Main {
        socio2.addSesion(ses2);
        aux1.addSesion(ses1);
        aux2.addSesion(ses2);
-       
+       listaActividades.add(act);
        listaActividades.add(aux1);
        listaActividades.add(aux2);
        listaUsuario.add(socio2);
        listaUsuario.add(socio1);
        guardarListaUsuarios(listaUsuario);
-       guardarListaActividades(listaActividades); */
-       
-       
-       //Ventana de prueba para crear el JScrolPane con separadores en una ventana
-       /*JPanel contenedor = new JPanel();
-       contenedor.setSize(320,300);
-       contenedor.setLayout(new BoxLayout(contenedor, BoxLayout.Y_AXIS));
-       for (int i = 0; i<10;i++){
-            Socio socio = new Socio("PepeLusi","tumadre@yahoo.es","9029e0q2e0","no",912812,"no hay",true);
-            JPanelMostrarInfo aux = new JPanelMostrarInfo(socio);
-            aux.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-            contenedor.add(aux);}
-        JScrollPane scrollPane = new JScrollPane(contenedor);
-        scrollPane.setSize(320,400);
-        JFrame ventana = new JFrame("prueba amigo");
-        ventana.add(scrollPane);
-        ventana.setVisible(true);
-        ventana.setSize(332,400);
-        ventana.setResizable(false);*/
-       /*JFrame ventana = new JFrame();
-       ventana.setSize(210,430);
-       JPanelCalendario calendario = new JPanelCalendario();
-       ventana.add(calendario);
-       ventana.setVisible(true)*/
-       
+       guardarListaActividades(listaActividades);
+       listaActividades.stream().forEach(act2->System.out.println(act2.getTitulo()+act2.getDiaSemanaRecursivo()));
     }
 }

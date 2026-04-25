@@ -37,16 +37,16 @@ public class PanelConsultaReservas extends javax.swing.JFrame {
         if (this.barraBusqueda.busquedaValida()){
             //Parte cuando la búsqueda es Exitosa,
             List<Sesion> listaSes = this.barraBusqueda.getBusquedaAdminReserva();
-            if (!listaSes.isEmpty()){
+
             this.barraBusqueda.setTextArea("");
             this.listaPanel = new JPanelLista();
             this.listaPanel.modoAdminListaReservasFiltrado(listaSes);
             this.jScrollPane1.setViewportView(this.listaPanel);
             this.jScrollPane1.revalidate();
-            this.jScrollPane1.repaint();}
-            else{
+            this.jScrollPane1.repaint();
+
                 this.barraBusqueda.setTextArea("");
-            }
+            
         }else{
                 this.barraBusqueda.setTextArea("");
                 iniciarNuevo();

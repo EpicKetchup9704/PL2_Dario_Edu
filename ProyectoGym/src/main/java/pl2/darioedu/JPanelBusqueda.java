@@ -1,6 +1,8 @@
 package pl2.darioedu;
 
+import java.time.DayOfWeek;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.swing.DefaultComboBoxModel;
@@ -17,7 +19,7 @@ public class JPanelBusqueda extends javax.swing.JPanel {
     private final String[] listaPosibilidadesAdminActividades = {"Dia","Monitor","Tipo"};
     private final String[] listaPosibilidadesAdminSocios = {"Nombre","Correo"};
     private final String[] listaPosibilidadesAdminReservas = {"Dia"};
-    
+    private final String[] listaPosibilidadesAdminActividadesBuscar = {"Dia Semana","Titulo","Monitor", "Tipo","Sala", "Dia"};
     
     public JPanelBusqueda() {
         initComponents();
@@ -61,6 +63,12 @@ public class JPanelBusqueda extends javax.swing.JPanel {
         this.seleccionado = listaPosibilidadesAdminActividades[0];
     }
     
+    public void setBusquedaAdminActividadBuscar(){
+        this.jComboBox1.setModel(new DefaultComboBoxModel<>(listaPosibilidadesAdminActividadesBuscar));
+        this.seleccionado = listaPosibilidadesAdminActividadesBuscar[0];
+    }
+    
+    
     public void setBusquedaAdminSocio(){
         this.jComboBox1.setModel(new DefaultComboBoxModel<>(listaPosibilidadesAdminSocios));
         this.seleccionado = listaPosibilidadesAdminSocios[0];
@@ -75,10 +83,14 @@ public class JPanelBusqueda extends javax.swing.JPanel {
         //Cuando la barra de búsqueda se ha seleccionado con 
         ArrayList<Actividad> listaActividad = Main.getListaActividadStatic();
         try{
+        int anno = 0;
+        int dia= 0;
+        int mes = 0;
         if (this.busquedaValida()){
-          int anno = Integer.parseInt(this.busqueda.substring(0, 4));
-          int mes = Integer.parseInt(this.busqueda.substring(5,7));
-          int dia = Integer.parseInt(this.busqueda.substring(8,10));
+          if(this.seleccionado.equals("Dia")){
+          anno = Integer.parseInt(this.busqueda.substring(0, 4));
+          mes = Integer.parseInt(this.busqueda.substring(5,7));
+          dia = Integer.parseInt(this.busqueda.substring(8,10));}
           List<Actividad> devolver;
           switch (this.seleccionado){
               case "Dia" -> 
@@ -106,10 +118,14 @@ public class JPanelBusqueda extends javax.swing.JPanel {
         //Cuando la barra de búsqueda se ha seleccionado con 
         ArrayList<Actividad> listaActividad = Main.getListaActividadStatic();
         try{
-        if (this.busquedaValida()){
-          int anno = Integer.parseInt(this.busqueda.substring(0, 4));
-          int mes = Integer.parseInt(this.busqueda.substring(5,7));
-          int dia = Integer.parseInt(this.busqueda.substring(8,10));
+            int anno = 0;
+            int dia= 0;
+            int mes = 0;
+             if (this.busquedaValida()){
+                if(this.seleccionado.equals("Dia")){
+                    anno = Integer.parseInt(this.busqueda.substring(0, 4));
+                    mes = Integer.parseInt(this.busqueda.substring(5,7));
+                    dia = Integer.parseInt(this.busqueda.substring(8,10));}
           List<Actividad> devolver;
           switch (this.seleccionado){
               case "Dia" -> 
@@ -130,6 +146,48 @@ public class JPanelBusqueda extends javax.swing.JPanel {
             return devolver;
         }
     }
+    
+        
+    public List<Actividad> getBusquedaAdminActividadBuscar(){
+        this.busqueda = jTextField1.getText();
+        //Cuando la barra de búsqueda se ha seleccionado con 
+        ArrayList<Actividad> listaActividad = Main.getListaActividadStatic();
+        try{
+        int anno = 0;
+        int dia= 0;
+        int mes = 0;
+        if (this.busquedaValida()){
+          if(this.seleccionado.equals("Dia")){
+          anno = Integer.parseInt(this.busqueda.substring(0, 4));
+          mes = Integer.parseInt(this.busqueda.substring(5,7));
+          dia = Integer.parseInt(this.busqueda.substring(8,10));}
+          List<Actividad> devolver;
+          switch (this.seleccionado){
+              case "Dia" -> 
+                  devolver = this.buscarActividadDia(listaActividad,anno,mes,dia);
+              case "Monitor" ->
+                  devolver = this.buscarActividadMonitor(listaActividad, this.busqueda);
+              case "Tipo" ->
+                  devolver = this.buscarActividadTipo(listaActividad, this.busqueda);
+              case "Dia Semana" ->
+                  devolver = this.buscarActividadDiaSemana(listaActividad, getDiaSemana(this.busqueda));
+              case "Titulo" ->
+                  devolver = this.buscarActividadTitulo(listaActividad, this.busqueda);
+              case "Sala"->
+                  devolver = this.buscarActividadSala(listaActividad, this.busqueda);
+              default-> 
+                  devolver = new ArrayList<>();
+          }
+          return devolver;       
+        }else{
+        List<Actividad> devolver = new ArrayList<>();
+        return devolver;}
+        }catch (NumberFormatException | IndexOutOfBoundsException error1){
+            ArrayList<Actividad> devolver = new ArrayList();
+            return devolver;
+        }
+    }
+    
 
     public List<Usuario> getBusquedaAdminSocio(){
         this.busqueda = jTextField1.getText();
@@ -163,7 +221,7 @@ public class JPanelBusqueda extends javax.swing.JPanel {
           List<Sesion> devolver;
           switch (this.seleccionado){
               case "Dia" -> 
-                  devolver = listaSocio.stream().flatMap(s -> s.getListaSesion().stream()).filter(s -> s.getAnno() == anno && s.getMes() == mes && s.getNumDiA()== dia).collect(Collectors.toList());
+                  devolver = this.buscarActividadAdminReserva(anno, mes, dia, listaSocio);
               default-> 
                   devolver = new ArrayList<>();
           }
@@ -172,11 +230,22 @@ public class JPanelBusqueda extends javax.swing.JPanel {
         List<Sesion> devolver = new ArrayList<>();
         return devolver;}
         }catch (NumberFormatException | IndexOutOfBoundsException error1){
-            List<Sesion> devolver = new ArrayList();
+            List<Sesion> devolver = new ArrayList<>();
             return devolver;
         }
     }
     
+    private List<Sesion> buscarActividadAdminReserva(int anno, int mes, int dia, List<Socio> listaSocio){
+        try{
+            
+            List<Sesion> devolver = listaSocio.stream().flatMap(soc -> soc.getListaSesion().stream()).filter(ses -> ses.getNumDiA() == dia && ses.getMes() == mes && ses.getAnno() == anno).toList();          
+            return devolver;
+        }
+        catch (Exception error){
+            List<Sesion> listaDevolver = new ArrayList<>();
+            return listaDevolver;
+        } 
+    }
     public final List<Actividad> buscarActividadMonitor(ArrayList<Actividad> listaActividad, String nombre){
         try{
         List<Actividad> listaDevolver = listaActividad.stream().filter(act -> act.getMonitor().equals(nombre)).collect(Collectors.toList());
@@ -212,6 +281,27 @@ public class JPanelBusqueda extends javax.swing.JPanel {
         } 
     }
     
+    public final List<Actividad> buscarActividadTitulo(ArrayList<Actividad> listaActividad,String titulo){
+        try{
+        List<Actividad> listaDevolver = listaActividad.stream().filter(act ->act.getTitulo().equals(titulo)).collect(Collectors.toList());
+        return listaDevolver;}
+        catch (Exception error){
+            List<Actividad> listaDevolver = new ArrayList<>();
+            return listaDevolver;
+        } 
+    }
+    
+    public final List<Actividad> buscarActividadSala(ArrayList<Actividad> listaActividad,String nombreSala){
+        try{
+        List<Actividad> listaDevolver = listaActividad.stream().filter(act ->act.getSala().getNombre().equals(nombreSala)).collect(Collectors.toList());
+        return listaDevolver;}
+        catch (Exception error){
+            List<Actividad> listaDevolver = new ArrayList<>();
+            return listaDevolver;
+        } 
+    }
+    
+    
     public final List<Usuario> buscarSocioNombre(List<Socio> listaSocio, String nombre){
         try{
         List<Usuario> listaDevolver = listaSocio.stream().filter(so -> so.getNombre().equals(nombre)).collect(Collectors.toList()); //Filtramos la primera parte, es decir, si hay huehco o no
@@ -237,6 +327,51 @@ public class JPanelBusqueda extends javax.swing.JPanel {
         }
         catch (Exception error){
             List<Usuario> listaDevolver = new ArrayList<>();
+            return listaDevolver;
+        }
+    }
+    
+    public DayOfWeek getDiaSemana(String diaSemana){
+        DayOfWeek devolver = null;
+        ArrayList<String> diaSem = new ArrayList<>(Arrays.asList("lunes","martes","miercoles","miércoles","jueves","viernes","sabado","sábado","domingo"));
+        ArrayList<String> diaCorto = new ArrayList<>(Arrays.asList("L","M","X","J","V","S","D"));
+        if(diaSem.contains(diaSemana.toLowerCase())){    
+        switch (diaSemana){    
+                case "lunes" -> devolver = DayOfWeek.MONDAY;
+                case "martes" -> devolver = DayOfWeek.TUESDAY;
+                case "miercoles" -> devolver = DayOfWeek.WEDNESDAY;
+                case "miércoles" -> devolver = DayOfWeek.WEDNESDAY;
+                case "jueves" -> devolver = DayOfWeek.THURSDAY;
+                case "viernes" -> devolver = DayOfWeek.FRIDAY;
+                case "sábado" -> devolver = DayOfWeek.SATURDAY;
+                case "sabado" -> devolver = DayOfWeek.SATURDAY;
+                case "domingo" -> devolver = DayOfWeek.SUNDAY;}
+            return devolver;
+            }
+        else if (diaCorto.contains(diaSemana.toUpperCase())){
+            switch (diaSemana){ 
+                case "L" -> devolver = DayOfWeek.MONDAY;
+                case "M" -> devolver = DayOfWeek.TUESDAY;
+                case "X" -> devolver = DayOfWeek.WEDNESDAY;
+                case "J" -> devolver = DayOfWeek.THURSDAY;
+                case "V" -> devolver = DayOfWeek.FRIDAY;
+                case "S" -> devolver = DayOfWeek.SATURDAY;
+                case "D" -> devolver = DayOfWeek.SUNDAY;}
+            return devolver;
+            }
+        else{
+            return devolver;
+        }
+    }
+    
+    public final List<Actividad> buscarActividadDiaSemana(ArrayList<Actividad> listaActividad,DayOfWeek diaSemana){
+        try{
+            List<Actividad> listaFiltrada = listaActividad.stream().filter(act->act.getDiaSemanaRecursivo()!=null).collect(Collectors.toList());
+            List<Actividad> listaDevolver = listaFiltrada.stream().filter(act->act.getDiaSemanaRecursivo().equals(diaSemana)).collect(Collectors.toList());
+            return listaDevolver;
+        }
+        catch (Exception error){
+            List<Actividad> listaDevolver = new ArrayList<>();
             return listaDevolver;
         }
     }
@@ -303,7 +438,7 @@ public class JPanelBusqueda extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        this.seleccionado = (String) this.jComboBox1.getSelectedItem();
+        this.seleccionado = this.jComboBox1.getSelectedItem().toString();
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed

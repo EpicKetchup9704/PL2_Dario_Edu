@@ -23,6 +23,11 @@ public class JPanelMostrarInfo extends javax.swing.JPanel {
         String devolver = cadena.length() > 25 ? cadena.substring(0,20) + "..." : cadena;
         return devolver;
     }
+    
+    public final String reducirCadena(String cadena, int num){
+        String devolver = cadena.length() > num ? cadena.substring(0,num-3) + "..." : cadena;
+        return devolver;
+    }
 
     public void setSocio(Socio socio) {
         this.socio = socio;
@@ -63,6 +68,7 @@ public class JPanelMostrarInfo extends javax.swing.JPanel {
         this.Titulo = new JLabel("No hay título introducido");
     }
     public JPanelMostrarInfo(Socio socio){
+        //Constructor para el admin para mostrar los socios que hay y gestionarlos
         initComponents();
         this.actividad = null;
         this.sesion = null;
@@ -80,7 +86,7 @@ public class JPanelMostrarInfo extends javax.swing.JPanel {
             this.Imagen2.setIcon(new ImageIcon(("src/main/resources/Vacio.png")));}
     }
     public JPanelMostrarInfo(Actividad actividad){
-        //Constructor para el admin, para mostrar actividades
+        //Constructor para el admin, para mostrar actividades y gestionarlas
         initComponents();
         this.actividad = actividad;
         this.sesion = null;
@@ -119,16 +125,17 @@ public class JPanelMostrarInfo extends javax.swing.JPanel {
             this.Imagen2.setEnabled(true);
             this.Imagen2.setIcon(new ImageIcon("src/main/resources/Editar.png"));}
             else{
-                //Constructor admin mostrar Actividades sin poder editar
+                //Constructor admin mostrar Actividades sin poder editar (visor)
                 this.actividad = actividad;
                 this.sesion = null;
                 this.admin = true;
                 this.socio = null;
                 this.Titulo.setText(actividad.getTitulo());
-                this.AP1.setText("Tipo: "+actividad.getTipo());
-                this.AP2.setText("Sala: "+actividad.getSala().getNombre());
+                this.AP1.setText("Tipo: "+actividad.getTipo()+ " | Sala: "+actividad.getSala().getNombre());
+                String apartado = (actividad.getDiaSemanaRecursivo()==null) ? "No hay un día de la semana fijo" : actividad.getDiaSemanaRecursivo().toString() + " | Hora Incio: " + actividad.getSesiones().get(0).getHoraInicio()+ " | Hora Fin: "+ actividad.getSesiones().get(0).getHoraFin() ;
+                this.AP2.setText("Día sema fijo: " + apartado);
                 this.AP3.setText("Aforo: "+actividad.getSala().getAforo() + " | Plazas: "+actividad.getSala().aforoRestante());
-                this.AP4.setText("Monitor: " +actividad.getMonitor());
+                this.AP4.setText("Monitor: " +actividad.getMonitor() + " | Sesiones: " + actividad.getSesiones().size());
                 this.Imagen1.setVisible(false);
                 this.Imagen1.setEnabled(false);
                 this.Imagen2.setVisible(false);
@@ -192,14 +199,19 @@ public class JPanelMostrarInfo extends javax.swing.JPanel {
 
         Imagen1.addActionListener(this::Imagen1ActionPerformed);
 
+        Titulo.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         Titulo.setText("Titulo:");
 
+        AP1.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         AP1.setText("Apartado 1:");
 
+        AP2.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         AP2.setText("Apartado 2:");
 
+        AP3.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         AP3.setText("Apartado 3:");
 
+        AP4.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         AP4.setText("Apartado 4:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -214,7 +226,7 @@ public class JPanelMostrarInfo extends javax.swing.JPanel {
                             .addComponent(AP1)
                             .addComponent(AP2)
                             .addComponent(AP3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 114, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 117, Short.MAX_VALUE)
                         .addComponent(Imagen1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(Imagen2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -247,41 +259,51 @@ public class JPanelMostrarInfo extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void Imagen2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Imagen2ActionPerformed
-
-        if ((this.actividad==null)&&(this.sesion==null)&&!(this.socio==null)&&(this.admin==false)){
-            JOptionPane.showMessageDialog(null,"Implementar cuadro para editar VIP estado","None",JOptionPane.INFORMATION_MESSAGE);
-            }
-        if (!(this.actividad==null)&&(this.sesion==null)&&!(this.socio==null)&&(this.admin==false)){
-            JOptionPane.showMessageDialog(null,"Implementar para el editor Admin de BorrarActividad","None",JOptionPane.INFORMATION_MESSAGE);
-            }
-        if (!(this.actividad==null)&&!(this.sesion==null)&&!(this.socio==null)&&(this.admin==true)){
-            JOptionPane.showMessageDialog(null,"Implementar para el editor Admin de Editar Reservas","None",JOptionPane.INFORMATION_MESSAGE);
-            }
-         if (!(this.actividad==null)&&!(this.sesion==null)&&(this.socio==null)&&(this.admin==false)){
-            JOptionPane.showMessageDialog(null,"Implementar para el usuario,mostrar Actividades Busqueda OK","None",JOptionPane.INFORMATION_MESSAGE);
-            }
-         if (!(this.actividad==null)&&!(this.sesion==null)&&!(this.socio==null)&&(this.admin==false)){
-            JOptionPane.showMessageDialog(null,"Implementar para el usuario,mostrarReservas Cancelar","None",JOptionPane.INFORMATION_MESSAGE);
-            }
+        if ((this.actividad == null)&&(this.sesion==null)&&(!this.admin)&&(this.socio!=null)){
+            JOptionPane.showMessageDialog(null,"Mensaje para dado un socio editar su info / admin ","None",JOptionPane.INFORMATION_MESSAGE);
+        }
+        else if ((this.actividad != null)&&(this.sesion==null)&&(!this.admin)&&(this.socio!=null)){
+            JOptionPane.showMessageDialog(null,"Mensaje para modificar actividad / admin","None",JOptionPane.INFORMATION_MESSAGE);
+        }
+        else if ((this.actividad != null)&&(this.sesion!=null)&&(this.admin)&&(this.socio!=null)){
+            JOptionPane.showMessageDialog(null,"Mensaje para editar reservas actividad / admin","None",JOptionPane.INFORMATION_MESSAGE);
+        }
+        else if ((this.actividad != null)&&(this.sesion==null)&&(this.admin)&&(this.socio!=null)){
+            //JOptionPane.showMessageDialog(null,"Mensaje para editar reservas actividad / admin","None",JOptionPane.INFORMATION_MESSAGE);
+        }
+        else if ((this.actividad != null)&&(this.sesion!=null)&&(!this.admin)&&(this.socio==null)){
+            JOptionPane.showMessageDialog(null,"Mensaje para editar búsqueda actividad continuar con reserva / socio","None",JOptionPane.INFORMATION_MESSAGE);
+        }
+        else if ((this.actividad != null)&&(this.sesion!=null)&&(!this.admin)&&(this.socio!=null)){
+            JOptionPane.showMessageDialog(null,"Mensaje para editar resrvas actividad continuar / socio","None",JOptionPane.INFORMATION_MESSAGE);
+        }
+        else{
+            JOptionPane.showMessageDialog(null,"Mensaje para editar reservas actividad / admin","None",JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_Imagen2ActionPerformed
 
     private void Imagen1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Imagen1ActionPerformed
-
-        if ((this.actividad==null)&&(this.sesion==null)&&!(this.socio==null)&&(this.admin==false)){
-            JOptionPane.showMessageDialog(null,"Implementar cuadro para editar VIP estado","None",JOptionPane.INFORMATION_MESSAGE);
-            }
-        if (!(this.actividad==null)&&(this.sesion==null)&&!(this.socio==null)&&(this.admin==false)){
-            JOptionPane.showMessageDialog(null,"Implementar para el editor Admin de BorrarActividad","None",JOptionPane.INFORMATION_MESSAGE);
-            }
-        if (!(this.actividad==null)&&!(this.sesion==null)&&!(this.socio==null)&&(this.admin==true)){
-            JOptionPane.showMessageDialog(null,"Implementar para el editor Admin de BorrarReservas","None",JOptionPane.INFORMATION_MESSAGE);
-            }
-         if (!(this.actividad==null)&&!(this.sesion==null)&&(this.socio==null)&&(this.admin==false)){
-            JOptionPane.showMessageDialog(null,"Implementar para el usuario,mostrar Actividades Busqueda OK","None",JOptionPane.INFORMATION_MESSAGE);
-            }
-         if (!(this.actividad==null)&&!(this.sesion==null)&&!(this.socio==null)&&(this.admin==false)){
-            JOptionPane.showMessageDialog(null,"Implementar para el usuario,mostrarReservas Cancelar","None",JOptionPane.INFORMATION_MESSAGE);
-            }
+        if ((this.actividad == null)&&(this.sesion==null)&&(!this.admin)&&(this.socio!=null)){
+            //JOptionPane.showMessageDialog(null,"Mensaje para dado un socio editar su info / admin ","None",JOptionPane.INFORMATION_MESSAGE);
+        }
+        else if ((this.actividad != null)&&(this.sesion==null)&&(!this.admin)&&(this.socio!=null)){
+            JOptionPane.showMessageDialog(null,"Mensaje para borrar actividad / admin","None",JOptionPane.INFORMATION_MESSAGE);
+        }
+        else if ((this.actividad != null)&&(this.sesion!=null)&&(this.admin)&&(this.socio!=null)){
+            JOptionPane.showMessageDialog(null,"Mensaje para elminiar reservas actividad / admin","None",JOptionPane.INFORMATION_MESSAGE);
+        }
+        else if ((this.actividad != null)&&(this.sesion==null)&&(this.admin)&&(this.socio!=null)){
+            //JOptionPane.showMessageDialog(null,"Mensaje para editar reservas actividad / admin","None",JOptionPane.INFORMATION_MESSAGE);
+        }
+        else if ((this.actividad != null)&&(this.sesion!=null)&&(!this.admin)&&(this.socio==null)){
+            //JOptionPane.showMessageDialog(null,"Mensaje para editar búsqueda actividad continuar con reserva / socio","None",JOptionPane.INFORMATION_MESSAGE);
+        }
+        else if ((this.actividad != null)&&(this.sesion!=null)&&(!this.admin)&&(this.socio!=null)){
+            //JOptionPane.showMessageDialog(null,"Mensaje para editar resrvas actividad continuar / socio","None",JOptionPane.INFORMATION_MESSAGE);
+        }
+        else{
+            JOptionPane.showMessageDialog(null,"Mensaje para borrar reservas actividad / admin","None",JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_Imagen1ActionPerformed
 
 

@@ -24,7 +24,7 @@ public class PanelConsultaActividades extends javax.swing.JFrame {
         this.usuario = admin;
         iniciarNuevo();
         this.barraBusqueda = new JPanelBusqueda();
-        this.barraBusqueda.setBusquedaUsuarioActividad();
+        this.barraBusqueda.setBusquedaAdminActividadBuscar();
         this.jPanel1.add(this.barraBusqueda);
     }
     
@@ -40,17 +40,15 @@ public class PanelConsultaActividades extends javax.swing.JFrame {
         this.barraBusqueda.setBusqueda();
         if (this.barraBusqueda.busquedaValida()){
             //Parte cuando la búsqueda es Exitosa,
-            List<Actividad> listaAct = this.barraBusqueda.getBusquedaAdminActividad();
-            if (!listaAct.isEmpty()){
+            List<Actividad> listaAct = this.barraBusqueda.getBusquedaAdminActividadBuscar();
+
             this.barraBusqueda.setTextArea("");
             this.listaPanel = new JPanelLista();
             this.listaPanel.modoAdminListaActividadesBusquedaFiltrado(listaAct);
             this.jScrollPane1.setViewportView(this.listaPanel);
             this.jScrollPane1.revalidate();
-            this.jScrollPane1.repaint();}
-            else{
-                this.barraBusqueda.setTextArea("");
-            }
+            this.jScrollPane1.repaint();
+
         }else{
                 this.barraBusqueda.setTextArea("");
                 iniciarNuevo();
