@@ -5,6 +5,7 @@
 package pl2.darioedu;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -14,12 +15,46 @@ public class PanelUsuActividades extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(PanelUsuActividades.class.getName());
     private Socio socio;
+    private JPanelBusqueda barraBusqueda;
+    private JPanelLista listaPanel;
     /**
      * Creates new form PanelUsuActividades
      */
     public PanelUsuActividades(Socio soci) {
         initComponents();
         this.socio = soci;
+        iniciarNuevo();
+        this.barraBusqueda = new JPanelBusqueda();
+        this.barraBusqueda.setBusquedaUsuarioActividad();
+        this.jPanel1.add(this.barraBusqueda);
+    }
+     public final void iniciarNuevo(){
+        this.listaPanel = new JPanelLista();
+        this.listaPanel.modoUsuarioListaBusqueda();
+        this.jScrollPane1.setViewportView(this.listaPanel);
+        this.jScrollPane1.revalidate();
+        this.jScrollPane1.repaint();
+        
+   }
+    public void busqueda(){
+        this.barraBusqueda.setBusqueda();
+        if (this.barraBusqueda.busquedaValida()){
+            //Parte cuando la búsqueda es Exitosa,
+            List<Actividad> listaAct = this.barraBusqueda.getBusquedaUsuarioActividad();
+
+            this.barraBusqueda.setTextArea("");
+            this.listaPanel = new JPanelLista();
+            this.listaPanel.modoUsuarioListaBusquedaFiltrado(listaAct);
+            this.jScrollPane1.setViewportView(this.listaPanel);
+            this.jScrollPane1.revalidate();
+            this.jScrollPane1.repaint();
+
+        }else{
+                this.barraBusqueda.setTextArea("");
+                iniciarNuevo();
+            
+        }
+        
     }
 
     /**
@@ -32,6 +67,9 @@ public class PanelUsuActividades extends javax.swing.JFrame {
     private void initComponents() {
 
         jButtonAtras = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        ButonBusqueda = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -40,21 +78,45 @@ public class PanelUsuActividades extends javax.swing.JFrame {
         jButtonAtras.setText("<html><center>Volver<br>Atrás<center></html>");
         jButtonAtras.addActionListener(this::jButtonAtrasActionPerformed);
 
+        jPanel1.setMaximumSize(new java.awt.Dimension(300, 70));
+        jPanel1.setMinimumSize(new java.awt.Dimension(300, 70));
+        jPanel1.setPreferredSize(new java.awt.Dimension(300, 70));
+        jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.LINE_AXIS));
+
+        ButonBusqueda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Buscar.png"))); // NOI18N
+        ButonBusqueda.setMaximumSize(new java.awt.Dimension(50, 50));
+        ButonBusqueda.setMinimumSize(new java.awt.Dimension(50, 50));
+        ButonBusqueda.setPreferredSize(new java.awt.Dimension(50, 50));
+        ButonBusqueda.addActionListener(this::ButonBusquedaActionPerformed);
+        jPanel1.add(ButonBusqueda);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButtonAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(306, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButtonAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(39, 39, 39)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 49, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jButtonAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(554, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -66,6 +128,10 @@ public class PanelUsuActividades extends javax.swing.JFrame {
         panel.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButtonAtrasActionPerformed
+
+    private void ButonBusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButonBusquedaActionPerformed
+        this.busqueda();
+    }//GEN-LAST:event_ButonBusquedaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -102,6 +168,9 @@ public class PanelUsuActividades extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ButonBusqueda;
     private javax.swing.JButton jButtonAtras;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

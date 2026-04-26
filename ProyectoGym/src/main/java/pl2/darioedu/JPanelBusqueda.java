@@ -89,9 +89,11 @@ public class JPanelBusqueda extends javax.swing.JPanel {
         if (this.busquedaValida()){
           if(this.seleccionado.equals("Dia")){
           anno = Integer.parseInt(this.busqueda.substring(0, 4));
-          mes = Integer.parseInt(this.busqueda.substring(5,7));
-          dia = Integer.parseInt(this.busqueda.substring(8,10));}
+          mes = Integer.parseInt(this.busqueda.substring(4,6));
+          dia = Integer.parseInt(this.busqueda.substring(6,8));
+          }
           List<Actividad> devolver;
+
           switch (this.seleccionado){
               case "Dia" -> 
                   devolver = this.buscarActividadDia(listaActividad,anno,mes,dia);
@@ -124,8 +126,8 @@ public class JPanelBusqueda extends javax.swing.JPanel {
              if (this.busquedaValida()){
                 if(this.seleccionado.equals("Dia")){
                     anno = Integer.parseInt(this.busqueda.substring(0, 4));
-                    mes = Integer.parseInt(this.busqueda.substring(5,7));
-                    dia = Integer.parseInt(this.busqueda.substring(8,10));}
+                    mes = Integer.parseInt(this.busqueda.substring(4,6));
+                    dia = Integer.parseInt(this.busqueda.substring(6,8));}
           List<Actividad> devolver;
           switch (this.seleccionado){
               case "Dia" -> 
@@ -159,8 +161,8 @@ public class JPanelBusqueda extends javax.swing.JPanel {
         if (this.busquedaValida()){
           if(this.seleccionado.equals("Dia")){
           anno = Integer.parseInt(this.busqueda.substring(0, 4));
-          mes = Integer.parseInt(this.busqueda.substring(5,7));
-          dia = Integer.parseInt(this.busqueda.substring(8,10));}
+          mes = Integer.parseInt(this.busqueda.substring(4,6));
+          dia = Integer.parseInt(this.busqueda.substring(6,8));}
           List<Actividad> devolver;
           switch (this.seleccionado){
               case "Dia" -> 
@@ -216,8 +218,8 @@ public class JPanelBusqueda extends javax.swing.JPanel {
         try{
         if (this.busquedaValida()){
           int anno = Integer.parseInt(this.busqueda.substring(0, 4));
-          int mes = Integer.parseInt(this.busqueda.substring(5,7));
-          int dia = Integer.parseInt(this.busqueda.substring(8,10));
+          int mes = Integer.parseInt(this.busqueda.substring(4,6));
+          int dia = Integer.parseInt(this.busqueda.substring(6,8));
           List<Sesion> devolver;
           switch (this.seleccionado){
               case "Dia" -> 
