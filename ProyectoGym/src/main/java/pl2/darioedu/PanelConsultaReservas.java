@@ -67,6 +67,7 @@ public class PanelConsultaReservas extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         ButonBusqueda = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
+        BotonAyuda = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -87,6 +88,12 @@ public class PanelConsultaReservas extends javax.swing.JFrame {
         ButonBusqueda.addActionListener(this::ButonBusquedaActionPerformed);
         jPanel1.add(ButonBusqueda);
 
+        BotonAyuda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AyudaBoton.png"))); // NOI18N
+        BotonAyuda.setMaximumSize(new java.awt.Dimension(50, 50));
+        BotonAyuda.setMinimumSize(new java.awt.Dimension(50, 50));
+        BotonAyuda.setPreferredSize(new java.awt.Dimension(50, 50));
+        BotonAyuda.addActionListener(this::BotonAyudaActionPerformed);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -101,7 +108,8 @@ public class PanelConsultaReservas extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(45, 45, 45)
                                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 49, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(BotonAyuda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane1)))
@@ -111,9 +119,12 @@ public class PanelConsultaReservas extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButtonVolverAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButtonVolverAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(BotonAyuda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -132,6 +143,10 @@ public class PanelConsultaReservas extends javax.swing.JFrame {
     private void ButonBusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButonBusquedaActionPerformed
         this.busqueda();
     }//GEN-LAST:event_ButonBusquedaActionPerformed
+
+    private void BotonAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonAyudaActionPerformed
+        new PanelAyuda("Este panel sirve para que puedas visualizar las reservas realizadas por los usuarios y poder editarlas(boton lápiz) o borrarlas (botón cruz)").setVisible(true);
+    }//GEN-LAST:event_BotonAyudaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -165,6 +180,7 @@ public class PanelConsultaReservas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BotonAyuda;
     private javax.swing.JButton ButonBusqueda;
     private javax.swing.JButton jButtonVolverAtras;
     private javax.swing.JPanel jPanel1;

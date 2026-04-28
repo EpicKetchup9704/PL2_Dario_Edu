@@ -103,10 +103,11 @@ public class JPanelLista extends javax.swing.JPanel{
             if (listaSesion == null){listaSesion = new ArrayList<>();}
             for (Sesion ses : listaSesion){
                List<Actividad> resultado= listaActividades.stream().filter(act->act.getSesiones().stream().anyMatch(se->se.equals(ses))).collect(Collectors.toList());
+              if (!resultado.isEmpty()) {
                JPanelMostrarInfo aux = new JPanelMostrarInfo(resultado.get(0),ses,true,soc);
                listaCeldas.add(aux);
                this.setContorno(aux);
-               this.add(aux);
+               this.add(aux);}
             }
         }
     }
@@ -118,10 +119,11 @@ public class JPanelLista extends javax.swing.JPanel{
             ArrayList<Actividad> listaActividades = soc.getListaActividades();
             for (Sesion ses : listaSesiones){
                List<Actividad> resultado= listaActividades.stream().filter(act->act.getSesiones().stream().anyMatch(se->se.equals(ses))).collect(Collectors.toList());
+               if (!resultado.isEmpty()) {
                JPanelMostrarInfo aux = new JPanelMostrarInfo(resultado.get(0),ses,true,soc);
                listaCeldas.add(aux);
                this.setContorno(aux);
-               this.add(aux);
+               this.add(aux);}
             }
         }
     }

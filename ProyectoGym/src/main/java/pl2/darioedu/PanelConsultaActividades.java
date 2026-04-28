@@ -70,6 +70,7 @@ public class PanelConsultaActividades extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         ButonBusqueda = new javax.swing.JButton();
+        BotonAyuda = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -90,6 +91,12 @@ public class PanelConsultaActividades extends javax.swing.JFrame {
         ButonBusqueda.addActionListener(this::ButonBusquedaActionPerformed);
         jPanel1.add(ButonBusqueda);
 
+        BotonAyuda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AyudaBoton.png"))); // NOI18N
+        BotonAyuda.setMaximumSize(new java.awt.Dimension(50, 50));
+        BotonAyuda.setMinimumSize(new java.awt.Dimension(50, 50));
+        BotonAyuda.setPreferredSize(new java.awt.Dimension(50, 50));
+        BotonAyuda.addActionListener(this::BotonAyudaActionPerformed);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -99,19 +106,22 @@ public class PanelConsultaActividades extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(39, 39, 39)
-                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jButtonVolverAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 49, Short.MAX_VALUE)))
+                        .addGap(39, 39, 39)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 49, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButtonVolverAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(BotonAyuda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButtonVolverAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonVolverAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BotonAyuda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -132,6 +142,10 @@ public class PanelConsultaActividades extends javax.swing.JFrame {
     private void ButonBusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButonBusquedaActionPerformed
         this.busqueda();
     }//GEN-LAST:event_ButonBusquedaActionPerformed
+
+    private void BotonAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonAyudaActionPerformed
+        new PanelAyuda("Este panel sirve para que introduzcas un parámetro a buscar de la lista de opciones y puedas visualizar de una forma más cómoda la información de las actividades").setVisible(true);
+    }//GEN-LAST:event_BotonAyudaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -165,6 +179,7 @@ public class PanelConsultaActividades extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BotonAyuda;
     private javax.swing.JButton ButonBusqueda;
     private javax.swing.JButton jButtonVolverAtras;
     private javax.swing.JPanel jPanel1;

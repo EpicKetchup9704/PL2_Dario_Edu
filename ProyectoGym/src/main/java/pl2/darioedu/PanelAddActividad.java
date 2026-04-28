@@ -30,6 +30,7 @@ public class PanelAddActividad extends javax.swing.JFrame {
     private void initComponents() {
 
         jButtonVolverAtras = new javax.swing.JButton();
+        BotonAyuda = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -38,6 +39,12 @@ public class PanelAddActividad extends javax.swing.JFrame {
         jButtonVolverAtras.setText("<-");
         jButtonVolverAtras.addActionListener(this::jButtonVolverAtrasActionPerformed);
 
+        BotonAyuda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AyudaBoton.png"))); // NOI18N
+        BotonAyuda.setMaximumSize(new java.awt.Dimension(50, 50));
+        BotonAyuda.setMinimumSize(new java.awt.Dimension(50, 50));
+        BotonAyuda.setPreferredSize(new java.awt.Dimension(50, 50));
+        BotonAyuda.addActionListener(this::BotonAyudaActionPerformed);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -45,14 +52,18 @@ public class PanelAddActividad extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jButtonVolverAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(305, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 249, Short.MAX_VALUE)
+                .addComponent(BotonAyuda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButtonVolverAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(258, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(BotonAyuda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonVolverAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(244, Short.MAX_VALUE))
         );
 
         pack();
@@ -64,6 +75,10 @@ public class PanelAddActividad extends javax.swing.JFrame {
         new PanelGestionActividades(usuario).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButtonVolverAtrasActionPerformed
+
+    private void BotonAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonAyudaActionPerformed
+        new PanelAyuda("Este panel sirve para que añadas una actividad a la base de archivos. Rellene todos los campos que se necesiten, tales como nombre, dia, hora inicio, hora fin").setVisible(true);
+    }//GEN-LAST:event_BotonAyudaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -97,6 +112,7 @@ public class PanelAddActividad extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BotonAyuda;
     private javax.swing.JButton jButtonVolverAtras;
     // End of variables declaration//GEN-END:variables
 }

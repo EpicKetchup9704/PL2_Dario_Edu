@@ -276,7 +276,7 @@ public class JPanelBusqueda extends javax.swing.JPanel {
         try{
         List<Actividad> listaDevolver = listaActividad.stream().filter(act -> act.getSala().hayHueco()).collect(Collectors.toList()); //Filtramos la primera parte, es decir, si hay huehco o no
         listaDevolver = listaDevolver.stream().filter(act -> act.getSesiones().stream().anyMatch(s->s.getNumDiA() == dia && s.getMes() == mes && s.getAnno() == anno)).collect(Collectors.toList()); //Filtramos la segunda parte, si coincide con dia, mes y fecha
-            return listaDevolver;}
+        return listaDevolver;}
         catch (Exception error){
             List<Actividad> listaDevolver = new ArrayList<>();
             return listaDevolver;
