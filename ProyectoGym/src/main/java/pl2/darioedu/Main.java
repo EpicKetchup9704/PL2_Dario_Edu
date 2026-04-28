@@ -81,7 +81,7 @@ public class Main {
     public static void main(String[] args) {
        ArrayList<Usuario> listaUsuario = setListaUsuarios();
        ArrayList<Actividad> listaActividades = setListaActividades();
-       Actividad act = new Actividad("Tu no mete cabra","Atletismo","Torrente Perez","Pistas UAH",102,false,DayOfWeek.MONDAY,8,13);
+       /*Actividad act = new Actividad("Tu no mete cabra","Atletismo","Torrente Perez","Pistas UAH",102,false,DayOfWeek.MONDAY,8,13);
        ArrayList<String> tarjeta1 = new ArrayList<>(Arrays.asList("1234123412341234","12/90"));
        ArrayList<String> tarjeta2 = new ArrayList<>(Arrays.asList("1123213212341234","12/10"));
        Socio socio1 = new Socio("PepeLusi","tumadre@yahoo.es","9029e0q2e0","no","9128121231",tarjeta1,true);
@@ -102,7 +102,7 @@ public class Main {
        listaUsuario.add(socio2);
        listaUsuario.add(socio1);
        guardarListaUsuarios(listaUsuario);
-       guardarListaActividades(listaActividades);
-       listaActividades.stream().forEach(act2->System.out.println(act2.getTitulo()+act2.getDiaSemanaRecursivo()));
+       guardarListaActividades(listaActividades);*/
+       
     }
 }

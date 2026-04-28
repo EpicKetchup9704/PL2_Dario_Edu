@@ -4,23 +4,98 @@
  */
 package pl2.darioedu;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import javax.swing.SpinnerNumberModel;
+
 /**
  *
- * @author User
+ * @author Daríoooooo :)
  */
 public class PanelModificarAct extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(PanelModificarAct.class.getName());
-    private final Administrador usuario;
-    private Actividad actividadPrevia;
-    private Actividad actividadNueva;
+    private int horaIncioSeleccionada;
+    private int horaFinSeleccionada = 0;
+    private boolean especial;
+    private int dia;
+    private int anno;
+    private int mes;
+    private Sala sala;
+    private String nombre;
+    private String tipo;
+    private String monitor;
+    private DayOfWeek recursivo;
+    private Actividad actividad;
+    
     /**
      * Creates new form PanelConsultaSocios
+     * @param actPrevia
      */
-    public PanelModificarAct(Administrador admin, Actividad actPrevia) {
+    
+    public PanelModificarAct (Actividad actPrevia) {
         initComponents();
-        this.usuario = admin;
-        this.actividadPrevia = actPrevia;
+
+        this.actividad = actPrevia;
+        this.sala = actPrevia.getSala();
+        this.Error.setVisible(false);
+        this.setCampos(actPrevia);
+        this.getReferenceActividad(actividad);
+    }
+    
+    
+    public final void getReferenceActividad(Actividad actividad){
+        ArrayList<Actividad> listaAct = Main.getListaActividadStatic();
+        for (Actividad act : listaAct){
+            if (act.equals(actividad)){
+                this.actividad = act;
+                break;
+            }
+        }
+    }
+    
+    private DayOfWeek stringToDayOfWeek(String diaSemana){
+        DayOfWeek devolver = null;
+        switch (diaSemana){    
+                case "Lunes" -> devolver = DayOfWeek.MONDAY;
+                case "Martes" -> devolver = DayOfWeek.TUESDAY;
+                case "Miércoles" -> devolver = DayOfWeek.WEDNESDAY;
+                case "Jueves" -> devolver = DayOfWeek.THURSDAY;
+                case "Viernes" -> devolver = DayOfWeek.FRIDAY;
+                case "Sábado" -> devolver = DayOfWeek.SATURDAY;
+                case "Domingo" -> devolver = DayOfWeek.SUNDAY;}
+        return devolver;
+    }
+    
+    
+    private boolean buscarActividadProgramada(int horaIni, int horaFin, DayOfWeek diaRec){
+        ArrayList<Actividad> listaAct = Main.getListaActividadStatic();
+        //Filtramos para cuando ninguna de las actividades contiene a la nuestra
+        boolean condicion = listaAct.stream().noneMatch(act->act.getDiaSemanaRecursivo().equals(diaRec)&&act.getUltmimaSesion().getHoraInicio()==horaIni&&act.getUltmimaSesion().getHoraFin()==horaFin);
+        return condicion;
+    }
+    private boolean buscarActividad(){
+        ArrayList<Actividad> listaAct = Main.getListaActividadStatic();
+        Actividad act = new Actividad(this.nombre,this.tipo,this.monitor,this.sala.getNombre(),this.sala.getAforo(),this.especial, this.recursivo);
+        boolean condicion = listaAct.stream().noneMatch(activ->activ.equals(act));
+        return condicion;
+    }
+    
+    private void setError(String error){
+        this.Error.setText(error);
+        this.Error.setVisible(true);
+    }
+    
+    public final void setCampos(Actividad actividad){
+        this.Campo1.setText(actividad.getTitulo());
+        this.Campo2.setText(actividad.getTipo());
+        this.Campo3.setText(actividad.getMonitor());
+        this.Campo6.setText(actividad.getSala().getNombre() + "Aforo: " + actividad.getSala().getAforo());
+        this.nombre = actividad.getTitulo();
+        this.tipo = actividad.getTipo();
+        this.sala = actividad.getSala();
+        this.recursivo = actividad.getDiaSemanaRecursivo();
     }
 
     /**
@@ -34,8 +109,27 @@ public class PanelModificarAct extends javax.swing.JFrame {
 
         jButtonVolverAtras = new javax.swing.JButton();
         BotonAyuda = new javax.swing.JButton();
+        Campo1 = new javax.swing.JTextField();
+        Texto1 = new javax.swing.JLabel();
+        Campo2 = new javax.swing.JTextField();
+        Texto2 = new javax.swing.JLabel();
+        Campo3 = new javax.swing.JTextField();
+        Texto3 = new javax.swing.JLabel();
+        Texto4 = new javax.swing.JLabel();
+        Campo6 = new javax.swing.JTextField();
+        Texto6 = new javax.swing.JLabel();
+        jSpinner1 = new javax.swing.JSpinner();
+        jSpinner2 = new javax.swing.JSpinner();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        Error = new javax.swing.JLabel();
+        GuardarCambios = new javax.swing.JButton();
+        jFormattedTextField1 = new javax.swing.JFormattedTextField();
+        jSpinner3 = new javax.swing.JSpinner();
+        jSpinner4 = new javax.swing.JSpinner();
+        Texto7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jButtonVolverAtras.setBackground(new java.awt.Color(255, 153, 51));
         jButtonVolverAtras.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -48,16 +142,147 @@ public class PanelModificarAct extends javax.swing.JFrame {
         BotonAyuda.setPreferredSize(new java.awt.Dimension(50, 50));
         BotonAyuda.addActionListener(this::BotonAyudaActionPerformed);
 
+        Campo1.addActionListener(this::Campo1ActionPerformed);
+        Campo1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                Campo1KeyReleased(evt);
+            }
+        });
+
+        Texto1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        Texto1.setText("Nombre:");
+
+        Campo2.setMaximumSize(new java.awt.Dimension(64, 22));
+        Campo2.addActionListener(this::Campo2ActionPerformed);
+        Campo2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                Campo2KeyReleased(evt);
+            }
+        });
+
+        Texto2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        Texto2.setText("Tipo");
+
+        Campo3.addActionListener(this::Campo3ActionPerformed);
+        Campo3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                Campo3KeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                Campo3KeyTyped(evt);
+            }
+        });
+
+        Texto3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        Texto3.setText("Monitor");
+
+        Texto4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        Texto4.setText("Dia Semana:");
+
+        Campo6.setEditable(false);
+        Campo6.setMaximumSize(new java.awt.Dimension(64, 22));
+        Campo6.addActionListener(this::Campo6ActionPerformed);
+        Campo6.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                Campo6KeyReleased(evt);
+            }
+        });
+
+        Texto6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        Texto6.setText("Sala:");
+
+        jSpinner1.setModel(new javax.swing.SpinnerNumberModel(0, 0, this.horaIncioSeleccionada+1, 1));
+        jSpinner1.addChangeListener(this::jSpinner1StateChanged);
+
+        jSpinner2.setModel(new javax.swing.SpinnerNumberModel(0, 0, 23, 1));
+        jSpinner2.addChangeListener(this::jSpinner2StateChanged);
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo", "Ninguno" }));
+        jComboBox1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jComboBox1FocusLost(evt);
+            }
+        });
+        jComboBox1.addActionListener(this::jComboBox1ActionPerformed);
+
+        Error.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        Error.setForeground(new java.awt.Color(255, 0, 0));
+        Error.setText("Evento ya programado en esa fecha");
+        Error.setEnabled(false);
+
+        GuardarCambios.setBackground(new java.awt.Color(255, 153, 51));
+        GuardarCambios.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        GuardarCambios.setText("Guardar Cambios");
+        GuardarCambios.addActionListener(this::GuardarCambiosActionPerformed);
+
+        jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("dd/MM/yy"))));
+        jFormattedTextField1.addActionListener(this::jFormattedTextField1ActionPerformed);
+        jFormattedTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jFormattedTextField1KeyReleased(evt);
+            }
+        });
+
+        jSpinner3.setModel(new javax.swing.SpinnerNumberModel(0, 0, this.horaIncioSeleccionada+1, 1));
+        jSpinner3.addChangeListener(this::jSpinner3StateChanged);
+
+        jSpinner4.setModel(new javax.swing.SpinnerNumberModel(0, 0, 23, 1));
+        jSpinner4.addChangeListener(this::jSpinner4StateChanged);
+
+        Texto7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        Texto7.setText("Día");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButtonVolverAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 249, Short.MAX_VALUE)
-                .addComponent(BotonAyuda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(Texto6, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(6, 6, 6)
+                        .addComponent(Campo6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(Texto3, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(Texto2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jButtonVolverAtras, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
+                                        .addComponent(Texto1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(Texto4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(4, 4, 4))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(Texto7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(GuardarCambios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(Error)
+                                .addGap(18, 18, 18)
+                                .addComponent(BotonAyuda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(Campo2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Campo1)
+                            .addComponent(Campo3)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jFormattedTextField1, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jSpinner4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jSpinner3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -65,17 +290,50 @@ public class PanelModificarAct extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(BotonAyuda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonVolverAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(244, Short.MAX_VALUE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButtonVolverAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Error)))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Campo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Texto1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Campo2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Texto2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Campo3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Texto3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(Texto4)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jSpinner3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jSpinner4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Texto7)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Campo6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Texto6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(GuardarCambios, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonVolverAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVolverAtrasActionPerformed
-        // Codigo para volver al panel de admin
         this.setVisible(false);
-        new PanelGestionActividades(usuario).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButtonVolverAtrasActionPerformed
 
@@ -83,39 +341,157 @@ public class PanelModificarAct extends javax.swing.JFrame {
         new PanelAyuda("Este panel te permite modificar la actividad que se haya seleccionado en el apartado de Gestión de Actividades").setVisible(true);
     }//GEN-LAST:event_BotonAyudaActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void Campo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Campo1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Campo1ActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> {
-    // 1. Creamos un administrador falso solo para esta prueba de diseño
-    Administrador adminDummy = new Administrador("Jefe Prueba", "admin@javafit.com", "0000");
-    
-    // 2. Se lo pasamos a la ventana para que nos permita construirla
-    new PanelAdmin(adminDummy).setVisible(true);
-});
+    private void Campo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Campo2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Campo2ActionPerformed
+
+    private void Campo3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Campo3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Campo3ActionPerformed
+
+    private void Campo6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Campo6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Campo6ActionPerformed
+
+    private void jSpinner2StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinner2StateChanged
+        this.horaIncioSeleccionada = (int) this.jSpinner2.getValue();
+    }//GEN-LAST:event_jSpinner2StateChanged
+
+    private void Campo1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Campo1KeyReleased
+        if (this.Campo1.getText() == null){
+            this.setError("No se puede tener un Campo nulo");
+        }
+        else{
+            this.Error.setVisible(false);
+            this.nombre = this.Campo1.getText();
+        }
+    }//GEN-LAST:event_Campo1KeyReleased
+
+    private void Campo2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Campo2KeyReleased
+        if (this.Campo2.getText() == null){
+            this.setError("No se puede tener un Campo nulo");
+        }
+        else{
+            this.Error.setVisible(false);
+            this.tipo = this.Campo2.getText();
+        }
+    }//GEN-LAST:event_Campo2KeyReleased
+
+    private void Campo3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Campo3KeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Campo3KeyTyped
+
+    private void Campo3KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Campo3KeyReleased
+        if (this.Campo3.getText() == null){
+            this.setError("No se puede tener un Campo nulo");
+        }
+        else{
+            this.Error.setVisible(false);
+            this.monitor = this.Campo3.getText();
+        }
+    }//GEN-LAST:event_Campo3KeyReleased
+
+    private void Campo6KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Campo6KeyReleased
+
+    }//GEN-LAST:event_Campo6KeyReleased
+
+    private void jComboBox1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jComboBox1FocusLost
+
+    }//GEN-LAST:event_jComboBox1FocusLost
+
+    private void jSpinner1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinner1StateChanged
+        this.jSpinner1.setModel(new SpinnerNumberModel(0, 0, this.horaIncioSeleccionada+1, 1));
+        this.horaFinSeleccionada = (int) this.jSpinner1.getValue();
+    }//GEN-LAST:event_jSpinner1StateChanged
+
+    private void GuardarCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarCambiosActionPerformed
+        if ((this.buscarActividadProgramada(this.horaIncioSeleccionada, this.horaFinSeleccionada, this.recursivo))&&this.buscarActividad()){    
+            this.setVisible(false);
+            this.dispose();}
+        else{
+            this.setError("Los campos introducidos no son válidos ");
+            }
+    }//GEN-LAST:event_GuardarCambiosActionPerformed
+
+    private void jSpinner3StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinner3StateChanged
+        this.jSpinner3.setModel(new SpinnerNumberModel(0, 0, this.horaIncioSeleccionada+1, 1));
+        this.horaFinSeleccionada = (int) this.jSpinner1.getValue();
+    }//GEN-LAST:event_jSpinner3StateChanged
+
+    private void jSpinner4StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinner4StateChanged
+         this.horaIncioSeleccionada = (int) this.jSpinner4.getValue();
+    }//GEN-LAST:event_jSpinner4StateChanged
+
+    private void jFormattedTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextField1ActionPerformed
+
+    }//GEN-LAST:event_jFormattedTextField1ActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        if (String.valueOf(this.jComboBox1.getSelectedItem()).equals("Ninguno")){
+            this.setError("No se seleccionará día recursivo");
+            this.recursivo = null;
+            this.jSpinner1.setEnabled(false);
+            this.jSpinner2.setEnabled(false);
+            this.jFormattedTextField1.setEnabled(true);
+            this.jSpinner3.setEnabled(true);
+            this.jSpinner4.setEnabled(true);
+        }
+    else{
+        this.setError("Se seleccionará" + String.valueOf(this.jComboBox1.getSelectedItem())+"como día recursivo");
+        this.recursivo = this.stringToDayOfWeek(String.valueOf(this.jComboBox1.getSelectedItem()));
+        this.jSpinner1.setEnabled(true);
+        this.jSpinner2.setEnabled(true);
+        this.jFormattedTextField1.setEnabled(false);
+        this.jSpinner3.setEnabled(false);
+        this.jSpinner4.setEnabled(false);
     }
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jFormattedTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jFormattedTextField1KeyReleased
+        try{
+        int diaS = Integer.parseInt(String.valueOf(this.jFormattedTextField1.getValue()).substring(0,2));
+        int mesS = Integer.parseInt(String.valueOf(this.jFormattedTextField1.getValue()).substring(2,4));
+        int annoS = Integer.parseInt(String.valueOf(this.jFormattedTextField1.getValue()).substring(4,8));
+        LocalDate diaM = LocalDate.of(annoS,mesS,diaS);
+        if (LocalDate.now().isAfter(diaM)||LocalDate.now().isEqual(diaM)){
+            this.setError("La fecha seleccionada no es válida");
+            }
+        else{
+            this.dia = diaS;
+            this.mes = mesS;
+            this.anno = annoS;
+            }
+        } catch(NumberFormatException error){
+            this.setError("El formato de la fecha no es válido");
+        }
+        
+    }//GEN-LAST:event_jFormattedTextField1KeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BotonAyuda;
+    private javax.swing.JTextField Campo1;
+    private javax.swing.JTextField Campo2;
+    private javax.swing.JTextField Campo3;
+    private javax.swing.JTextField Campo6;
+    private javax.swing.JLabel Error;
+    private javax.swing.JButton GuardarCambios;
+    private javax.swing.JLabel Texto1;
+    private javax.swing.JLabel Texto2;
+    private javax.swing.JLabel Texto3;
+    private javax.swing.JLabel Texto4;
+    private javax.swing.JLabel Texto6;
+    private javax.swing.JLabel Texto7;
     private javax.swing.JButton jButtonVolverAtras;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JFormattedTextField jFormattedTextField1;
+    private javax.swing.JSpinner jSpinner1;
+    private javax.swing.JSpinner jSpinner2;
+    private javax.swing.JSpinner jSpinner3;
+    private javax.swing.JSpinner jSpinner4;
     // End of variables declaration//GEN-END:variables
 }

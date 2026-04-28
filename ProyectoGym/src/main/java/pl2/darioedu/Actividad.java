@@ -111,7 +111,12 @@ public class Actividad implements Serializable{
         }
         return devolver;
     }
-    
+    public Sesion getUltmimaSesion(){
+        if (this.diaSemanaRecursivo != null){
+            return this.getSesiones().getLast();
+        }
+        return null;
+    }
     
     @Override
     public String toString() {

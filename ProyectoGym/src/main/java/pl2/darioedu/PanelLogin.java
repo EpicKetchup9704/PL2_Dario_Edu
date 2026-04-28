@@ -54,6 +54,7 @@ public class PanelLogin extends javax.swing.JFrame {
         jButtonAyuda.setBackground(new java.awt.Color(255, 102, 0));
         jButtonAyuda.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         jButtonAyuda.setText("Ayuda");
+        jButtonAyuda.addActionListener(this::jButtonAyudaActionPerformed);
 
         jLabelError.setForeground(new java.awt.Color(255, 0, 0));
         jLabelError.setText("El usuario o contraseña introducidos no son validos");
@@ -158,6 +159,10 @@ public class PanelLogin extends javax.swing.JFrame {
         ventanaRegistro.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButtonRegistrarActionPerformed
+
+    private void jButtonAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAyudaActionPerformed
+        new PanelAyuda("Este panel le permite entrar en su área personal. Si no eres socio, pulse en el boton de la Izquierda. Si eres cliente, introduce sus credenciales en los recuadros superiores (Nombre y contraseña)").setVisible(true);
+    }//GEN-LAST:event_jButtonAyudaActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAcceder;

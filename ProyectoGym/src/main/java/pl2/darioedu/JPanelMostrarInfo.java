@@ -278,7 +278,7 @@ public class JPanelMostrarInfo extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null,"Mensaje para editar resrvas actividad continuar / socio","None",JOptionPane.INFORMATION_MESSAGE);
         }
         else{
-            JOptionPane.showMessageDialog(null,"Mensaje para editar reservas actividad / admin","None",JOptionPane.INFORMATION_MESSAGE);
+            new PanelModificarAct(this.actividad).setVisible(true);
         }
     }//GEN-LAST:event_Imagen2ActionPerformed
 
