@@ -73,6 +73,13 @@ public class PanelConsultaActividades extends javax.swing.JFrame {
         BotonAyuda = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowFocusListener(new java.awt.event.WindowFocusListener() {
+            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
+                formWindowGainedFocus(evt);
+            }
+            public void windowLostFocus(java.awt.event.WindowEvent evt) {
+            }
+        });
 
         jButtonVolverAtras.setBackground(new java.awt.Color(255, 153, 51));
         jButtonVolverAtras.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -146,6 +153,10 @@ public class PanelConsultaActividades extends javax.swing.JFrame {
     private void BotonAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonAyudaActionPerformed
         new PanelAyuda("Este panel sirve para que introduzcas un parámetro a buscar de la lista de opciones y puedas visualizar de una forma más cómoda la información de las actividades").setVisible(true);
     }//GEN-LAST:event_BotonAyudaActionPerformed
+
+    private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
+        this.iniciarNuevo();
+    }//GEN-LAST:event_formWindowGainedFocus
 
     /**
      * @param args the command line arguments

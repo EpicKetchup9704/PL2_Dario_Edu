@@ -46,6 +46,13 @@ public class PanelUsuReservas extends javax.swing.JFrame {
         BotonAyuda = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowFocusListener(new java.awt.event.WindowFocusListener() {
+            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
+                formWindowGainedFocus(evt);
+            }
+            public void windowLostFocus(java.awt.event.WindowEvent evt) {
+            }
+        });
 
         jButtonAtras.setBackground(new java.awt.Color(255, 153, 51));
         jButtonAtras.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
@@ -97,6 +104,10 @@ public class PanelUsuReservas extends javax.swing.JFrame {
     private void BotonAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonAyudaActionPerformed
         new PanelAyuda("Este panel sirve para que pueda ver las reservas que haya hecho y puede borrarlas, no modificarlas").setVisible(true);
     }//GEN-LAST:event_BotonAyudaActionPerformed
+
+    private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
+        this.iniciarNuevo();
+    }//GEN-LAST:event_formWindowGainedFocus
 
     /**
      * @param args the command line arguments

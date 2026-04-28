@@ -73,6 +73,13 @@ public class PanelUsuActividades extends javax.swing.JFrame {
         BotonAyuda = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowFocusListener(new java.awt.event.WindowFocusListener() {
+            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
+                formWindowGainedFocus(evt);
+            }
+            public void windowLostFocus(java.awt.event.WindowEvent evt) {
+            }
+        });
 
         jButtonAtras.setBackground(new java.awt.Color(255, 153, 51));
         jButtonAtras.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
@@ -147,6 +154,10 @@ public class PanelUsuActividades extends javax.swing.JFrame {
     private void BotonAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonAyudaActionPerformed
         new PanelAyuda("Este panel sirve para que puedas consultar las actividades y buscar por la que quieras. Una vez encontrada la actividad, tendrá que hacer click en su flecha correspondiente, y ahí se le llevará a la reserva").setVisible(true);
     }//GEN-LAST:event_BotonAyudaActionPerformed
+
+    private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
+        this.iniciarNuevo();
+    }//GEN-LAST:event_formWindowGainedFocus
 
     /**
      * @param args the command line arguments
