@@ -10,18 +10,19 @@ Este es el proyecto final de Java, hacer una aplicación OOP con una interfaz gr
 ## Lista de Tareas
  
  - [ ] Interfaces gráficas con Swing
- - - [ ] Intefaz Panel de Usuario
- - - [ ] Intefaz Panel de Login
- - - [ ] Intefaz Panel de Administrador
- - - [ ] Interfaz Ayuda (Pueda abrir el manual de Usuario si es necesario)
+ - - [x] Intefaz Panel de Usuario
+ - - [ ] Interfaces Adicionales
+ - - [x] Intefaz Panel de Login
+ - - [x] Intefaz Panel de Administrador
+ - - [x] Interfaz Ayuda (Pueda abrir el manual de Usuario si es necesario)
  - [ ] Información y documentos
  - - [ ] Manual de usuario
  - - [ ] Javadoc Correspondiente
  - - [ ] Informe para entregar
  - [ ] Funcionamiento alpliación
- - - [ ] Clases básicas, relacionadas con el documento original
- - - [ ] Fichero de serialización, convención de lectura y clase de lectura
- - - [ ] Resto de clases para su correcto funcionamiento
+ - - [x] Clases básicas, relacionadas con el documento original
+ - - [x] Fichero de serialización, convención de lectura y clase de lectura
+ - - [x] Resto de clases para su correcto funcionamiento
  - [ ] Recursos
- - - [ ] Apartado llamado resources para el apartado de imágenes, logos, etc., así como añadir su fichero de modificación por si hay que modificarlo.
+ - - [x] Apartado llamado resources para el apartado de imágenes, logos, etc., así como añadir su fichero de modificación por si hay que modificarlo.
  - - [ ] Logos aplicación
