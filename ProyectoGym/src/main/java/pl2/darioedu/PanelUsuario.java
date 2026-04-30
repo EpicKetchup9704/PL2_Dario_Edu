@@ -145,37 +145,6 @@ public class PanelUsuario extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> {
-    // 1. Creamos un socio falso solo para esta prueba de diseño
-    ArrayList<String> prueba = new ArrayList<>();
-    prueba.add("5555666677778888");
-    prueba.add("04/27");
-    Socio socioDummy = new Socio("Socio Prueba", "socio@prueba.com", "1234", "DireccionPrueba", "959699444", prueba, false);
-    
-    // 2. Se lo pasamos a la ventana para que nos permita construirla
-    new PanelUsuario(socioDummy).setVisible(true);
-    });
-        
-    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonActividades;
     private javax.swing.JButton jButtonDatosPersonales;

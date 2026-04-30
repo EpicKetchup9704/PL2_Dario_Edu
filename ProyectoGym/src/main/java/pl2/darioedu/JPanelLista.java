@@ -13,7 +13,7 @@ import javax.swing.JPanel;
  * @author Darío
  */
 public class JPanelLista extends javax.swing.JPanel{
-    private final ArrayList<Usuario> listaUser = Main.getListaUsuarioStatic();
+    private final ArrayList<Usuario> listaUser = new ArrayList<>(Main.getListaUsuarioStatic().stream().filter(usu->usu instanceof Socio).collect(Collectors.toList()));
     private final ArrayList<Actividad> listaActividad = Main.getListaActividadStatic();
     private ArrayList<JPanelMostrarInfo> listaCeldas = new ArrayList<>();
     //Parte para almacenamiento de información de un botón pulsados

@@ -209,7 +209,7 @@ public class PanelNuevoUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonAccederActionPerformed
 
     private void jButtonAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAyudaActionPerformed
-        PanelAyuda ventanaAyuda = new PanelAyuda();
+        PanelAyuda ventanaAyuda = new PanelAyuda("Este panel le permite crear un usuario si no ha lo ha creado previamente");
         this.setVisible(false);
         ventanaAyuda.setVisible(true);
         this.dispose();

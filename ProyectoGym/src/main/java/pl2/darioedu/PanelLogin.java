@@ -1,4 +1,5 @@
 package pl2.darioedu;
+
 public class PanelLogin extends javax.swing.JFrame {    
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(PanelLogin.class.getName());
     /**
@@ -30,15 +31,19 @@ public class PanelLogin extends javax.swing.JFrame {
         jButtonRegistrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("JavaFit - LoginMenu");
         setBackground(new java.awt.Color(255, 204, 102));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 48)); // NOI18N
-        jLabel1.setText("JavaGym");
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("JavaFit");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel2.setText("Usuario");
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel2.setText("Correo:");
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("Contraseña");
 
         jTextFieldUsuario.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -56,7 +61,9 @@ public class PanelLogin extends javax.swing.JFrame {
         jButtonAyuda.setText("Ayuda");
         jButtonAyuda.addActionListener(this::jButtonAyudaActionPerformed);
 
+        jLabelError.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabelError.setForeground(new java.awt.Color(255, 0, 0));
+        jLabelError.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelError.setText("El usuario o contraseña introducidos no son validos");
 
         jButtonRegistrar.setBackground(new java.awt.Color(255, 102, 0));
@@ -69,32 +76,34 @@ public class PanelLogin extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(44, 44, 44)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3))
-                .addGap(24, 24, 24)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jTextFieldUsuario, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(82, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(85, 85, 85))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabelError)
-                        .addGap(63, 63, 63))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButtonRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButtonAcceder, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButtonAyuda)
-                .addGap(14, 14, 14))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabelError, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGap(17, 17, 17)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(jTextFieldUsuario, javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jPasswordField1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jButtonRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jButtonAcceder, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jButtonAyuda)))))
+                        .addGap(0, 12, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -111,13 +120,12 @@ public class PanelLogin extends javax.swing.JFrame {
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabelError)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jButtonAcceder, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonRegistrar, javax.swing.GroupLayout.Alignment.LEADING))
-                    .addComponent(jButtonAyuda, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButtonAcceder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonRegistrar, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButtonAyuda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
 
         pack();
@@ -127,25 +135,22 @@ public class PanelLogin extends javax.swing.JFrame {
         String correo = this.jTextFieldUsuario.getText();
         char[] passArray = this.jPasswordField1.getPassword();
         String passString = new String(passArray);
-        
+        this.jLabelError.setVisible(false);
         if (GestorSeguridad.autenticar1(correo, passString)){
-            System.out.println("Primer IF");
             if (GestorSeguridad.autenticarEsAdmin(GestorSeguridad.autenticar2(correo))){
-                System.out.println("Segundo IF");
                 PanelAdmin ventanaAdmin = new PanelAdmin((Administrador) GestorSeguridad.autenticar2(correo));
                 this.setVisible(false);
                 ventanaAdmin.setVisible(true);
                 this.dispose();
             } else {
-                System.out.println("Primer ELSE");
                 PanelUsuario ventanaSocio = new PanelUsuario((Socio) GestorSeguridad.autenticar2(correo));
                 this.setVisible(false);
                 ventanaSocio.setVisible(true);
                 this.dispose();
             }
         } else{
-            System.out.println("Segundo IF");
-            this.jLabel1.setVisible(true);
+           if (!correo.contains("@")){this.imprimirEspecifico("No se puede introducir el usuario");}
+           else{ this.imprimirEspecifico("Usuario no encontrado en el sistema");}
         }
     }//GEN-LAST:event_jButtonAccederActionPerformed
 
@@ -161,7 +166,7 @@ public class PanelLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonRegistrarActionPerformed
 
     private void jButtonAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAyudaActionPerformed
-        new PanelAyuda("Este panel le permite entrar en su área personal. Si no eres socio, pulse en el boton de la Izquierda. Si eres cliente, introduce sus credenciales en los recuadros superiores (Nombre y contraseña)").setVisible(true);
+        new PanelAyuda("Este panel le permite entrar en su área personal. Si no eres socio, pulse en el boton de la Izquierda. Si eres cliente, introduce sus credenciales en los recuadros superiores (Correo y contraseña). \n Si introduce su usario no es válido, solo es posible iniciar sesión con un correo").setVisible(true);
     }//GEN-LAST:event_jButtonAyudaActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -175,58 +180,25 @@ public class PanelLogin extends javax.swing.JFrame {
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JTextField jTextFieldUsuario;
     // End of variables declaration//GEN-END:variables
-
     public final String getUsuario(){
         return this.jTextFieldUsuario.getText();
     }
-    
     public final String getHash(){
         String contra = String.valueOf(this.jPasswordField1.getPassword());
         String hash = GestorSeguridad.hashearContra(contra);
         return hash;
     }
-    
-    
-    
-
-    
     public void cerrarVentana(){
         //Cerrar ventana en forma de código: https://stackoverflow.com/questions/1234912/how-to-programmatically-close-a-jframe
             this.setVisible(false);
             this.dispose();
     }
     public void imprimirInvalido(){
-        this.jLabel2.setVisible(true);
+        this.jLabelError.setVisible(true);
     }
     public void imprimirEspecifico(String mensaje){
         //Si quieremos devolver un mensaje de invalidez espcífico; longitud máxima de 50 caracteres, incluidos espacios)
-        this.jLabel2.setText(mensaje);
-        this.jLabel2.setVisible(true);
-    }
-    public boolean validarCampos(){
-        return(false); }
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> {
-    
-    new PanelLogin().setVisible(true);
-});
+        this.jLabelError.setText(mensaje);
+        this.jLabelError.setVisible(true);
     }
 }

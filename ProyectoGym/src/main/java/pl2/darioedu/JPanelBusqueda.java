@@ -11,7 +11,7 @@ import javax.swing.DefaultComboBoxModel;
  *
  * @author Darío
  */
-public class JPanelBusqueda extends javax.swing.JPanel {
+public class JPanelBusqueda extends javax.swing.JPanel{
     public JFrameCalendario calendario = new JFrameCalendario();
     private String busqueda = "";
     private String seleccionado = "";
@@ -93,7 +93,6 @@ public class JPanelBusqueda extends javax.swing.JPanel {
           dia = Integer.parseInt(this.busqueda.substring(6,8));
           }
           List<Actividad> devolver;
-
           switch (this.seleccionado){
               case "Dia" -> 
                   devolver = this.buscarActividadDia(listaActividad,anno,mes,dia);
@@ -192,6 +191,7 @@ public class JPanelBusqueda extends javax.swing.JPanel {
     
 
     public List<Usuario> getBusquedaAdminSocio(){
+        System.out.println(1);
         this.busqueda = jTextField1.getText();
         ArrayList<Usuario> listaUsuario = Main.getListaUsuarioStatic();
         List<Socio> listaSocio =listaUsuario.stream().filter(us -> us instanceof Socio).map(us -> (Socio) us).toList();

@@ -81,6 +81,11 @@ public class Main {
     public static void main(String[] args) {
        ArrayList<Usuario> listaUsuario = setListaUsuarios();
        ArrayList<Actividad> listaActividades = setListaActividades();
+       new PanelLogin().setVisible(true);
+       
+        //Administrador admin = new Administrador("admin","admin@javafit.com","admin");
+       //listaUsuario.add(admin);
+       //guardarListaUsuarios(listaUsuario);
        /*Actividad act = new Actividad("Tu no mete cabra","Atletismo","Torrente Perez","Pistas UAH",102,false,DayOfWeek.MONDAY,8,13);
        ArrayList<String> tarjeta1 = new ArrayList<>(Arrays.asList("1234123412341234","12/90"));
        ArrayList<String> tarjeta2 = new ArrayList<>(Arrays.asList("1123213212341234","12/10"));

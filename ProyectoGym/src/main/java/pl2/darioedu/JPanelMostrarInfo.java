@@ -4,6 +4,7 @@
  */
 package pl2.darioedu;
 
+import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -132,7 +133,7 @@ public class JPanelMostrarInfo extends javax.swing.JPanel {
                 this.socio = null;
                 this.Titulo.setText(actividad.getTitulo());
                 this.AP1.setText("Tipo: "+actividad.getTipo()+ " | Sala: "+actividad.getSala().getNombre());
-                String apartado = (actividad.getDiaSemanaRecursivo()==null) ? "No hay un día de la semana fijo" : actividad.getDiaSemanaRecursivo().toString() + " | Hora Incio: " + actividad.getSesiones().get(0).getHoraInicio()+ " | Hora Fin: "+ actividad.getSesiones().get(0).getHoraFin() ;
+                String apartado = (actividad.getDiaSemanaRecursivo()==null) ? "No hay " : actividad.getDiaSemanaRecursivo().toString() + " | De " + actividad.getSesiones().get(0).getHoraInicio()+ " a "+ actividad.getSesiones().get(0).getHoraFin() ;
                 this.AP2.setText("Día sema fijo: " + apartado);
                 this.AP3.setText("Aforo: "+actividad.getSala().getAforo() + " | Plazas: "+actividad.getSala().aforoRestante());
                 this.AP4.setText("Monitor: " +actividad.getMonitor() + " | Sesiones: " + actividad.getSesiones().size());
@@ -260,7 +261,22 @@ public class JPanelMostrarInfo extends javax.swing.JPanel {
 
     private void Imagen2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Imagen2ActionPerformed
         if ((this.actividad == null)&&(this.sesion==null)&&(!this.admin)&&(this.socio!=null)){
-            JOptionPane.showMessageDialog(null,"Mensaje para dado un socio editar su info / admin ","None",JOptionPane.INFORMATION_MESSAGE);
+           int n = JOptionPane.showConfirmDialog(null,"¿Desea cambiar el estado del Socio?","JavaFit - MENU",JOptionPane.YES_NO_OPTION);
+           if (n==JOptionPane.YES_OPTION){
+               ArrayList<Usuario> listaUser= Main.getListaUsuarioStatic();
+                for (Usuario user : listaUser){
+                    if (user instanceof Socio socio1){
+                      if (socio1.equals(this.socio)){
+                          if (this.socio.getVipStatus()){
+                              socio1.cambiarStatusVip(false);
+                          }
+                          else{
+                              socio1.cambiarStatusVip(true);
+                          }
+                        }
+                    }  
+                }
+            }
         }
         else if ((this.actividad != null)&&(this.sesion==null)&&(!this.admin)&&(this.socio!=null)){
             JOptionPane.showMessageDialog(null,"Mensaje para modificar actividad / admin","None",JOptionPane.INFORMATION_MESSAGE);
@@ -290,7 +306,21 @@ public class JPanelMostrarInfo extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null,"Mensaje para borrar actividad / admin","None",JOptionPane.INFORMATION_MESSAGE);
         }
         else if ((this.actividad != null)&&(this.sesion!=null)&&(this.admin)&&(this.socio!=null)){
-            JOptionPane.showMessageDialog(null,"Mensaje para elminiar reservas actividad / admin","None",JOptionPane.INFORMATION_MESSAGE);
+        int n = JOptionPane.showConfirmDialog(null,"¿Desea borrar la reserva?","JavaFit - MENU",JOptionPane.YES_NO_OPTION);
+            //Cuando la opción es seleccionada como Yes / Se elimina la actividad después de hacer la búsqueda
+            if (n==JOptionPane.YES_OPTION){
+                ArrayList<Usuario> listaUser = Main.getListaUsuarioStatic();
+                for (Usuario user : listaUser){
+                    if (user instanceof Socio socio1){
+                        for (Sesion ses : socio1.getListaSesion()){
+                                if(ses.equals(this.sesion)){
+                                    socio1.getListaSesion().remove(ses);
+                                }
+                            }
+                        }
+                    }
+                Main.guardarListaUsuarios(listaUser);
+                }
         }
         else if ((this.actividad != null)&&(this.sesion==null)&&(this.admin)&&(this.socio!=null)){
             //JOptionPane.showMessageDialog(null,"Mensaje para editar reservas actividad / admin","None",JOptionPane.INFORMATION_MESSAGE);
@@ -302,10 +332,14 @@ public class JPanelMostrarInfo extends javax.swing.JPanel {
             //JOptionPane.showMessageDialog(null,"Mensaje para editar resrvas actividad continuar / socio","None",JOptionPane.INFORMATION_MESSAGE);
         }
         else{
-            JOptionPane.showMessageDialog(null,"Mensaje para borrar reservas actividad / admin","None",JOptionPane.INFORMATION_MESSAGE);
+            int n = JOptionPane.showConfirmDialog(null,"¿Desea borrar la Actividad?","JavaFit - MENU",JOptionPane.YES_NO_OPTION);
+            if (n == JOptionPane.YES_OPTION){
+                ArrayList<Actividad> listaAct = Main.getListaActividadStatic();
+                listaAct.remove(this.actividad);
+                Main.guardarListaActividades(listaAct);
+            }
         }
     }//GEN-LAST:event_Imagen1ActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel AP1;

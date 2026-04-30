@@ -65,7 +65,7 @@ public class GestorSeguridad {
         return Base64.getEncoder().encodeToString(sal);
     }
     public static boolean autenticar1(String intentoCorreo, String Contra){
-        ArrayList<Usuario> todosLosUsuarios = Main.setListaUsuarios();
+        ArrayList<Usuario> todosLosUsuarios = Main.getListaUsuarioStatic();
         boolean encontrado = false;
         String saleado = "";
         for (Usuario usuarioActual : todosLosUsuarios){
