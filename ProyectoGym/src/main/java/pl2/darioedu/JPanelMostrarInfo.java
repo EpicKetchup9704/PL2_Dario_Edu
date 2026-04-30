@@ -122,9 +122,10 @@ public class JPanelMostrarInfo extends javax.swing.JPanel {
             this.Imagen1.setVisible(true);
             this.Imagen1.setEnabled(true);
             this.Imagen1.setIcon(new ImageIcon("src/main/resources/Cruz.png"));
-            this.Imagen2.setVisible(true);
-            this.Imagen2.setEnabled(true);
-            this.Imagen2.setIcon(new ImageIcon("src/main/resources/Editar.png"));}
+            this.Imagen2.setVisible(false);
+            this.Imagen2.setEnabled(false);
+            //this.Imagen2.setIcon(new ImageIcon("src/main/resources/Editar.png"));
+            }
             else{
                 //Constructor admin mostrar Actividades sin poder editar (visor)
                 this.actividad = actividad;
@@ -263,7 +264,7 @@ public class JPanelMostrarInfo extends javax.swing.JPanel {
         if ((this.actividad == null)&&(this.sesion==null)&&(!this.admin)&&(this.socio!=null)){
            int n = JOptionPane.showConfirmDialog(null,"¿Desea cambiar el estado del Socio?","JavaFit - MENU",JOptionPane.YES_NO_OPTION);
            if (n==JOptionPane.YES_OPTION){
-               ArrayList<Usuario> listaUser= Main.getListaUsuarioStatic();
+               ArrayList<Usuario> listaUser = Main.getListaUsuarioStatic();
                 for (Usuario user : listaUser){
                     if (user instanceof Socio socio1){
                       if (socio1.equals(this.socio)){
@@ -276,7 +277,8 @@ public class JPanelMostrarInfo extends javax.swing.JPanel {
                         }
                     }  
                 }
-            }
+           Main.guardarListaUsuarios(listaUser); 
+           }
         }
         else if ((this.actividad != null)&&(this.sesion==null)&&(!this.admin)&&(this.socio!=null)){
             JOptionPane.showMessageDialog(null,"Mensaje para modificar actividad / admin","None",JOptionPane.INFORMATION_MESSAGE);
@@ -332,11 +334,26 @@ public class JPanelMostrarInfo extends javax.swing.JPanel {
             //JOptionPane.showMessageDialog(null,"Mensaje para editar resrvas actividad continuar / socio","None",JOptionPane.INFORMATION_MESSAGE);
         }
         else{
-            int n = JOptionPane.showConfirmDialog(null,"¿Desea borrar la Actividad?","JavaFit - MENU",JOptionPane.YES_NO_OPTION);
+            int n = JOptionPane.showConfirmDialog(null,"¿Desea borrar la Actividad? | Se borrarán las reservas asociadas a dicha actividad","JavaFit - MENU",JOptionPane.YES_NO_OPTION);
             if (n == JOptionPane.YES_OPTION){
                 ArrayList<Actividad> listaAct = Main.getListaActividadStatic();
+                ArrayList<Usuario> listaUser = Main.getListaUsuarioStatic();
                 listaAct.remove(this.actividad);
+                for (Usuario user : listaUser){
+                    if (user instanceof Socio socio1){
+                        if(socio1.getListaActividades().contains(this.actividad)){
+                            listaAct.remove(this.actividad);
+                            for(Sesion ses:socio1.getListaSesion()){
+                                if (this.actividad.getSesiones().contains(ses)){
+                                    socio1.getListaSesion().remove(ses);
+                                }
+                            }
+                        }
+                    } else {
+                    }
+                }
                 Main.guardarListaActividades(listaAct);
+                Main.guardarListaUsuarios(listaUser);
             }
         }
     }//GEN-LAST:event_Imagen1ActionPerformed

@@ -83,7 +83,7 @@ public class Main {
        ArrayList<Actividad> listaActividades = setListaActividades();
        new PanelLogin().setVisible(true);
        
-        //Administrador admin = new Administrador("admin","admin@javafit.com","admin");
+       //Administrador admin = new Administrador("admin","admin@javafit.com","admin");
        //listaUsuario.add(admin);
        //guardarListaUsuarios(listaUsuario);
        /*Actividad act = new Actividad("Tu no mete cabra","Atletismo","Torrente Perez","Pistas UAH",102,false,DayOfWeek.MONDAY,8,13);

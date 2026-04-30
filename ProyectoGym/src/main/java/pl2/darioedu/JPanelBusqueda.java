@@ -191,7 +191,6 @@ public class JPanelBusqueda extends javax.swing.JPanel{
     
 
     public List<Usuario> getBusquedaAdminSocio(){
-        System.out.println(1);
         this.busqueda = jTextField1.getText();
         ArrayList<Usuario> listaUsuario = Main.getListaUsuarioStatic();
         List<Socio> listaSocio =listaUsuario.stream().filter(us -> us instanceof Socio).map(us -> (Socio) us).toList();
