@@ -12,6 +12,7 @@ public class Actividad implements Serializable{
     private Sala sala;
     private DayOfWeek diaSemanaRecursivo; //en la practica se expone de buscar por día de la semana, así que añado un dayOfWeek para representar eso 
     private ArrayList<Sesion> listaSesiones ;
+    private String imagenNum;
     
     public Actividad(String titulo, String tipo,String monitor, Sala sala, boolean extra){
         this.titulo = titulo ;
@@ -22,6 +23,7 @@ public class Actividad implements Serializable{
         this.esExtraordinaria = extra ;
         this.listaSesiones = new ArrayList<>();
         this.diaSemanaRecursivo = null;
+        this.imagenNum = "000";
     }
     public Actividad(String titulo, String tipo,String monitor,String nombreSala,int aforo,  boolean extra){
         this.titulo = titulo ;
@@ -30,6 +32,16 @@ public class Actividad implements Serializable{
         this.esExtraordinaria = extra ;
         this.listaSesiones = new ArrayList<>();
         this.diaSemanaRecursivo = null;
+        this.imagenNum = "000";
+    }
+        public Actividad(String titulo, String tipo,String monitor,String nombreSala,int aforo,  boolean extra, String imgNum){
+        this.titulo = titulo ;
+        this.tipo = tipo ;
+        this.sala = new Sala(nombreSala, aforo) ;
+        this.esExtraordinaria = extra ;
+        this.listaSesiones = new ArrayList<>();
+        this.diaSemanaRecursivo = null;
+        this.imagenNum = imgNum;
     }
     
     public Actividad(String titulo, String tipo,String monitor,String nombreSala,int aforo,  boolean extra, DayOfWeek diaSemana){
@@ -39,6 +51,7 @@ public class Actividad implements Serializable{
         this.esExtraordinaria = extra ;
         this.diaSemanaRecursivo = diaSemana;
         this.listaSesiones = new ArrayList<>();
+        this.imagenNum = "000";
     }
     
     public Actividad(String titulo, String tipo,String monitor,String nombreSala,int aforo,  boolean extra, DayOfWeek diaSemana, int horaIni, int horaFin){
@@ -48,6 +61,16 @@ public class Actividad implements Serializable{
         this.esExtraordinaria = extra ;
         this.diaSemanaRecursivo = diaSemana;
         this.listaSesiones = this.getSesionesDiaSemana(diaSemana, horaIni, horaFin);
+        this.imagenNum = "000";
+    }
+    public Actividad(String titulo, String tipo,String monitor,String nombreSala,int aforo,  boolean extra, DayOfWeek diaSemana, int horaIni, int horaFin, String imgNum){
+        this.titulo = titulo ;
+        this.tipo = tipo ;
+        this.sala = new Sala(nombreSala, aforo) ;
+        this.esExtraordinaria = extra ;
+        this.diaSemanaRecursivo = diaSemana;
+        this.listaSesiones = this.getSesionesDiaSemana(diaSemana, horaIni, horaFin);
+        this.imagenNum = imgNum;
     }
     
     public void addSesion(Sesion clase){
@@ -116,6 +139,15 @@ public class Actividad implements Serializable{
             return this.getSesiones().getLast();
         }
         return null;
+    }
+    
+    public void setImgNum(String id){
+        this.imagenNum = id;
+    }
+    
+        
+    public String getImgNum(){
+        return this.imagenNum;
     }
     
     @Override

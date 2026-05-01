@@ -52,19 +52,22 @@ public class PanelNuevoAdmin extends javax.swing.JFrame {
         jLabelNomCor = new javax.swing.JLabel();
         jLabelContra = new javax.swing.JLabel();
         jLabelCorrecto = new javax.swing.JLabel();
+        BotonAyuda = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("JavaFit - New Admin Menu - Version "+Globales.version);
 
         jLabel1.setText("Nombre:");
 
         jLabel2.setText("Correo:");
 
-        jLabel3.setText("Contraseña");
+        jLabel3.setText("Contraseña: ");
 
-        jLabel4.setText("Repetir Contraseña");
+        jLabel4.setText("Repetir Contraseña: ");
 
-        jButtonVolverAtras.setBackground(new java.awt.Color(153, 255, 0));
-        jButtonVolverAtras.setText("<html><center>Volver<br>Atrás<center></html>");
+        jButtonVolverAtras.setBackground(new java.awt.Color(255, 153, 51));
+        jButtonVolverAtras.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jButtonVolverAtras.setText("<-");
         jButtonVolverAtras.addActionListener(this::jButtonVolverAtrasActionPerformed);
 
         Registrar.setBackground(new java.awt.Color(102, 255, 51));
@@ -72,14 +75,23 @@ public class PanelNuevoAdmin extends javax.swing.JFrame {
         Registrar.addActionListener(this::RegistrarActionPerformed);
 
         jLabelNomCor.setForeground(new java.awt.Color(255, 51, 51));
+        jLabelNomCor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelNomCor.setText("Rellene nombre y correo, por favor");
 
         jLabelContra.setForeground(new java.awt.Color(255, 51, 51));
+        jLabelContra.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelContra.setText("Las contraseñas no coinciden");
 
         jLabelCorrecto.setBackground(new java.awt.Color(102, 255, 51));
         jLabelCorrecto.setForeground(new java.awt.Color(51, 153, 0));
+        jLabelCorrecto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelCorrecto.setText("Admin registrado correctamente");
+
+        BotonAyuda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AyudaBoton.png"))); // NOI18N
+        BotonAyuda.setMaximumSize(new java.awt.Dimension(50, 50));
+        BotonAyuda.setMinimumSize(new java.awt.Dimension(50, 50));
+        BotonAyuda.setPreferredSize(new java.awt.Dimension(50, 50));
+        BotonAyuda.addActionListener(this::BotonAyudaActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -88,32 +100,37 @@ public class PanelNuevoAdmin extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelCorrecto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabelContra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButtonVolverAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(Registrar))
-                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButtonVolverAtras, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Registrar, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel1)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel3)
-                                .addComponent(jLabel4)
-                                .addComponent(jLabelNomCor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jPasswordField2)
-                                .addComponent(jPasswordField1)
-                                .addComponent(jTextFieldCorreo)
-                                .addComponent(jTextFieldNombre)
-                                .addComponent(jLabelContra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(jLabelCorrecto))
-                        .addGap(0, 9, Short.MAX_VALUE)))
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(BotonAyuda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPasswordField2)
+                    .addComponent(jPasswordField1)
+                    .addComponent(jTextFieldCorreo)
+                    .addComponent(jTextFieldNombre)
+                    .addComponent(jLabelNomCor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 61, Short.MAX_VALUE)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(BotonAyuda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -134,10 +151,10 @@ public class PanelNuevoAdmin extends javax.swing.JFrame {
                 .addComponent(jLabelContra)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabelCorrecto)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(Registrar, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
-                    .addComponent(jButtonVolverAtras))
+                    .addComponent(jButtonVolverAtras, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -168,11 +185,16 @@ public class PanelNuevoAdmin extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_RegistrarActionPerformed
 
+    private void BotonAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonAyudaActionPerformed
+        new PanelAyuda("Este panel sirve para crear un nuevo admin").setVisible(true);
+    }//GEN-LAST:event_BotonAyudaActionPerformed
+
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BotonAyuda;
     private javax.swing.JButton Registrar;
     private javax.swing.JButton jButtonVolverAtras;
     private javax.swing.JLabel jLabel1;

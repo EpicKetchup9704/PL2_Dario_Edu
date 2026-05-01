@@ -1,13 +1,15 @@
 package pl2.darioedu;
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
 import java.time.DayOfWeek;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 //Estoy haciendo pruebas en general;
@@ -76,13 +78,41 @@ public class Main {
             listaActividades.remove(actividadPrevio);
             listaActividades.add(actividadPrevio);
         }
+        public static boolean existePrevio(){
+            File fichero = new File("recibo.txt");
+            return fichero.exists();
+        }
+        
+        public static void esrcibirFichero(Actividad act, Sesion ses){
+            try{
+            PrintWriter aux = new PrintWriter(new BufferedWriter(new FileWriter("recibo.txt")));
+            String cad1 = "############RECIBO###################";
+            String cad3 = "Actividad - "+act.getTitulo() + "| Reserva - " + ses.toString();
+            String cad4 = "GRACIAS POR HACER LA RESERVA ";
+            aux.println(cad1);
+            aux.println(cad3);
+            aux.println(cad4);
+            }
+           
+            catch (IOException e){
+            }
+        }
+        
+        public static int getNumImagenes(){
+            File directorio = new File("src/main/src/main/resources/images");
+            return directorio.list().length;
+        }
+        
+        
         
         
     public static void main(String[] args) {
        ArrayList<Usuario> listaUsuario = setListaUsuarios();
        ArrayList<Actividad> listaActividades = setListaActividades();
        new PanelLogin().setVisible(true);
-       
+       new PanelModificarAct(new Actividad("Es una prueba","Ninguno","Benito Camela","Pistas UAH",189,false,DayOfWeek.MONDAY,8,13)).setVisible(true);
+       System.out.println(listaUsuario.size());
+       System.out.println(listaActividades.size());
        //Administrador admin = new Administrador("admin","admin@javafit.com","admin");
        //listaUsuario.add(admin);
        //guardarListaUsuarios(listaUsuario);

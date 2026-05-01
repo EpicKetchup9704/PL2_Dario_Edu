@@ -59,6 +59,7 @@ public class PanelNuevoUsuario extends javax.swing.JFrame {
         jFormattedTextFieldTLF = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("JavaFit - User Register Menu - Version "+Globales.version);
 
         jTextFieldNombre.addActionListener(this::jTextFieldNombreActionPerformed);
 

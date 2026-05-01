@@ -39,6 +39,7 @@ public class PanelAdmin extends javax.swing.JFrame {
         jButtonCrearAdmin = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("JavaFit - Admin Menu - Version "+Globales.version );
         setMaximumSize(new java.awt.Dimension(400, 315));
         setMinimumSize(new java.awt.Dimension(400, 315));
 

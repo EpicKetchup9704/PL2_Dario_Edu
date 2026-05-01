@@ -328,6 +328,9 @@
         </Component>
         <Component class="javax.swing.JToggleButton" name="B1">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="10" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="1"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[43, 43]"/>
@@ -346,6 +349,9 @@
         </Component>
         <Component class="javax.swing.JToggleButton" name="B2">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="10" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="1"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[43, 43]"/>
@@ -364,6 +370,9 @@
         </Component>
         <Component class="javax.swing.JToggleButton" name="B3">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="10" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="1"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[43, 43]"/>
@@ -382,6 +391,9 @@
         </Component>
         <Component class="javax.swing.JToggleButton" name="B4">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="10" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="1"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[43, 43]"/>
@@ -400,6 +412,9 @@
         </Component>
         <Component class="javax.swing.JToggleButton" name="B5">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="10" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="1"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[43, 43]"/>
@@ -418,6 +433,9 @@
         </Component>
         <Component class="javax.swing.JToggleButton" name="B6">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="10" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="1"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[43, 43]"/>
@@ -436,6 +454,9 @@
         </Component>
         <Component class="javax.swing.JToggleButton" name="B7">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="10" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="1"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[43, 43]"/>
@@ -454,6 +475,9 @@
         </Component>
         <Component class="javax.swing.JToggleButton" name="B14">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="10" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="1"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[43, 43]"/>
@@ -472,6 +496,9 @@
         </Component>
         <Component class="javax.swing.JToggleButton" name="B9">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="10" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="1"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[43, 43]"/>
@@ -490,6 +517,9 @@
         </Component>
         <Component class="javax.swing.JToggleButton" name="B10">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="10" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="1"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[43, 43]"/>
@@ -508,6 +538,9 @@
         </Component>
         <Component class="javax.swing.JToggleButton" name="B11">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="10" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="1"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[43, 43]"/>
@@ -526,6 +559,9 @@
         </Component>
         <Component class="javax.swing.JToggleButton" name="B12">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="10" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="1"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[43, 43]"/>
@@ -544,6 +580,9 @@
         </Component>
         <Component class="javax.swing.JToggleButton" name="B13">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="10" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="1"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[43, 43]"/>
@@ -562,6 +601,9 @@
         </Component>
         <Component class="javax.swing.JToggleButton" name="B8">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="10" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="1"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[43, 43]"/>
@@ -580,6 +622,9 @@
         </Component>
         <Component class="javax.swing.JToggleButton" name="B21">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="10" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="1"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[43, 43]"/>
@@ -598,6 +643,9 @@
         </Component>
         <Component class="javax.swing.JToggleButton" name="B16">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="10" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="1"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[43, 43]"/>
@@ -616,6 +664,9 @@
         </Component>
         <Component class="javax.swing.JToggleButton" name="B17">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="10" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="1"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[43, 43]"/>
@@ -634,6 +685,9 @@
         </Component>
         <Component class="javax.swing.JToggleButton" name="B18">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="10" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="1"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[43, 43]"/>
@@ -652,6 +706,9 @@
         </Component>
         <Component class="javax.swing.JToggleButton" name="B19">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="10" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="1"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[43, 43]"/>
@@ -670,6 +727,9 @@
         </Component>
         <Component class="javax.swing.JToggleButton" name="B20">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="10" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="1"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[43, 43]"/>
@@ -688,6 +748,9 @@
         </Component>
         <Component class="javax.swing.JToggleButton" name="B15">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="10" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="1"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[43, 43]"/>
@@ -706,6 +769,9 @@
         </Component>
         <Component class="javax.swing.JToggleButton" name="B26">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="10" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="1"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[43, 43]"/>
@@ -724,6 +790,9 @@
         </Component>
         <Component class="javax.swing.JToggleButton" name="B27">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="10" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="1"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[43, 43]"/>
@@ -742,6 +811,9 @@
         </Component>
         <Component class="javax.swing.JToggleButton" name="B22">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="10" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="1"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[43, 43]"/>
@@ -760,6 +832,9 @@
         </Component>
         <Component class="javax.swing.JToggleButton" name="B28">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="10" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="1"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[43, 43]"/>
@@ -778,6 +853,9 @@
         </Component>
         <Component class="javax.swing.JToggleButton" name="B23">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="10" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="1"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[43, 43]"/>
@@ -796,6 +874,9 @@
         </Component>
         <Component class="javax.swing.JToggleButton" name="B24">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="10" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="1"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[43, 43]"/>
@@ -814,6 +895,9 @@
         </Component>
         <Component class="javax.swing.JToggleButton" name="B25">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="10" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="1"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[43, 43]"/>
@@ -832,6 +916,9 @@
         </Component>
         <Component class="javax.swing.JToggleButton" name="B33">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="10" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="1"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[43, 43]"/>
@@ -850,6 +937,9 @@
         </Component>
         <Component class="javax.swing.JToggleButton" name="B34">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="10" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="1"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[43, 43]"/>
@@ -868,6 +958,9 @@
         </Component>
         <Component class="javax.swing.JToggleButton" name="B29">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="10" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="1"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[43, 43]"/>
@@ -886,6 +979,9 @@
         </Component>
         <Component class="javax.swing.JToggleButton" name="B35">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="10" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="1"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[43, 43]"/>
@@ -904,6 +1000,9 @@
         </Component>
         <Component class="javax.swing.JToggleButton" name="B30">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="10" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="1"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[43, 43]"/>
@@ -922,6 +1021,9 @@
         </Component>
         <Component class="javax.swing.JToggleButton" name="B31">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="10" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="1"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[43, 43]"/>
@@ -940,6 +1042,9 @@
         </Component>
         <Component class="javax.swing.JToggleButton" name="B32">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="10" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="1"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[43, 43]"/>
@@ -958,6 +1063,9 @@
         </Component>
         <Component class="javax.swing.JToggleButton" name="B36">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="10" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="1"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[43, 43]"/>
@@ -976,6 +1084,9 @@
         </Component>
         <Component class="javax.swing.JToggleButton" name="B37">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="10" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="1"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[43, 43]"/>
@@ -994,6 +1105,9 @@
         </Component>
         <Component class="javax.swing.JToggleButton" name="B38">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="10" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="1"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[43, 43]"/>
@@ -1012,6 +1126,9 @@
         </Component>
         <Component class="javax.swing.JToggleButton" name="B39">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="10" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="1"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[43, 43]"/>
@@ -1030,6 +1147,9 @@
         </Component>
         <Component class="javax.swing.JToggleButton" name="B40">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="10" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="1"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[43, 43]"/>
@@ -1048,6 +1168,9 @@
         </Component>
         <Component class="javax.swing.JToggleButton" name="B41">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="10" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="1"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[43, 43]"/>
@@ -1066,6 +1189,9 @@
         </Component>
         <Component class="javax.swing.JToggleButton" name="B42">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="10" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="1"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[43, 43]"/>

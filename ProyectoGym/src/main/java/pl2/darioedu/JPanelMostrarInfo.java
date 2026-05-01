@@ -140,8 +140,9 @@ public class JPanelMostrarInfo extends javax.swing.JPanel {
                 this.AP4.setText("Monitor: " +actividad.getMonitor() + " | Sesiones: " + actividad.getSesiones().size());
                 this.Imagen1.setVisible(false);
                 this.Imagen1.setEnabled(false);
-                this.Imagen2.setVisible(false);
-                this.Imagen2.setEnabled(false);
+                this.Imagen2.setIcon((new ImageIcon("src/main/resources/FlechaOk.png")));
+                this.Imagen2.setVisible(true);
+                this.Imagen2.setEnabled(true);
             }
         }
         else{
@@ -290,11 +291,14 @@ public class JPanelMostrarInfo extends javax.swing.JPanel {
             //JOptionPane.showMessageDialog(null,"Mensaje para editar reservas actividad / admin","None",JOptionPane.INFORMATION_MESSAGE);
         }
         else if ((this.actividad != null)&&(this.sesion!=null)&&(!this.admin)&&(this.socio==null)){
-            JOptionPane.showMessageDialog(null,"Mensaje para editar búsqueda actividad continuar con reserva / socio","None",JOptionPane.INFORMATION_MESSAGE);
+            int n = JOptionPane.showConfirmDialog(null,"¿Desea continuar con la reserva?","JavaFit - MENU",JOptionPane.YES_NO_OPTION);     
         }
         else if ((this.actividad != null)&&(this.sesion!=null)&&(!this.admin)&&(this.socio!=null)){
-            JOptionPane.showMessageDialog(null,"Mensaje para editar resrvas actividad continuar / socio","None",JOptionPane.INFORMATION_MESSAGE);
+          int n = JOptionPane.showConfirmDialog(null,"¿Desea borrar la reserva?","JavaFit - MENU",JOptionPane.YES_NO_OPTION);
         }
+        else if(this.actividad!=null&&this.sesion==null&&this.admin==true&&this.socio==null){
+            new PanelVerImagen(this.actividad).setVisible(true);
+            }
         else{
             new PanelModificarAct(this.actividad).setVisible(true);
         }
@@ -303,9 +307,6 @@ public class JPanelMostrarInfo extends javax.swing.JPanel {
     private void Imagen1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Imagen1ActionPerformed
         if ((this.actividad == null)&&(this.sesion==null)&&(!this.admin)&&(this.socio!=null)){
             //JOptionPane.showMessageDialog(null,"Mensaje para dado un socio editar su info / admin ","None",JOptionPane.INFORMATION_MESSAGE);
-        }
-        else if ((this.actividad != null)&&(this.sesion==null)&&(!this.admin)&&(this.socio!=null)){
-            JOptionPane.showMessageDialog(null,"Mensaje para borrar actividad / admin","None",JOptionPane.INFORMATION_MESSAGE);
         }
         else if ((this.actividad != null)&&(this.sesion!=null)&&(this.admin)&&(this.socio!=null)){
         int n = JOptionPane.showConfirmDialog(null,"¿Desea borrar la reserva?","JavaFit - MENU",JOptionPane.YES_NO_OPTION);

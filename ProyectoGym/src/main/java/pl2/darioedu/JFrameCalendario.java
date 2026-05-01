@@ -309,6 +309,7 @@ public class JFrameCalendario extends javax.swing.JFrame {
         jButton2.setPreferredSize(new java.awt.Dimension(75, 75));
         jButton2.addActionListener(this::jButton2ActionPerformed);
 
+        B1.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         B1.setText("1");
         B1.setMaximumSize(new java.awt.Dimension(43, 43));
         B1.setMinimumSize(new java.awt.Dimension(43, 43));
@@ -316,6 +317,7 @@ public class JFrameCalendario extends javax.swing.JFrame {
         B1.addChangeListener(this::B1StateChanged);
         B1.addActionListener(this::B1ActionPerformed);
 
+        B2.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         B2.setText("1");
         B2.setMaximumSize(new java.awt.Dimension(43, 43));
         B2.setMinimumSize(new java.awt.Dimension(43, 43));
@@ -323,6 +325,7 @@ public class JFrameCalendario extends javax.swing.JFrame {
         B2.addChangeListener(this::B2StateChanged);
         B2.addActionListener(this::B2ActionPerformed);
 
+        B3.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         B3.setText("1");
         B3.setMaximumSize(new java.awt.Dimension(43, 43));
         B3.setMinimumSize(new java.awt.Dimension(43, 43));
@@ -330,6 +333,7 @@ public class JFrameCalendario extends javax.swing.JFrame {
         B3.addChangeListener(this::B3StateChanged);
         B3.addActionListener(this::B3ActionPerformed);
 
+        B4.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         B4.setText("1");
         B4.setMaximumSize(new java.awt.Dimension(43, 43));
         B4.setMinimumSize(new java.awt.Dimension(43, 43));
@@ -337,6 +341,7 @@ public class JFrameCalendario extends javax.swing.JFrame {
         B4.addChangeListener(this::B4StateChanged);
         B4.addActionListener(this::B4ActionPerformed);
 
+        B5.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         B5.setText("1");
         B5.setMaximumSize(new java.awt.Dimension(43, 43));
         B5.setMinimumSize(new java.awt.Dimension(43, 43));
@@ -344,6 +349,7 @@ public class JFrameCalendario extends javax.swing.JFrame {
         B5.addChangeListener(this::B5StateChanged);
         B5.addActionListener(this::B5ActionPerformed);
 
+        B6.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         B6.setText("1");
         B6.setMaximumSize(new java.awt.Dimension(43, 43));
         B6.setMinimumSize(new java.awt.Dimension(43, 43));
@@ -351,6 +357,7 @@ public class JFrameCalendario extends javax.swing.JFrame {
         B6.addChangeListener(this::B6StateChanged);
         B6.addActionListener(this::B6ActionPerformed);
 
+        B7.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         B7.setText("1");
         B7.setMaximumSize(new java.awt.Dimension(43, 43));
         B7.setMinimumSize(new java.awt.Dimension(43, 43));
@@ -358,6 +365,7 @@ public class JFrameCalendario extends javax.swing.JFrame {
         B7.addChangeListener(this::B7StateChanged);
         B7.addActionListener(this::B7ActionPerformed);
 
+        B14.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         B14.setText("1");
         B14.setMaximumSize(new java.awt.Dimension(43, 43));
         B14.setMinimumSize(new java.awt.Dimension(43, 43));
@@ -365,6 +373,7 @@ public class JFrameCalendario extends javax.swing.JFrame {
         B14.addChangeListener(this::B14StateChanged);
         B14.addActionListener(this::B14ActionPerformed);
 
+        B9.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         B9.setText("1");
         B9.setMaximumSize(new java.awt.Dimension(43, 43));
         B9.setMinimumSize(new java.awt.Dimension(43, 43));
@@ -372,6 +381,7 @@ public class JFrameCalendario extends javax.swing.JFrame {
         B9.addChangeListener(this::B9StateChanged);
         B9.addActionListener(this::B9ActionPerformed);
 
+        B10.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         B10.setText("1");
         B10.setMaximumSize(new java.awt.Dimension(43, 43));
         B10.setMinimumSize(new java.awt.Dimension(43, 43));
@@ -379,6 +389,7 @@ public class JFrameCalendario extends javax.swing.JFrame {
         B10.addChangeListener(this::B10StateChanged);
         B10.addActionListener(this::B10ActionPerformed);
 
+        B11.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         B11.setText("1");
         B11.setMaximumSize(new java.awt.Dimension(43, 43));
         B11.setMinimumSize(new java.awt.Dimension(43, 43));
@@ -386,6 +397,7 @@ public class JFrameCalendario extends javax.swing.JFrame {
         B11.addChangeListener(this::B11StateChanged);
         B11.addActionListener(this::B11ActionPerformed);
 
+        B12.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         B12.setText("1");
         B12.setMaximumSize(new java.awt.Dimension(43, 43));
         B12.setMinimumSize(new java.awt.Dimension(43, 43));
@@ -393,6 +405,7 @@ public class JFrameCalendario extends javax.swing.JFrame {
         B12.addChangeListener(this::B12StateChanged);
         B12.addActionListener(this::B12ActionPerformed);
 
+        B13.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         B13.setText("1");
         B13.setMaximumSize(new java.awt.Dimension(43, 43));
         B13.setMinimumSize(new java.awt.Dimension(43, 43));
@@ -400,6 +413,7 @@ public class JFrameCalendario extends javax.swing.JFrame {
         B13.addChangeListener(this::B13StateChanged);
         B13.addActionListener(this::B13ActionPerformed);
 
+        B8.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         B8.setText("1");
         B8.setMaximumSize(new java.awt.Dimension(43, 43));
         B8.setMinimumSize(new java.awt.Dimension(43, 43));
@@ -407,6 +421,7 @@ public class JFrameCalendario extends javax.swing.JFrame {
         B8.addChangeListener(this::B8StateChanged);
         B8.addActionListener(this::B8ActionPerformed);
 
+        B21.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         B21.setText("1");
         B21.setMaximumSize(new java.awt.Dimension(43, 43));
         B21.setMinimumSize(new java.awt.Dimension(43, 43));
@@ -414,6 +429,7 @@ public class JFrameCalendario extends javax.swing.JFrame {
         B21.addChangeListener(this::B21StateChanged);
         B21.addActionListener(this::B21ActionPerformed);
 
+        B16.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         B16.setText("1");
         B16.setMaximumSize(new java.awt.Dimension(43, 43));
         B16.setMinimumSize(new java.awt.Dimension(43, 43));
@@ -421,6 +437,7 @@ public class JFrameCalendario extends javax.swing.JFrame {
         B16.addChangeListener(this::B16StateChanged);
         B16.addActionListener(this::B16ActionPerformed);
 
+        B17.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         B17.setText("1");
         B17.setMaximumSize(new java.awt.Dimension(43, 43));
         B17.setMinimumSize(new java.awt.Dimension(43, 43));
@@ -428,6 +445,7 @@ public class JFrameCalendario extends javax.swing.JFrame {
         B17.addChangeListener(this::B17StateChanged);
         B17.addActionListener(this::B17ActionPerformed);
 
+        B18.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         B18.setText("1");
         B18.setMaximumSize(new java.awt.Dimension(43, 43));
         B18.setMinimumSize(new java.awt.Dimension(43, 43));
@@ -435,6 +453,7 @@ public class JFrameCalendario extends javax.swing.JFrame {
         B18.addChangeListener(this::B18StateChanged);
         B18.addActionListener(this::B18ActionPerformed);
 
+        B19.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         B19.setText("1");
         B19.setMaximumSize(new java.awt.Dimension(43, 43));
         B19.setMinimumSize(new java.awt.Dimension(43, 43));
@@ -442,6 +461,7 @@ public class JFrameCalendario extends javax.swing.JFrame {
         B19.addChangeListener(this::B19StateChanged);
         B19.addActionListener(this::B19ActionPerformed);
 
+        B20.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         B20.setText("1");
         B20.setMaximumSize(new java.awt.Dimension(43, 43));
         B20.setMinimumSize(new java.awt.Dimension(43, 43));
@@ -449,6 +469,7 @@ public class JFrameCalendario extends javax.swing.JFrame {
         B20.addChangeListener(this::B20StateChanged);
         B20.addActionListener(this::B20ActionPerformed);
 
+        B15.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         B15.setText("1");
         B15.setMaximumSize(new java.awt.Dimension(43, 43));
         B15.setMinimumSize(new java.awt.Dimension(43, 43));
@@ -456,6 +477,7 @@ public class JFrameCalendario extends javax.swing.JFrame {
         B15.addChangeListener(this::B15StateChanged);
         B15.addActionListener(this::B15ActionPerformed);
 
+        B26.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         B26.setText("1");
         B26.setMaximumSize(new java.awt.Dimension(43, 43));
         B26.setMinimumSize(new java.awt.Dimension(43, 43));
@@ -463,6 +485,7 @@ public class JFrameCalendario extends javax.swing.JFrame {
         B26.addChangeListener(this::B26StateChanged);
         B26.addActionListener(this::B26ActionPerformed);
 
+        B27.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         B27.setText("1");
         B27.setMaximumSize(new java.awt.Dimension(43, 43));
         B27.setMinimumSize(new java.awt.Dimension(43, 43));
@@ -470,6 +493,7 @@ public class JFrameCalendario extends javax.swing.JFrame {
         B27.addChangeListener(this::B27StateChanged);
         B27.addActionListener(this::B27ActionPerformed);
 
+        B22.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         B22.setText("1");
         B22.setMaximumSize(new java.awt.Dimension(43, 43));
         B22.setMinimumSize(new java.awt.Dimension(43, 43));
@@ -477,6 +501,7 @@ public class JFrameCalendario extends javax.swing.JFrame {
         B22.addChangeListener(this::B22StateChanged);
         B22.addActionListener(this::B22ActionPerformed);
 
+        B28.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         B28.setText("1");
         B28.setMaximumSize(new java.awt.Dimension(43, 43));
         B28.setMinimumSize(new java.awt.Dimension(43, 43));
@@ -484,6 +509,7 @@ public class JFrameCalendario extends javax.swing.JFrame {
         B28.addChangeListener(this::B28StateChanged);
         B28.addActionListener(this::B28ActionPerformed);
 
+        B23.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         B23.setText("1");
         B23.setMaximumSize(new java.awt.Dimension(43, 43));
         B23.setMinimumSize(new java.awt.Dimension(43, 43));
@@ -491,6 +517,7 @@ public class JFrameCalendario extends javax.swing.JFrame {
         B23.addChangeListener(this::B23StateChanged);
         B23.addActionListener(this::B23ActionPerformed);
 
+        B24.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         B24.setText("1");
         B24.setMaximumSize(new java.awt.Dimension(43, 43));
         B24.setMinimumSize(new java.awt.Dimension(43, 43));
@@ -498,6 +525,7 @@ public class JFrameCalendario extends javax.swing.JFrame {
         B24.addChangeListener(this::B24StateChanged);
         B24.addActionListener(this::B24ActionPerformed);
 
+        B25.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         B25.setText("1");
         B25.setMaximumSize(new java.awt.Dimension(43, 43));
         B25.setMinimumSize(new java.awt.Dimension(43, 43));
@@ -505,6 +533,7 @@ public class JFrameCalendario extends javax.swing.JFrame {
         B25.addChangeListener(this::B25StateChanged);
         B25.addActionListener(this::B25ActionPerformed);
 
+        B33.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         B33.setText("1");
         B33.setMaximumSize(new java.awt.Dimension(43, 43));
         B33.setMinimumSize(new java.awt.Dimension(43, 43));
@@ -512,6 +541,7 @@ public class JFrameCalendario extends javax.swing.JFrame {
         B33.addChangeListener(this::B33StateChanged);
         B33.addActionListener(this::B33ActionPerformed);
 
+        B34.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         B34.setText("1");
         B34.setMaximumSize(new java.awt.Dimension(43, 43));
         B34.setMinimumSize(new java.awt.Dimension(43, 43));
@@ -519,6 +549,7 @@ public class JFrameCalendario extends javax.swing.JFrame {
         B34.addChangeListener(this::B34StateChanged);
         B34.addActionListener(this::B34ActionPerformed);
 
+        B29.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         B29.setText("1");
         B29.setMaximumSize(new java.awt.Dimension(43, 43));
         B29.setMinimumSize(new java.awt.Dimension(43, 43));
@@ -526,6 +557,7 @@ public class JFrameCalendario extends javax.swing.JFrame {
         B29.addChangeListener(this::B29StateChanged);
         B29.addActionListener(this::B29ActionPerformed);
 
+        B35.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         B35.setText("1");
         B35.setMaximumSize(new java.awt.Dimension(43, 43));
         B35.setMinimumSize(new java.awt.Dimension(43, 43));
@@ -533,6 +565,7 @@ public class JFrameCalendario extends javax.swing.JFrame {
         B35.addChangeListener(this::B35StateChanged);
         B35.addActionListener(this::B35ActionPerformed);
 
+        B30.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         B30.setText("1");
         B30.setMaximumSize(new java.awt.Dimension(43, 43));
         B30.setMinimumSize(new java.awt.Dimension(43, 43));
@@ -540,6 +573,7 @@ public class JFrameCalendario extends javax.swing.JFrame {
         B30.addChangeListener(this::B30StateChanged);
         B30.addActionListener(this::B30ActionPerformed);
 
+        B31.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         B31.setText("1");
         B31.setMaximumSize(new java.awt.Dimension(43, 43));
         B31.setMinimumSize(new java.awt.Dimension(43, 43));
@@ -547,6 +581,7 @@ public class JFrameCalendario extends javax.swing.JFrame {
         B31.addChangeListener(this::B31StateChanged);
         B31.addActionListener(this::B31ActionPerformed);
 
+        B32.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         B32.setText("1");
         B32.setMaximumSize(new java.awt.Dimension(43, 43));
         B32.setMinimumSize(new java.awt.Dimension(43, 43));
@@ -554,6 +589,7 @@ public class JFrameCalendario extends javax.swing.JFrame {
         B32.addChangeListener(this::B32StateChanged);
         B32.addActionListener(this::B32ActionPerformed);
 
+        B36.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         B36.setText("1");
         B36.setMaximumSize(new java.awt.Dimension(43, 43));
         B36.setMinimumSize(new java.awt.Dimension(43, 43));
@@ -561,6 +597,7 @@ public class JFrameCalendario extends javax.swing.JFrame {
         B36.addChangeListener(this::B36StateChanged);
         B36.addActionListener(this::B36ActionPerformed);
 
+        B37.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         B37.setText("1");
         B37.setMaximumSize(new java.awt.Dimension(43, 43));
         B37.setMinimumSize(new java.awt.Dimension(43, 43));
@@ -568,6 +605,7 @@ public class JFrameCalendario extends javax.swing.JFrame {
         B37.addChangeListener(this::B37StateChanged);
         B37.addActionListener(this::B37ActionPerformed);
 
+        B38.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         B38.setText("1");
         B38.setMaximumSize(new java.awt.Dimension(43, 43));
         B38.setMinimumSize(new java.awt.Dimension(43, 43));
@@ -575,6 +613,7 @@ public class JFrameCalendario extends javax.swing.JFrame {
         B38.addChangeListener(this::B38StateChanged);
         B38.addActionListener(this::B38ActionPerformed);
 
+        B39.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         B39.setText("1");
         B39.setMaximumSize(new java.awt.Dimension(43, 43));
         B39.setMinimumSize(new java.awt.Dimension(43, 43));
@@ -582,6 +621,7 @@ public class JFrameCalendario extends javax.swing.JFrame {
         B39.addChangeListener(this::B39StateChanged);
         B39.addActionListener(this::B39ActionPerformed);
 
+        B40.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         B40.setText("1");
         B40.setMaximumSize(new java.awt.Dimension(43, 43));
         B40.setMinimumSize(new java.awt.Dimension(43, 43));
@@ -589,6 +629,7 @@ public class JFrameCalendario extends javax.swing.JFrame {
         B40.addChangeListener(this::B40StateChanged);
         B40.addActionListener(this::B40ActionPerformed);
 
+        B41.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         B41.setText("1");
         B41.setMaximumSize(new java.awt.Dimension(43, 43));
         B41.setMinimumSize(new java.awt.Dimension(43, 43));
@@ -596,6 +637,7 @@ public class JFrameCalendario extends javax.swing.JFrame {
         B41.addChangeListener(this::B41StateChanged);
         B41.addActionListener(this::B41ActionPerformed);
 
+        B42.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         B42.setText("1");
         B42.setMaximumSize(new java.awt.Dimension(43, 43));
         B42.setMinimumSize(new java.awt.Dimension(43, 43));

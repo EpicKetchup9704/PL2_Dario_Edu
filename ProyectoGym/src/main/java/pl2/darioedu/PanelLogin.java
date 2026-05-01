@@ -31,7 +31,7 @@ public class PanelLogin extends javax.swing.JFrame {
         jButtonRegistrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("JavaFit - LoginMenu");
+        setTitle("JavaFit - Login Menu - Version "+Globales.version);
         setBackground(new java.awt.Color(255, 204, 102));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 48)); // NOI18N

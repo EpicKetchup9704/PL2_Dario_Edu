@@ -33,6 +33,7 @@ public class PanelAddActividad extends javax.swing.JFrame {
         BotonAyuda = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("JavaFit - Admin Menu New Activity - Version "+Globales.version);
 
         jButtonVolverAtras.setBackground(new java.awt.Color(255, 153, 51));
         jButtonVolverAtras.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N

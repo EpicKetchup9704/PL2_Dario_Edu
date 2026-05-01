@@ -1,5 +1,4 @@
 package pl2.darioedu;
-//  QUEDA PENDIENTE PONERLE LO DE BUSCAR ACTIVIDADES Y ESPECIALMENTE EL COBRARLAS, POR AHORA SOLO HE METIDO LOS ATRIBUTOS BASICOS
 
 import java.io.Serializable;
 import java.util.ArrayList;
