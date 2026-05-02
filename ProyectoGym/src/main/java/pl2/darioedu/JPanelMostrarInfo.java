@@ -15,6 +15,8 @@ import javax.swing.JOptionPane;
  * Hay que añadir ventanas emergentes para cada accion / deseada
  */
 public class JPanelMostrarInfo extends javax.swing.JPanel {
+    private Socio socioAux;
+    private boolean busqueda;
     private Socio socio;
     private Actividad actividad;
     private Sesion sesion;
@@ -63,6 +65,36 @@ public class JPanelMostrarInfo extends javax.swing.JPanel {
         return admin;
     }
     
+    public JPanelMostrarInfo(boolean modo, Socio socio, Actividad act, Sesion ses){
+        initComponents();
+        this.actividad = act;
+        this.sesion = ses;
+        this.admin = false;
+        this.socio = null;
+        this.socioAux = socio;
+        if (modo == true){
+           this.busqueda = true;
+           this.Titulo.setText(act.getTitulo());
+           this.AP1.setText("Monitor" + act.getMonitor());
+           this.AP2.setText("Sesion" + ses.getSesionStringFormateado('-'));
+           this.AP3.setText("Tipo" + act.getTipo());
+           this.AP4.setText("Para continuar con la reserva haz click en la flecha");
+           this.Imagen1.setVisible(false);
+           this.Imagen2.setVisible(true);
+           this.Imagen2.setIcon((new ImageIcon("src/main/resources/FlechaOk.png")));
+        }
+        else{
+            this.busqueda = false;
+            this.Titulo.setText(act.getTitulo());
+            this.AP1.setText("Monitor" + act.getMonitor());
+            this.AP2.setText("Sesion" + ses.getSesionStringFormateado('-'));
+            this.AP3.setText("Tipo" + act.getTipo());
+            this.AP4.setText("Para borar la reserva haz click en la cruz");
+            this.Imagen1.setVisible(false);
+            this.Imagen2.setVisible(true);
+            this.Imagen2.setIcon((new ImageIcon("src/main/resources/Cruz.png")));
+        }
+    }
     
     public JPanelMostrarInfo() {
         initComponents();
@@ -96,7 +128,7 @@ public class JPanelMostrarInfo extends javax.swing.JPanel {
             this.Titulo.setText(actividad.getTitulo());
             this.AP1.setText("Tipo: "+actividad.getTipo());
             this.AP2.setText("Sala: "+actividad.getSala().getNombre());
-            this.AP3.setText("Aforo: "+actividad.getSala().getAforo() + " | Plazas: "+actividad.getSala().aforoRestante());
+            this.AP3.setText("Aforo: "+actividad.getSala().getAforo() + " | NumUsuarios: "+actividad.getSala().getNumPersonas());
             this.AP4.setText("Monitor: " +actividad.getMonitor());
             this.Imagen1.setVisible(true);
             this.Imagen1.setEnabled(true);
@@ -143,42 +175,6 @@ public class JPanelMostrarInfo extends javax.swing.JPanel {
                 this.Imagen2.setIcon((new ImageIcon("src/main/resources/FlechaOk.png")));
                 this.Imagen2.setVisible(true);
                 this.Imagen2.setEnabled(true);
-            }
-        }
-        else{
-            if(user == null){
-                //Constructor para el usuario, para consulta de búsqueda (tema de Sesion)
-            this.actividad = actividad;
-            this.sesion = clase;
-            this.admin = false;
-            this.socio = null;
-            this.Titulo.setText(actividad.getTitulo());
-            this.AP1.setText("Tipo: "+actividad.getTipo());
-            this.AP2.setText("Sala: "+actividad.getSala().getNombre());
-            this.AP3.setText("Clase: "+clase.getSesionStringFormateado(':'));
-            this.AP4.setText("Monitor"+actividad.getMonitor());
-            this.Imagen1.setVisible(false);
-            this.Imagen1.setEnabled(false);
-            this.Imagen2.setVisible(true);
-            this.Imagen2.setEnabled(true);
-            this.Imagen2.setIcon((new ImageIcon("src/main/resources/FlechaOk.png")));
-            }
-            else{
-                //Constructor para el usuario, para consulta de reservas (tema de Sesion)
-                this.actividad = actividad;
-                this.sesion = clase;
-                this.admin = false;
-                this.socio = user;
-                this.Titulo.setText(actividad.getTitulo());
-                this.AP1.setText("Tipo: "+actividad.getTipo());
-                this.AP2.setText("Sala: "+actividad.getSala().getNombre());
-                this.AP3.setText("Reserva: "+clase.getSesionStringFormateado(':'));
-                this.AP4.setText("Monitor"+actividad.getMonitor());
-                this.Imagen1.setVisible(false);
-                this.Imagen1.setEnabled(false);
-                this.Imagen2.setVisible(true);
-                this.Imagen2.setEnabled(true);
-                this.Imagen2.setIcon(new ImageIcon("src/main/resources/Cruz.png"));
             }
         }
     }
@@ -281,20 +277,26 @@ public class JPanelMostrarInfo extends javax.swing.JPanel {
            Main.guardarListaUsuarios(listaUser); 
            }
         }
-        else if ((this.actividad != null)&&(this.sesion==null)&&(!this.admin)&&(this.socio!=null)){
-            JOptionPane.showMessageDialog(null,"Mensaje para modificar actividad / admin","None",JOptionPane.INFORMATION_MESSAGE);
-        }
-        else if ((this.actividad != null)&&(this.sesion!=null)&&(this.admin)&&(this.socio!=null)){
-            JOptionPane.showMessageDialog(null,"Mensaje para editar reservas actividad / admin","None",JOptionPane.INFORMATION_MESSAGE);
-        }
-        else if ((this.actividad != null)&&(this.sesion==null)&&(this.admin)&&(this.socio!=null)){
-            //JOptionPane.showMessageDialog(null,"Mensaje para editar reservas actividad / admin","None",JOptionPane.INFORMATION_MESSAGE);
-        }
-        else if ((this.actividad != null)&&(this.sesion!=null)&&(!this.admin)&&(this.socio==null)){
+        else if (this.busqueda==true&&this.socioAux!=null){
             int n = JOptionPane.showConfirmDialog(null,"¿Desea continuar con la reserva?","JavaFit - MENU",JOptionPane.YES_NO_OPTION);     
-        }
-        else if ((this.actividad != null)&&(this.sesion!=null)&&(!this.admin)&&(this.socio!=null)){
+            if (n == JOptionPane.YES_OPTION){ 
+                if (socioAux.getListaActividades().contains(this.actividad)){
+                            socioAux.getListaSesion().add(this.sesion);
+                            Main.esrcibirFichero(this.actividad, this.sesion);
+                        }
+                        else {
+                            socioAux.addActividad(this.actividad);
+                            socioAux.getListaSesion().add(this.sesion);
+                            Main.esrcibirFichero(this.actividad, this.sesion);
+                        }
+                    }                   
+                }
+                
+        else if (this.busqueda==false&&this.socioAux!=null){
           int n = JOptionPane.showConfirmDialog(null,"¿Desea borrar la reserva?","JavaFit - MENU",JOptionPane.YES_NO_OPTION);
+          if (n==JOptionPane.YES_OPTION){
+                            socioAux.getListaSesion().remove(this.sesion);
+                        }
         }
         else if(this.actividad!=null&&this.sesion==null&&this.admin==true&&this.socio==null){
             new PanelVerImagen(this.actividad).setVisible(true);

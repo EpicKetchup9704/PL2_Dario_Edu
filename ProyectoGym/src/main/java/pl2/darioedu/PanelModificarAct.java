@@ -523,14 +523,12 @@ public class PanelModificarAct extends javax.swing.JFrame {
         if (this.recursivo == null&&!this.coincideSesion()&&!this.coincideActividad()){    
             this.pasarValores();
             Main.guardarListaActividades(Main.getListaActividadStatic());
-            Main.esrcibirFichero(this.actividad,new Sesion(this.anno,this.mes,this.dia,this.horaIncioSeleccionada,this.horaFinSeleccionada));
             this.setVisible(false);
             this.dispose();
             System.out.println("Cambios guardados con éxito");}
         else if (this.recursivo != null&&!this.coincideRecursivo()&&!this.coincideActividad()){
             this.pasarValores();
             Main.guardarListaActividades(Main.getListaActividadStatic());
-            Main.esrcibirFichero(this.actividad,new Sesion(this.anno,this.mes,this.dia,this.horaIncioSeleccionada,this.horaFinSeleccionada));
             this.setVisible(false);
             this.dispose();}
         else {

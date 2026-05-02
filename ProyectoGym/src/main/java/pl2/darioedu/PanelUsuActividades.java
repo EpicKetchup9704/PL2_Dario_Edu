@@ -20,7 +20,7 @@ public class PanelUsuActividades extends javax.swing.JFrame {
     /**
      * Creates new form PanelUsuActividades
      */
-    public PanelUsuActividades(Socio soci) {
+        public PanelUsuActividades(Socio soci) {
         initComponents();
         this.socio = soci;
         iniciarNuevo();
@@ -30,7 +30,7 @@ public class PanelUsuActividades extends javax.swing.JFrame {
     }
      public final void iniciarNuevo(){
         this.listaPanel = new JPanelLista();
-        this.listaPanel.modoUsuarioListaBusqueda();
+        this.listaPanel.modoUsuarioListaBusqueda(this.socio);
         this.jScrollPane1.setViewportView(this.listaPanel);
         this.jScrollPane1.revalidate();
         this.jScrollPane1.repaint();
@@ -41,10 +41,9 @@ public class PanelUsuActividades extends javax.swing.JFrame {
         if (this.barraBusqueda.busquedaValida()){
             //Parte cuando la búsqueda es Exitosa,
             List<Actividad> listaAct = this.barraBusqueda.getBusquedaUsuarioActividad();
-
             this.barraBusqueda.setTextArea("");
             this.listaPanel = new JPanelLista();
-            this.listaPanel.modoUsuarioListaBusquedaFiltrado(listaAct);
+            this.listaPanel.modoUsuarioListaBusquedaFiltrado(listaAct,this.socio);
             this.jScrollPane1.setViewportView(this.listaPanel);
             this.jScrollPane1.revalidate();
             this.jScrollPane1.repaint();

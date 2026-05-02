@@ -49,4 +49,8 @@ public class Sala implements Serializable{
     public int aforoRestante(){
         return (this.aforo - this.personasApuntadas) ;
     }
+    
+    public int getNumPersonas(){
+        return this.personasApuntadas;
+    }
 }

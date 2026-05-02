@@ -16,6 +16,7 @@ public class JPanelLista extends javax.swing.JPanel{
     private final ArrayList<Usuario> listaUser = new ArrayList<>(Main.getListaUsuarioStatic().stream().filter(usu->usu instanceof Socio).collect(Collectors.toList()));
     private final ArrayList<Actividad> listaActividad = Main.getListaActividadStatic();
     private ArrayList<JPanelMostrarInfo> listaCeldas = new ArrayList<>();
+    
     //Parte para almacenamiento de información de un botón pulsados
 
     public ArrayList<JPanelMostrarInfo> getListaCeldas() {
@@ -128,7 +129,7 @@ public class JPanelLista extends javax.swing.JPanel{
         }
     }
     
-    public void modoUsuarioListaBusqueda(){
+    public void modoUsuarioListaBusqueda(Socio socio){
         /*
         Este método tiene que añadir un List<Actividad>, se presupone que viene filtrado de los métodos de búsqueda de la clase main
         */ 
@@ -136,14 +137,25 @@ public class JPanelLista extends javax.swing.JPanel{
         this.setLayout();
             for (Actividad act : listaActividad){
                for (Sesion ses: act.getSesiones()){
-               JPanelMostrarInfo aux = new JPanelMostrarInfo(act,ses,false,null);
+               if (!(socio.getListaSesion().contains(ses))){
+                    int contador = act.getSala().getAforo();
+                    for (Usuario user :listaUser){
+                    if (user instanceof Socio soci1 && soci1.getListaSesion().contains(ses)){
+                        System.out.println("SOCIO EN LISTA: " + System.identityHashCode(soci1));
+                        contador--;
+                    }
+                }
+               if (contador >0){
+               JPanelMostrarInfo aux = new JPanelMostrarInfo(true,socio,act,ses);
                listaCeldas.add(aux);
                this.setContorno(aux);
                this.add(aux);}
+               }
+            }
         }
     }
         
-        public void modoUsuarioListaBusquedaFiltrado(List<Actividad> listaAct){
+        public void modoUsuarioListaBusquedaFiltrado(List<Actividad> listaAct, Socio soci){
         /*
         Este método tiene que añadir un List<Actividad>, se presupone que viene filtrado de los métodos de búsqueda de la clase main
         */ 
@@ -151,12 +163,23 @@ public class JPanelLista extends javax.swing.JPanel{
         this.setLayout();
             for (Actividad act : listaAct){
                for (Sesion ses: act.getSesiones()){
-               JPanelMostrarInfo aux = new JPanelMostrarInfo(act,ses,false,null);
-               listaCeldas.add(aux);
-               this.setContorno(aux);
-               this.add(aux);}
+                 if (!(soci.getListaSesion().contains(ses))){
+                int contador = act.getSala().getAforo();
+                for (Usuario user :listaUser){
+                    if (user instanceof Socio soci1 && soci1.getListaSesion().contains(ses)){
+                        contador--;
+                    }
+                }
+                if (contador >0){
+                    JPanelMostrarInfo aux = new JPanelMostrarInfo(true,soci,act,ses);
+                    listaCeldas.add(aux);
+                    this.setContorno(aux);
+                    this.add(aux);}
+            }
+            
+                }
+            }
         }
-    }
     
     public void modoUsuarioListaReservas(Usuario user){
         listaCeldas = new ArrayList<>();
@@ -166,7 +189,7 @@ public class JPanelLista extends javax.swing.JPanel{
         ArrayList<Sesion> listaSes = soc.getListaSesion();
             for (Sesion ses : listaSes){
                List<Actividad> resultado = listaAct.stream().filter(act->act.getSesiones().stream().anyMatch(se->se.equals(ses))).collect(Collectors.toList());
-               JPanelMostrarInfo aux = new JPanelMostrarInfo(resultado.get(0),ses,false,soc);
+               JPanelMostrarInfo aux = new JPanelMostrarInfo(false,soc,resultado.get(0),ses);
                listaCeldas.add(aux);
                this.setContorno(aux);
                this.add(aux);

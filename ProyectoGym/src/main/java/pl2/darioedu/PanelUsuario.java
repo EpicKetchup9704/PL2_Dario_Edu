@@ -5,6 +5,8 @@
 package pl2.darioedu;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -20,8 +22,18 @@ public class PanelUsuario extends javax.swing.JFrame {
     public PanelUsuario(Socio soci) {
         initComponents();
         this.socio = soci;
+        System.out.println("Socio Original: " + System.identityHashCode(this.socio));
+        Main.getListaUsuarioStatic().stream().forEach(us->System.out.println("Socios lista: " + System.identityHashCode(us)));
     }
-
+    public void guardarUsuarios() {
+        ArrayList<Usuario> listaUs = Main.getListaUsuarioStatic();
+        for (int i = 0; i < listaUs.size(); i++) {
+            if (listaUs.get(i).getCorreo() == (this.socio.getCorreo())) {
+            listaUs.set(i, this.socio);
+            break;
+        }
+    }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -42,6 +54,13 @@ public class PanelUsuario extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("JavaFit - User Menu - Version "+Globales.version);
+        addWindowFocusListener(new java.awt.event.WindowFocusListener() {
+            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
+                formWindowGainedFocus(evt);
+            }
+            public void windowLostFocus(java.awt.event.WindowEvent evt) {
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel1.setText("Bienvenido,");
@@ -155,6 +174,10 @@ public class PanelUsuario extends javax.swing.JFrame {
     private void BotonAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonAyudaActionPerformed
         new PanelAyuda("Este es el menú principal de acceder cuando uno es usuario").setVisible(true);
     }//GEN-LAST:event_BotonAyudaActionPerformed
+
+    private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
+        this.guardarUsuarios();
+    }//GEN-LAST:event_formWindowGainedFocus
 
     /**
      * @param args the command line arguments

@@ -110,9 +110,7 @@ public class Main {
        ArrayList<Usuario> listaUsuario = setListaUsuarios();
        ArrayList<Actividad> listaActividades = setListaActividades();
        new PanelLogin().setVisible(true);
-       new PanelModificarAct(new Actividad("Es una prueba","Ninguno","Benito Camela","Pistas UAH",189,false,DayOfWeek.MONDAY,8,13)).setVisible(true);
-       System.out.println(listaUsuario.size());
-       System.out.println(listaActividades.size());
+       //new PanelModificarAct(new Actividad("Es una prueba","Ninguno","Benito Camela","Pistas UAH",189,false,DayOfWeek.MONDAY,8,13)).setVisible(true);
        //Administrador admin = new Administrador("admin","admin@javafit.com","admin");
        //listaUsuario.add(admin);
        //guardarListaUsuarios(listaUsuario);

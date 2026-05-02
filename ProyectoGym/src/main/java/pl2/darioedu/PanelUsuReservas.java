@@ -26,7 +26,7 @@ public class PanelUsuReservas extends javax.swing.JFrame {
     }
     public final void iniciarNuevo(){
         this.listaPanel = new JPanelLista();
-        this.listaPanel.modoUsuarioListaReservas(socio);
+        this.listaPanel.modoUsuarioListaReservas(this.socio);
         this.jScrollPane1.setViewportView(this.listaPanel);
         this.jScrollPane1.revalidate();
         this.jScrollPane1.repaint();
