@@ -1,6 +1,13 @@
 package pl2.darioedu;
 import java.io.Serializable;
 import java.util.ArrayList;//Creamos un arrayList de nombre de dominios de correo válidos para que no haya usuarios con correos anónimos / desechables
+/**
+ * Clase principal para Usuarios
+ * @author Darío
+ * @author Eduardo
+ * Esta es la clase de la que heredarám Administrador y Socio, para que se entienda en un contexto de herencia.
+ * Se requieren los parámetros nombre, correo, y ya se llama a métodos estáticos de la clase GestorSeguridad para que se hashee la contraseña
+ */
 
 public class Usuario implements Serializable{
     // Esto va a ser una clase padre, de aqui heredaran Administrador y Usuario Normal

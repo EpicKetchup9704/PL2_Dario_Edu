@@ -3,8 +3,16 @@ package pl2.darioedu;
 import java.util.List;
 
 /**
- *
- * @author User
+ * Ventana Consulta Reservas
+ * @author Darío
+ * @author Eduardo
+ * Esta es la ventana para consultar las reservas realizadas, que permite borrarlas.
+ * Se crea un JScrollPane, se le agrega el JPanelLista Instanciado y se añade al JScrollPane .setViewportView() para que reescale el JPanel contenedor. 
+ * Una vez reescalado, si se necesita refrescarlo, se crea un JPanelLista nuevo, (esta clase es fundamental),
+ * con los resultados filtrados o nuevos y se agrega .repaint() y .revalidate() para que se actualice correctamente. Asimismo, contiene un 
+ * WindowListener que hace que se actualize una vez el usuario ha cerrado los JDialogPane que contenga. Asimismo, el botón estña incorporado aquí
+ * simplemente ya que es mejor para hacer cambios al estar en una ventana, que se le pueden añadir actionEvents
+ * Se recomienda ver la documentación para ver su implementación.
  */
 public class PanelConsultaReservas extends javax.swing.JFrame {
     

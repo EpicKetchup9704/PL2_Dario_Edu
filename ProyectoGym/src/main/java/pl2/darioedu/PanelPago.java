@@ -10,8 +10,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- *
- * @author User
+ * Ventana de Pago
+ * @author Eduardo
+ * Esta es la ventana de pago que viene tras que el usuario se haya inscrito en el sistema por primera vez. Añade todo lo necesario para
+ * que funcione correctamente, incluyendo la parte de referencia a utilTienda
  */
 public class PanelPago extends javax.swing.JFrame {
     

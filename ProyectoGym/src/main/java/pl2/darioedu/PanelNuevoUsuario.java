@@ -5,8 +5,10 @@
 package pl2.darioedu;
 
 /**
- *
- * @author Darío
+ * Ventana para registrarse
+ * @author Eduardo
+ * Esta es la ventana que permite que el usuario se registre por primera vez
+ * 
  */
 public class PanelNuevoUsuario extends javax.swing.JFrame {
     

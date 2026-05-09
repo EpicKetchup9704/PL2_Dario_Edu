@@ -1,12 +1,13 @@
 package pl2.darioedu;
 /**
  *
- * @author Dario & EduDP
+ * @author Dario
+ * @author Eduardo
+ * Esta clase hereda de la clase padre usuario (tal y como lo indca el extends).
+ * Previamente se consideró algunos aspectos relevantes, de ahí que haya parte del código comentado
+ * Por otro lado, esta clase es como si fuera usuario, ya que no toma ningún parámetro adicional
  */
 public class Administrador extends Usuario{
-    //Suponemos que los valores no se van a modificar - Puede que después
-    
-    
     public Administrador(String nombre, String correo, String contra){
         super(nombre,correo,contra);
     }

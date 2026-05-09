@@ -9,18 +9,29 @@ import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
 /**
- *
+ * Panel Lista (Contenedor de JPanelMostrarInfo
  * @author Darío
+ * Esta clase es la encargada de administrar de una forma sencilla las "casillas" seleccionadas, ya que se llama a la clase 
+ * JPanelMostrarInfo para cada elemento de un ArrayList o List, en función del modo seleccionado. Para que se pueda reutilizar, los
+ * métodos comunes están puestos al final de esta clase. Por otro lado, se hace un uso del manejo de las excepciones para evitar que no 
+ * se llame a la clase MostrarInfo con elementos nulos. Asimismo, evitamos problemas para cuando el usuario introduce de manera errónea 
+ * una fecha, ya que se hace un splicing que puede resultar en un IndexOutOfBoundsException. 
+ * Por otro lado, hay un uso frecuente de búsquedas recursivas despueés de llamar a la clase UtilTienda. Considere que este proyecto es el resultado
+ * de casi dos meses de trabajo, por lo cual para evitar editar mucho código se dispuso de hacer "arreglos" menores añadiendo dichas búsquedas.
+ * ¡
  */
 public class JPanelLista extends javax.swing.JPanel{
-    private final ArrayList<Usuario> listaUser = new ArrayList<>(Main.getListaUsuarioStatic().stream().filter(usu->usu instanceof Socio).collect(Collectors.toList()));
-    private final ArrayList<Actividad> listaActividad = Main.getListaActividadStatic();
+    private final ArrayList<Usuario> listaUser = new ArrayList<>(UtilTienda.getInstancia().getListaUsuarioStatic().stream().filter(usu->usu instanceof Socio).collect(Collectors.toList()));
+    private final ArrayList<Actividad> listaActividad = UtilTienda.getInstancia().getListaActividadStatic();
     private ArrayList<JPanelMostrarInfo> listaCeldas = new ArrayList<>();
     
     //Parte para almacenamiento de información de un botón pulsados
 
     public ArrayList<JPanelMostrarInfo> getListaCeldas() {
         return listaCeldas;
+    }
+    
+    public final void modoVacio(){
     }
     
     public final void setLayout(){

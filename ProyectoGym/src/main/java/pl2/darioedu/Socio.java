@@ -2,7 +2,16 @@ package pl2.darioedu;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-
+/**
+ * Clase Socio
+ * @author Eduardo
+ * @author Darío
+ * Esta es una de las clases más importantes del programa, básicamente se heredan atributos de la clase padre Usuario y se añaden los atributosç
+ * dirección, tarjeta, teléfono, si es VIP, la lista de actividades y la lista de Sesiones.
+ * IMPORTANTE: Al empezar el proyecto bastante pronto, se optó por emplear la estructura de datos ArrayList. Es recomendable por temas de rendimiento
+ * y funcionalidad emplear HashMap, ya que el usuario y la lista de actividades no pueden tener la misma sesión. Asimismo, para evitar erroresç
+ * se instancian los arrayList necesarios, ya que si no devuelve NulPointerException
+ */
 public class Socio extends Usuario implements Serializable{
     private String direccion;
     private ArrayList<String> tarjeta;

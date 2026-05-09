@@ -5,12 +5,14 @@
 package pl2.darioedu;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
- *
- * @author User
+ * Panel para el Usuario
+ * @author Eduardo
+ * @author Darío
+ * Este es el panel creado para el usuario, y le permite abrir los ventanas emergentes para hacer reservas o borrarlas. Cabe destacar
+ * que en los ActionEvent correspondiente a los botones se encuentran las líneas necesarias para lanzar dichas ventanas. Se pasa el usuario al
+ * constructor de los paneles 
  */
 public class PanelUsuario extends javax.swing.JFrame {
     
@@ -18,15 +20,16 @@ public class PanelUsuario extends javax.swing.JFrame {
     private static Socio socio;
     /**
      * Creates new form PanelUsuario
+     * @param soci
      */
     public PanelUsuario(Socio soci) {
         initComponents();
         this.socio = soci;
         System.out.println("Socio Original: " + System.identityHashCode(this.socio));
-        Main.getListaUsuarioStatic().stream().forEach(us->System.out.println("Socios lista: " + System.identityHashCode(us)));
+        UtilTienda.getInstancia().getListaUsuarioStatic().stream().forEach(us->System.out.println("Socios lista: " + System.identityHashCode(us)));
     }
     public void guardarUsuarios() {
-        ArrayList<Usuario> listaUs = Main.getListaUsuarioStatic();
+        ArrayList<Usuario> listaUs = UtilTienda.getInstancia().getListaUsuarioStatic();
         for (int i = 0; i < listaUs.size(); i++) {
             if (listaUs.get(i).getCorreo() == (this.socio.getCorreo())) {
             listaUs.set(i, this.socio);

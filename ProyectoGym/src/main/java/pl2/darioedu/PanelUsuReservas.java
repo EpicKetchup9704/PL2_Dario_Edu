@@ -4,12 +4,16 @@
  */
 package pl2.darioedu;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  *
- * @author User
+ * @author Eduardo
+ * @author Darío
+ * Este es el panel de reservas, que no contiene un panel de búsqueda, ya que solo se modifican las reservas. Se implmenta la misma estructura
+ * que en los paneles que requieran del componente JPanelLista. Se crea un JScrollPane, se le agrega el JPanelLista Instanciado y se añade
+ * al JScrollPane .setViewportView() para que reescale el JPanel contenedor. Una vez reescalado, si se necesita refrescarlo, se crea un JPanelLista
+ * nuevo con los resultados filtrados o nuevos y se agrega .repaint() y .revalidate() para que se actualice correctamente. Asimismo, contiene un 
+ * WindowListener que hace que se actualize una vez el usuario ha cerrado los JDialogPane que contenga.
+ * Se recomienda ver la documentación para ver su implementación.
  */
 public class PanelUsuReservas extends javax.swing.JFrame {
     
@@ -26,7 +30,11 @@ public class PanelUsuReservas extends javax.swing.JFrame {
     }
     public final void iniciarNuevo(){
         this.listaPanel = new JPanelLista();
-        this.listaPanel.modoUsuarioListaReservas(this.socio);
+        try{
+        this.listaPanel.modoUsuarioListaReservas(this.socio);}
+        catch (IndexOutOfBoundsException error){
+            this.listaPanel.modoVacio();
+        }
         this.jScrollPane1.setViewportView(this.listaPanel);
         this.jScrollPane1.revalidate();
         this.jScrollPane1.repaint();

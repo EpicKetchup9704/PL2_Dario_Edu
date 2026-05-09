@@ -9,8 +9,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
- *
- * @author User
+ * Ventana modificar datos personales
+ * @author Eduardo
+ * Esta es la ventana que permite modificar los datos personales del socio que lo haya solicitado
  */
 public class PanelModificarDatosPersonales extends javax.swing.JFrame {
     
@@ -317,11 +318,8 @@ public class PanelModificarDatosPersonales extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldDireccionActionPerformed
 
     private void jButtonCambiarDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCambiarDatosActionPerformed
-    ArrayList<Usuario> listaUser = Main.setListaUsuarios();
-    Socio usuarioEncontrado = (Socio) listaUser.stream()
-    .filter(u -> u.getCorreo().equals(this.correoIni))
-    .findFirst()
-    .orElse(null);
+    ArrayList<Usuario> listaUser = UtilTienda.getInstancia().getListaUsuarioStatic();
+    Socio usuarioEncontrado = (Socio) listaUser.stream().filter(u -> u.getCorreo().equals(this.correoIni)).findFirst().orElse(null);
     
     if (Arrays.equals(this.jPasswordField1.getPassword(), jPasswordField2.getPassword())){        
         if (!(this.jTextFieldNombre.getText().equals(""))){
@@ -351,7 +349,7 @@ public class PanelModificarDatosPersonales extends javax.swing.JFrame {
                 usuarioEncontrado.cambiarTarjeta(this.tarjeta);
             }
             usuarioEncontrado.cambiarStatusVip(this.isVip);
-            Main.guardarListaUsuarios(listaUser);
+            UtilTienda.getInstancia().guardarListaUsuarios(listaUser);
             
             PanelLogin ventanaLogueo = new PanelLogin();
             this.setVisible(false);

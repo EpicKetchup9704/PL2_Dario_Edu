@@ -10,8 +10,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
- *
- * @author PcEduDM
+ * Ventana nuevo Admin
+ * @author Eduardo
+ * Esta ventana permite crear un nuevo admin a partir de la ventana de administrador
  */
 public class PanelNuevoAdmin extends javax.swing.JFrame {
     
@@ -177,9 +178,9 @@ public class PanelNuevoAdmin extends javax.swing.JFrame {
             String contTemp = String.valueOf(this.jPasswordField1.getPassword());
             adminRegistrar = new Administrador(this.jTextFieldNombre.getText(), this.jTextFieldCorreo.getText(),
             contTemp);
-            ArrayList<Usuario> listaUSU = Main.setListaUsuarios();
+            ArrayList<Usuario> listaUSU = UtilTienda.getInstancia().getListaUsuarioStatic();
             listaUSU.add(adminRegistrar);
-            Main.guardarListaUsuarios(listaUSU);
+            UtilTienda.getInstancia().guardarListaUsuarios(listaUSU);
             this.jLabelCorrecto.setVisible(true);
             
         }

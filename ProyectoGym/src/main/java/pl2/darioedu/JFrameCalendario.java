@@ -12,8 +12,18 @@ import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 
 /**
- *
+ * Clase contenedora del calendario auxiliar
  * @author Darío
+ * Esta clase se encarga de generar un pequeño calendario emergente cada vez que se requiera
+ * Está compuesta por 42 botones (días), dos para avanzar y dos para guardar elegir día o no 
+ * Como se puede llegar a entender que no se comprenda, se explica brevemente:
+ * Se crea con el constructor y se inicializan los valores máximos, se llama a la función editar
+ * estado (texto) y pone el correspondiente texto. Se calcula empleando funciones de LocalDate
+ * y se llama a una función que del arrayList de botones se encarga de recorrerla y cambiar su estado (enabled)
+ * por otro lado, cada vez de se cambie con las flechas, se actualiza el mes (calculando si pasa de año) llamando a la clase globales.
+ * Hay métodos adicionales que no se han empleado por cambios en la especificación del programa.
+ * MUY IMPORTANTE-> Necesita una referencia del JTextArea que quiera que el objeto escriba sobre él, haciendo que sea más cómodo la
+ * comunicación entre dichos objetos.  
  */
 public class JFrameCalendario extends javax.swing.JFrame {
     private int ultimoPulsado;

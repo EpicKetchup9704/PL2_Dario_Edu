@@ -12,8 +12,12 @@ import java.util.stream.Collectors;
 import javax.swing.SpinnerNumberModel;
 
 /**
- *
+ * Ventana Modificar Actividad
  * @author Daríoooooo :)
+ * @author Eduardo
+ * Esta es la ventana para modificar la actividad. Muestra los aspectos de la actividad anterior y algunos que no se pueden modificar.
+ * Asimismo, se incluye varias funcionalidades como la de seleccionar de un JComboBox la imagen deseada o para seleccionar si la actividad
+ * es o no extraordinaria.
  */
 public class PanelModificarAct extends javax.swing.JFrame {
     
@@ -48,7 +52,7 @@ public class PanelModificarAct extends javax.swing.JFrame {
     
     
     public final void getReferenceActividad(Actividad actividad){
-        ArrayList<Actividad> listaAct = Main.getListaActividadStatic();
+        ArrayList<Actividad> listaAct = UtilTienda.getInstancia().getListaActividadStatic();
         for (Actividad act : listaAct){
             if (act.equals(actividad)){
                 this.actividad = act;
@@ -84,13 +88,13 @@ public class PanelModificarAct extends javax.swing.JFrame {
     }
     
     private boolean coincideSesion(){
-        ArrayList<Actividad> listaAct = Main.getListaActividadStatic();
+        ArrayList<Actividad> listaAct = UtilTienda.getInstancia().getListaActividadStatic();
         boolean condicion = listaAct.stream().noneMatch(act->act.getSesiones().stream().noneMatch(ses->ses.getNumDiA()==this.dia&&ses.getMes()==this.mes&&ses.getAnno()==anno));
         return !condicion;
     }
     
     private boolean coincideRecursivo(){
-        ArrayList<Actividad> listaAct = Main.getListaActividadStatic();
+        ArrayList<Actividad> listaAct = UtilTienda.getInstancia().getListaActividadStatic();
         List<Actividad> listaAux = listaAct.stream().filter(act->act.getDiaSemanaRecursivo()!=null).collect(Collectors.toList());
         //Filtramos para cuando ninguna de las actividades contiene a la nuestra
         boolean condicion = listaAux.stream().noneMatch(act->act.getSesiones().stream().noneMatch(ses->ses.getHoraFin()==this.horaFinSeleccionada&&ses.getHoraInicio()==this.horaIncioSeleccionada));
@@ -98,7 +102,7 @@ public class PanelModificarAct extends javax.swing.JFrame {
     }
     
     private boolean coincideActividad(){
-        ArrayList<Actividad> listaAct = Main.getListaActividadStatic();
+        ArrayList<Actividad> listaAct = UtilTienda.getInstancia().getListaActividadStatic();
         boolean condicion1 = listaAct.stream().noneMatch(act->act.getTitulo().equals(this.nombre));
         return !condicion1;
     }
@@ -522,13 +526,13 @@ public class PanelModificarAct extends javax.swing.JFrame {
         System.out.println("Pasado a guardar cambios");
         if (this.recursivo == null&&!this.coincideSesion()&&!this.coincideActividad()){    
             this.pasarValores();
-            Main.guardarListaActividades(Main.getListaActividadStatic());
+            UtilTienda.getInstancia().guardarListaActividades(UtilTienda.getInstancia().getListaActividadStatic());
             this.setVisible(false);
             this.dispose();
             System.out.println("Cambios guardados con éxito");}
         else if (this.recursivo != null&&!this.coincideRecursivo()&&!this.coincideActividad()){
             this.pasarValores();
-            Main.guardarListaActividades(Main.getListaActividadStatic());
+            UtilTienda.getInstancia().guardarListaActividades(UtilTienda.getInstancia().getListaActividadStatic());
             this.setVisible(false);
             this.dispose();}
         else {

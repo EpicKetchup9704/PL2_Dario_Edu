@@ -12,6 +12,14 @@ import java.util.Base64;
 // va de la mano con el anterior, el random anterior nos mete una serie de bits (0 y 1s), esto los traduce al caracter o lo que sea que corresponda
 
 
+/**
+ * 
+ * @author Eduardo
+ * Esta clase se encarga de hashear las constraseñas y hacer verificaciones estáticas para cuando se ha introducido
+ * un usuario y contraseña en el panel de login
+ */
+
+
 public class GestorSeguridad {
     // Metodo que voy a hacer para que las contraseñas sean seguras mediante un sistema hash,
     // lo aplicaremos una vez creemos la interfaz
@@ -65,7 +73,7 @@ public class GestorSeguridad {
         return Base64.getEncoder().encodeToString(sal);
     }
     public static boolean autenticar1(String intentoCorreo, String Contra){
-        ArrayList<Usuario> todosLosUsuarios = Main.getListaUsuarioStatic();
+        ArrayList<Usuario> todosLosUsuarios = UtilTienda.getInstancia().getListaUsuarioStatic();
         boolean encontrado = false;
         String saleado = "";
         for (Usuario usuarioActual : todosLosUsuarios){
@@ -89,7 +97,7 @@ public class GestorSeguridad {
         return encontrado;
     }
     public static Usuario autenticar2(String intentoCorreo){
-        ArrayList<Usuario> todosLosUsuarios = Main.setListaUsuarios();
+        ArrayList<Usuario> todosLosUsuarios = UtilTienda.getInstancia().setListaUsuarios();
         Usuario encontrado = null;
         
         for (Usuario usuarioActual : todosLosUsuarios){

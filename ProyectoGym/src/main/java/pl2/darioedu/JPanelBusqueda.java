@@ -8,8 +8,14 @@ import java.util.stream.Collectors;
 import javax.swing.DefaultComboBoxModel;
 
 /**
- *
+ * Panel Búsqueda
  * @author Darío
+ * @author Eduardo
+ * Esta clase es la encargada de de manejar la búsqueda
+ * Se incluye como una clase sin herencia por conveniencia y facilidad de uso.
+ * Se selecciona el modo, se busca y se selecciona para cuando se haya filtrado la búsqueda en función de los criterios
+ * dados por la JComboBox, que NetBeans ofrece solo instanciarlo en uno, así que se le añade a cada selección de modo la línea 
+ * DefaultComboBoxModel para que se pueda cambiar el estado
  */
 public class JPanelBusqueda extends javax.swing.JPanel{
     public JFrameCalendario calendario = new JFrameCalendario();
@@ -81,7 +87,7 @@ public class JPanelBusqueda extends javax.swing.JPanel{
     public List<Actividad> getBusquedaUsuarioActividad(){
         this.busqueda = jTextField1.getText();
         //Cuando la barra de búsqueda se ha seleccionado con 
-        ArrayList<Actividad> listaActividad = Main.getListaActividadStatic();
+        ArrayList<Actividad> listaActividad = UtilTienda.getInstancia().getListaActividadStatic();
         try{
         int anno = 0;
         int dia= 0;
@@ -117,7 +123,7 @@ public class JPanelBusqueda extends javax.swing.JPanel{
     public List<Actividad> getBusquedaAdminActividad(){
         this.busqueda = jTextField1.getText();
         //Cuando la barra de búsqueda se ha seleccionado con 
-        ArrayList<Actividad> listaActividad = Main.getListaActividadStatic();
+        ArrayList<Actividad> listaActividad = UtilTienda.getInstancia().getListaActividadStatic();
         try{
             int anno = 0;
             int dia= 0;
@@ -152,7 +158,7 @@ public class JPanelBusqueda extends javax.swing.JPanel{
     public List<Actividad> getBusquedaAdminActividadBuscar(){
         this.busqueda = jTextField1.getText();
         //Cuando la barra de búsqueda se ha seleccionado con 
-        ArrayList<Actividad> listaActividad = Main.getListaActividadStatic();
+        ArrayList<Actividad> listaActividad = UtilTienda.getInstancia().getListaActividadStatic();
         try{
         int anno = 0;
         int dia= 0;
@@ -192,7 +198,7 @@ public class JPanelBusqueda extends javax.swing.JPanel{
 
     public List<Usuario> getBusquedaAdminSocio(){
         this.busqueda = jTextField1.getText();
-        ArrayList<Usuario> listaUsuario = Main.getListaUsuarioStatic();
+        ArrayList<Usuario> listaUsuario = UtilTienda.getInstancia().getListaUsuarioStatic();
         List<Socio> listaSocio =listaUsuario.stream().filter(us -> us instanceof Socio).map(us -> (Socio) us).toList();
         if (this.busquedaValida()){
           List<Usuario> devolver;
@@ -212,7 +218,7 @@ public class JPanelBusqueda extends javax.swing.JPanel{
     
     public List<Sesion> getBusquedaAdminReserva(){
         this.busqueda = jTextField1.getText();
-        ArrayList<Usuario> listaUsuario = Main.getListaUsuarioStatic();
+        ArrayList<Usuario> listaUsuario = UtilTienda.getInstancia().getListaUsuarioStatic();
         List<Socio> listaSocio =listaUsuario.stream().filter(us -> us instanceof Socio).map(us -> (Socio) us).toList();
         try{
         if (this.busquedaValida()){

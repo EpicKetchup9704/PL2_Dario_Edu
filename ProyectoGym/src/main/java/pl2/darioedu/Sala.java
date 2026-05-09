@@ -1,7 +1,12 @@
 package pl2.darioedu;
 
 import java.io.Serializable;
-
+/**
+ * Sala
+ * @author Eduardo
+ * Esta es la clase sala, que es imprescindible para la creación de actividades. No se emplean en la aplicación muchos métodos, no obstante
+ * se dejan por si cambia la especificación de la aplicación en algún momento
+ */
 public class Sala implements Serializable{
     private int aforo;
     private String nombre;

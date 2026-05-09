@@ -4,6 +4,14 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+/**
+ * Esta es la clase Actividad, que contiene diversos pàrámetros para que vaya bien. No
+ * @author Darío 
+ * @author Eduardo
+ * Se requieren de los parámetros básicos título, tipo, monitor, sala y si es extraordinaria, y la hora de inicio, hora de fin
+ * Se puede hacer que la actividad sea de tipo recursiva, es decir, que añada tantos sesiones hasta final del año que coincidan con ese "day of week"
+ */
+
 public class Actividad implements Serializable{
     private boolean esExtraordinaria;
     private String titulo;
@@ -18,8 +26,6 @@ public class Actividad implements Serializable{
         this.titulo = titulo ;
         this.tipo = tipo ;
         this.sala = sala ;
-        // Por ahora creo que de cara a la interfaz es mejor no meter las sesiones en el constructor
-        // Primero creamos la actividad, despues se le añaden o quitan sesiones
         this.esExtraordinaria = extra ;
         this.listaSesiones = new ArrayList<>();
         this.diaSemanaRecursivo = null;

@@ -8,18 +8,38 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
-import java.time.DayOfWeek;
 import java.util.ArrayList;
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-//Estoy haciendo pruebas en general;
-public class Main {
-    public static ArrayList<Actividad> listaActividades = setListaActividades();
-    public static ArrayList<Usuario> listaUsuario = setListaUsuarios();
-    public static ArrayList<Usuario> getListaUsuarioStatic(){return listaUsuario;}
-    public static ArrayList<Actividad> getListaActividadStatic(){return listaActividades;}
+/**
+ * Parte Serialización del Negocio
+ * @author Eduardo
+ * @author Darío
+ * ESTA ES UNA DE LAS CLASES MÁS IMPORTANTES, LA QUE HACE QUE FUNCIONE CORRECTAMENTE LA APLICACIÓN.
+ * Se requerían de bastantes métodos estáticos, así que se indicó cambiar los métodos de la clase que fueran estáticos. Para ello
+ * se emplea un patrón de diseño para instanciar la clase una única vez llamado Singleton, que pone el contructor en privado, compara
+ * si el atributo instancia se ha creado y se llama a la clase por la instancia y luego por sus métodos (para que esté enfocado en POO)
+ */
+
+
+
+public class UtilTienda {
+    public ArrayList<Actividad> listaActividades = this.setListaActividades();
+    public ArrayList<Usuario> listaUsuario = this.setListaUsuarios();
+    public ArrayList<Usuario> getListaUsuarioStatic(){return this.listaUsuario;}
+    public ArrayList<Actividad> getListaActividadStatic(){return this.listaActividades;}
+    public static UtilTienda instancia = null;
     
-    public static final ArrayList<Usuario> setListaUsuarios(){
+    private UtilTienda(){
+    }
+    
+    public static UtilTienda getInstancia(){
+        if (instancia==null){
+            instancia = new UtilTienda();
+        }
+        return instancia;
+    }
+    
+    
+    public final ArrayList<Usuario> setListaUsuarios(){
         //Creamos este método ya que la clase Usuario no necesita de unArrayList para cada uno
         try{
             ObjectInputStream aux = new ObjectInputStream(new FileInputStream("listaUsuarios.dat"));
@@ -32,7 +52,7 @@ public class Main {
             return (new ArrayList<>());
         }
     }
-    public final static void guardarListaUsuarios(ArrayList<Usuario> listaUser){
+    public final void guardarListaUsuarios(ArrayList<Usuario> listaUser){
         try{
             ObjectOutputStream aux = new ObjectOutputStream(new FileOutputStream("listaUsuarios.dat"));
             aux.writeObject(listaUser); //Escribimos el fichero de usuarios
@@ -41,7 +61,7 @@ public class Main {
             }
     }
     
-    public static final ArrayList<Actividad> setListaActividades(){
+    public final ArrayList<Actividad> setListaActividades(){
         //Creamos este método ya que la clase Usuario no necesita de unArrayList para cada uno
         try{
             ObjectInputStream aux = new ObjectInputStream(new FileInputStream("listaActividades.dat"));
@@ -55,7 +75,7 @@ public class Main {
         }
     }
     public ArrayList<Actividad> getListaActividades(){return listaActividades;}
-    public static final void guardarListaActividades(ArrayList<Actividad> listaActividades){
+    public final void guardarListaActividades(ArrayList<Actividad> listaActividades){
         try{
             ObjectOutputStream aux = new ObjectOutputStream(new FileOutputStream("listaActividades.dat"));
             aux.writeObject(listaActividades); //Escribimos el fichero de usuarios
@@ -69,36 +89,37 @@ public class Main {
             listaUsuarios.add(user);
         }
     }
-        public static void actualizarUsuarioLista(Usuario usuarioPrevio, Usuario usuarioNuevo){
+        public void actualizarUsuarioLista(Usuario usuarioPrevio, Usuario usuarioNuevo){
             listaUsuario.remove(usuarioPrevio);
             listaUsuario.add(usuarioNuevo);
         }
         
-        public static void actualizarActividadLista(Actividad actividadPrevio, Actividad actividadNuevo){
+        public void actualizarActividadLista(Actividad actividadPrevio, Actividad actividadNuevo){
             listaActividades.remove(actividadPrevio);
             listaActividades.add(actividadPrevio);
         }
-        public static boolean existePrevio(){
+        public boolean existePrevio(){
             File fichero = new File("recibo.txt");
             return fichero.exists();
         }
         
-        public static void esrcibirFichero(Actividad act, Sesion ses){
+        public void esrcibirFichero(Actividad act, Sesion ses){
             try{
-            PrintWriter aux = new PrintWriter(new BufferedWriter(new FileWriter("recibo.txt")));
             String cad1 = "############RECIBO###################";
             String cad3 = "Actividad - "+act.getTitulo() + "| Reserva - " + ses.toString();
             String cad4 = "GRACIAS POR HACER LA RESERVA ";
+            String id_recibo = "Recibo_" + ses.getSesionStringFormateado('-');
+            PrintWriter aux = new PrintWriter(new BufferedWriter(new FileWriter("facturas/"+id_recibo+".txt")));
             aux.println(cad1);
             aux.println(cad3);
             aux.println(cad4);
+            aux.close();
             }
-           
             catch (IOException e){
             }
         }
         
-        public static int getNumImagenes(){
+        public int getNumImagenes(){
             File directorio = new File("src/main/src/main/resources/images");
             return directorio.list().length;
         }
@@ -106,19 +127,20 @@ public class Main {
         
         
         
-    public static void main(String[] args) {
+    /*
        ArrayList<Usuario> listaUsuario = setListaUsuarios();
        ArrayList<Actividad> listaActividades = setListaActividades();
        new PanelLogin().setVisible(true);
        //new PanelModificarAct(new Actividad("Es una prueba","Ninguno","Benito Camela","Pistas UAH",189,false,DayOfWeek.MONDAY,8,13)).setVisible(true);
-       //Administrador admin = new Administrador("admin","admin@javafit.com","admin");
+       Administrador admin = new Administrador("admin","admin@javafit.com","admin");
        //listaUsuario.add(admin);
        //guardarListaUsuarios(listaUsuario);
        /*Actividad act = new Actividad("Tu no mete cabra","Atletismo","Torrente Perez","Pistas UAH",102,false,DayOfWeek.MONDAY,8,13);
        ArrayList<String> tarjeta1 = new ArrayList<>(Arrays.asList("1234123412341234","12/90"));
        ArrayList<String> tarjeta2 = new ArrayList<>(Arrays.asList("1123213212341234","12/10"));
-       Socio socio1 = new Socio("PepeLusi","tumadre@yahoo.es","9029e0q2e0","no","9128121231",tarjeta1,true);
+       
        Socio socio2 = new Socio("PepeMiguel","pruebae@yahoo.es","9121239e0q2e0","no","91231231231",tarjeta2,true);
+       Socio socio1 = new Socio("PepeLusi","tumadre@yahoo.es","9029e0q2e0","no","9128121231",tarjeta1,true);
        Actividad aux1 = new Actividad("Esto es una prueba","Natacion","Dario Domínguez","Piscina",912,false);
        Actividad aux2 = new Actividad("Eueba","Noon","Domínguez","Nada",1232,false);
        Sesion ses1 = new Sesion(2026, 12, 3, 9, 10);
@@ -135,7 +157,7 @@ public class Main {
        listaUsuario.add(socio2);
        listaUsuario.add(socio1);
        guardarListaUsuarios(listaUsuario);
-       guardarListaActividades(listaActividades);*/
+       guardarListaActividades(listaActividades);
        
-    }
+    }*/
 }

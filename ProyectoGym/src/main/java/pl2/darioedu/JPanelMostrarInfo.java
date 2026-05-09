@@ -10,9 +10,17 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 /**
- * 
+ * Panel Casilla para mostrar
  * @author Darío
- * Hay que añadir ventanas emergentes para cada accion / deseada
+ * Esta es una de las clases clave del proyecto; En función de un contexto dado, se muestra la información de una manera u otra.
+ * Se optó por hacerlo de esta forma ya que se puede reutilizar en diversos contextos, ya que haciendo cuentas rápidas, da unos 16 estados
+ * posibles de contextos, lo que lo vuelve una clase idílica si se opta por añadir cambios adicionales. Para entender cómo hay que pasar los 
+ * argumentos, se incluye un comentario debajo de cada constructor para cada caso contextual. Lógicamente al sufrir cambios en la especificación
+ * el proyecto, se optó por añadir líneas que pueden parecer "un engorro" o que simplemente e pueden optimizar, pero dado a que la idea original
+ * de incluirlo era como hemos comentado, lo preferimos dejar así. Asimismo, para cada caso hay dos opciones disposibles de interacturar: 
+ * Imagen 1 e Imagen 2, que dependeiendo del contexto hacen diversas acciones (se recomienda ir a la línea 266 y ver los action events, que
+ * pueden suponer que se entienda mejor los códigos. Por útlimo, para ciertas acciones, se optó por comodidad usar cuadros de diálogo emergentes
+ * al ser más fáciles que usar que creando una clase adicional.
  */
 public class JPanelMostrarInfo extends javax.swing.JPanel {
     private Socio socioAux;
@@ -75,10 +83,10 @@ public class JPanelMostrarInfo extends javax.swing.JPanel {
         if (modo == true){
            this.busqueda = true;
            this.Titulo.setText(act.getTitulo());
-           this.AP1.setText("Monitor" + act.getMonitor());
-           this.AP2.setText("Sesion" + ses.getSesionStringFormateado('-'));
-           this.AP3.setText("Tipo" + act.getTipo());
-           this.AP4.setText("Para continuar con la reserva haz click en la flecha");
+           this.AP1.setText("Monitor: " + act.getMonitor());
+           this.AP2.setText("Sesion: " + ses.getSesionStringFormateado('-'));
+           this.AP3.setText("Tipo: " + act.getTipo());
+           this.AP4.setText("Para continuar con la reserva haz click en la flecha ");
            this.Imagen1.setVisible(false);
            this.Imagen2.setVisible(true);
            this.Imagen2.setIcon((new ImageIcon("src/main/resources/FlechaOk.png")));
@@ -86,10 +94,10 @@ public class JPanelMostrarInfo extends javax.swing.JPanel {
         else{
             this.busqueda = false;
             this.Titulo.setText(act.getTitulo());
-            this.AP1.setText("Monitor" + act.getMonitor());
-            this.AP2.setText("Sesion" + ses.getSesionStringFormateado('-'));
-            this.AP3.setText("Tipo" + act.getTipo());
-            this.AP4.setText("Para borar la reserva haz click en la cruz");
+            this.AP1.setText("Monitor: " + act.getMonitor());
+            this.AP2.setText("Sesion: " + ses.getSesionStringFormateado('-'));
+            this.AP3.setText("Tipo: " + act.getTipo());
+            this.AP4.setText("Para borrar la reserva haz click en la cruz: ");
             this.Imagen1.setVisible(false);
             this.Imagen2.setVisible(true);
             this.Imagen2.setIcon((new ImageIcon("src/main/resources/Cruz.png")));
@@ -261,7 +269,7 @@ public class JPanelMostrarInfo extends javax.swing.JPanel {
         if ((this.actividad == null)&&(this.sesion==null)&&(!this.admin)&&(this.socio!=null)){
            int n = JOptionPane.showConfirmDialog(null,"¿Desea cambiar el estado del Socio?","JavaFit - MENU",JOptionPane.YES_NO_OPTION);
            if (n==JOptionPane.YES_OPTION){
-               ArrayList<Usuario> listaUser = Main.getListaUsuarioStatic();
+               ArrayList<Usuario> listaUser = UtilTienda.getInstancia().getListaUsuarioStatic();
                 for (Usuario user : listaUser){
                     if (user instanceof Socio socio1){
                       if (socio1.equals(this.socio)){
@@ -274,29 +282,39 @@ public class JPanelMostrarInfo extends javax.swing.JPanel {
                         }
                     }  
                 }
-           Main.guardarListaUsuarios(listaUser); 
+           UtilTienda.getInstancia().guardarListaUsuarios(listaUser); 
            }
         }
         else if (this.busqueda==true&&this.socioAux!=null){
             int n = JOptionPane.showConfirmDialog(null,"¿Desea continuar con la reserva?","JavaFit - MENU",JOptionPane.YES_NO_OPTION);     
-            if (n == JOptionPane.YES_OPTION){ 
+            if (n == JOptionPane.YES_OPTION){
+                Socio socioprevio = this.socioAux;
                 if (socioAux.getListaActividades().contains(this.actividad)){
                             socioAux.getListaSesion().add(this.sesion);
-                            Main.esrcibirFichero(this.actividad, this.sesion);
+                            UtilTienda.getInstancia().esrcibirFichero(this.actividad, this.sesion);
                         }
                         else {
                             socioAux.addActividad(this.actividad);
                             socioAux.getListaSesion().add(this.sesion);
-                            Main.esrcibirFichero(this.actividad, this.sesion);
+                            UtilTienda.getInstancia().esrcibirFichero(this.actividad, this.sesion);
                         }
+            ArrayList<Usuario> listaUser = UtilTienda.getInstancia().getListaUsuarioStatic();
+            listaUser.remove(socioprevio);
+            listaUser.add(this.socioAux);
+            UtilTienda.getInstancia().guardarListaUsuarios(listaUser);
                     }                   
                 }
                 
         else if (this.busqueda==false&&this.socioAux!=null){
           int n = JOptionPane.showConfirmDialog(null,"¿Desea borrar la reserva?","JavaFit - MENU",JOptionPane.YES_NO_OPTION);
           if (n==JOptionPane.YES_OPTION){
-                            socioAux.getListaSesion().remove(this.sesion);
-                        }
+                Socio socioprevio = this.socioAux;
+                socioAux.getListaSesion().remove(this.sesion);
+                ArrayList<Usuario> listaUser = UtilTienda.getInstancia().getListaUsuarioStatic();
+                listaUser.remove(socioprevio);
+                listaUser.add(this.socioAux);
+                UtilTienda.getInstancia().guardarListaUsuarios(listaUser);              
+          }
         }
         else if(this.actividad!=null&&this.sesion==null&&this.admin==true&&this.socio==null){
             new PanelVerImagen(this.actividad).setVisible(true);
@@ -314,7 +332,7 @@ public class JPanelMostrarInfo extends javax.swing.JPanel {
         int n = JOptionPane.showConfirmDialog(null,"¿Desea borrar la reserva?","JavaFit - MENU",JOptionPane.YES_NO_OPTION);
             //Cuando la opción es seleccionada como Yes / Se elimina la actividad después de hacer la búsqueda
             if (n==JOptionPane.YES_OPTION){
-                ArrayList<Usuario> listaUser = Main.getListaUsuarioStatic();
+                ArrayList<Usuario> listaUser = UtilTienda.getInstancia().getListaUsuarioStatic();
                 for (Usuario user : listaUser){
                     if (user instanceof Socio socio1){
                         for (Sesion ses : socio1.getListaSesion()){
@@ -324,7 +342,7 @@ public class JPanelMostrarInfo extends javax.swing.JPanel {
                             }
                         }
                     }
-                Main.guardarListaUsuarios(listaUser);
+                UtilTienda.getInstancia().guardarListaUsuarios(listaUser);
                 }
         }
         else if ((this.actividad != null)&&(this.sesion==null)&&(this.admin)&&(this.socio!=null)){
@@ -339,8 +357,8 @@ public class JPanelMostrarInfo extends javax.swing.JPanel {
         else{
             int n = JOptionPane.showConfirmDialog(null,"¿Desea borrar la Actividad? | Se borrarán las reservas asociadas a dicha actividad","JavaFit - MENU",JOptionPane.YES_NO_OPTION);
             if (n == JOptionPane.YES_OPTION){
-                ArrayList<Actividad> listaAct = Main.getListaActividadStatic();
-                ArrayList<Usuario> listaUser = Main.getListaUsuarioStatic();
+                ArrayList<Actividad> listaAct = UtilTienda.getInstancia().getListaActividadStatic();
+                ArrayList<Usuario> listaUser = UtilTienda.getInstancia().getListaUsuarioStatic();
                 listaAct.remove(this.actividad);
                 for (Usuario user : listaUser){
                     if (user instanceof Socio socio1){
@@ -355,8 +373,8 @@ public class JPanelMostrarInfo extends javax.swing.JPanel {
                     } else {
                     }
                 }
-                Main.guardarListaActividades(listaAct);
-                Main.guardarListaUsuarios(listaUser);
+                UtilTienda.getInstancia().guardarListaActividades(listaAct);
+                UtilTienda.getInstancia().guardarListaUsuarios(listaUser);
             }
         }
     }//GEN-LAST:event_Imagen1ActionPerformed

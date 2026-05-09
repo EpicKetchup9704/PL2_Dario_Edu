@@ -8,8 +8,10 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
 /**
- *
+ * Panel para ver la Imagen
  * @author Darío
+ * Esta clase obtiene el id de la imagen de la actividad y permite reescalar la ventana al tamaño de la imagen. Lógicamente si no se encuentra
+ * se muestra una imagen de no encontrado. Se emplea los métodos getWidth y getHeight para obtener el tamaño de la imagen, se le añade un pequeño margen y se reescala la ventana 
  */
 public class PanelVerImagen extends javax.swing.JFrame {
     

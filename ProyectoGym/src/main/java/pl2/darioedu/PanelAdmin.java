@@ -5,8 +5,10 @@
 package pl2.darioedu;
 
 /**
- *
- * @author User
+ * Panel Administrador
+ * @author Eduardo
+ * @author Darío
+ * Este es el panel de administrador, se encarga de recibir del panel de login el administrador y ya de aquí se hacen diversas operaciones
  */
 public class PanelAdmin extends javax.swing.JFrame {
     
@@ -18,6 +20,7 @@ public class PanelAdmin extends javax.swing.JFrame {
     public PanelAdmin(Administrador admin) {
         initComponents();
         this.usuario = admin ;
+        this.NombreUsuario.setText(this.usuario.getNombre());
         NombreUsuario.setText(usuario.getNombre()) ;
     }
     

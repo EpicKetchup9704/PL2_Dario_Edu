@@ -7,8 +7,11 @@ package pl2.darioedu;
 import javax.swing.JPanel;
 
 /**
- *
+ * Ventana Emergente de ayuda
  * @author Darío
+ * Esta es la ventana emergente de ayuda, que sirve para que el usuario pueda recibir ayuda necesaria. Tiene un constructor que recibe el
+ * texto deseado y se escribe en el JTextArea, que tiene algunas configuraciones para que el texto se acorte de forma vertical y tenga
+ * un elemento slider
  */
 public class PanelAyuda extends javax.swing.JFrame {
     

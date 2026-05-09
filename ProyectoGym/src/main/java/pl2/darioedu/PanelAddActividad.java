@@ -5,8 +5,10 @@
 package pl2.darioedu;
 
 /**
- *
- * @author User
+ * Panel Añadir Actividad
+ * @author Eduardo
+ * Este es el panel para añadir la actividad, que tiene una estructura similar al de modificar activiad, ya que a grandes
+ * rasgos hacien la misma acción
  */
 public class PanelAddActividad extends javax.swing.JFrame {
     

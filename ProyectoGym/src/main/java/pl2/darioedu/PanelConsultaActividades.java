@@ -7,8 +7,18 @@ package pl2.darioedu;
 import java.util.List;
 
 /**
- *
- * @author User
+ * Ventana de Consulta de Actividades
+ * @author Darío
+ * @author Eduardo
+
+ * Esta clase permite crear el panel para ver las actividades. No se requiere que muestre ningún botón adicional, así que se optó por ocultar 
+ * los botones pertinentes. Se necesita del JScrollPane correspondiente y en este caso el JComboBox muestra bastantes opciones de búsqueda.
+ * Se crea un JScrollPane, se le agrega el JPanelLista Instanciado y se añade al JScrollPane .setViewportView() para que reescale el JPanel contenedor. 
+ * Una vez reescalado, si se necesita refrescarlo, se crea un JPanelLista nuevo, (esta clase es fundamental),
+ * con los resultados filtrados o nuevos y se agrega .repaint() y .revalidate() para que se actualice correctamente. Asimismo, contiene un 
+ * WindowListener que hace que se actualize una vez el usuario ha cerrado los JDialogPane que contenga. Asimismo, el botón estña incorporado aquí
+ * simplemente ya que es mejor para hacer cambios al estar en una ventana, que se le pueden añadir actionEvents
+ * Se recomienda ver la documentación para ver su implementación.
  */
 public class PanelConsultaActividades extends javax.swing.JFrame {
     

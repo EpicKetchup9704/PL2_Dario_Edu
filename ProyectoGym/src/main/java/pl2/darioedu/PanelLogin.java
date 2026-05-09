@@ -1,5 +1,12 @@
 package pl2.darioedu;
-
+/**
+ * Ventana Login
+ * @author Darío
+ * @author Eduardo
+ * Esta es la ventana principal que contiene el método para iniciar el programa (public static void main). Con ello se logra inicializar
+ * el panel como punto de entrada principal al programa. Cabe destacar que tiene que ser introducido el correo y no es usuario y que coincida la contraseña.
+ * De aquí se llama a las funciones de verificación de Gestor Seguridad para que se hashee su contraseña, ya que no se guarda directamente
+ */
 public class PanelLogin extends javax.swing.JFrame {    
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(PanelLogin.class.getName());
     /**
@@ -10,6 +17,9 @@ public class PanelLogin extends javax.swing.JFrame {
         this.setTitle("JavaFit - Login Menu - "+Globales.version);
         this.jLabelError.setVisible(false);
         this.jTextFieldUsuario.setText("");
+    }
+    public static void main (String args[]){
+        new PanelLogin().setVisible(true);
     }
     /**
      * This method is called from within the constructor to initialize the form.

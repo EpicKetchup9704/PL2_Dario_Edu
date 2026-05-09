@@ -2,9 +2,15 @@ package pl2.darioedu;
 
 import java.io.Serializable;
 import java.time.*;
-/*
-* Hay que establecer algunas características más relacionadas con la fecha: sea numDia (ya que dia es DAYOFWEEK), sea mes y año
-*/
+/**
+ * Sesion de actividades
+ * @author Eduardo
+ * @author Darío
+ * Esta clase contiene unos parámetros de dia, mes, año, hora inicio y hora fin de la actividad para indicar un periodo de tiempo en el que 
+ * la actividad transcurre. Por como se ha implementado la aplicación con las respectivas estructuras de datos, no se puede tener dos actividades con
+ * la misma sesión, es decir, no pueden ser recurrentes y empezar y finalizar a la misma hora en el mismo día
+ * 
+ */
 
 public class Sesion implements Serializable {
     //Voy a poner las horas como de tipo entero ya que con LocalTime es dificil operar

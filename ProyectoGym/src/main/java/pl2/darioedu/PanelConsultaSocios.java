@@ -7,8 +7,17 @@ package pl2.darioedu;
 import java.util.List;
 
 /**
- *
- * @author User
+ * Ventana Consultar Socios
+ * @author Darío 
+ * @author Eduardo
+ * Esta es la ventana que permite consultar los Socios disponibles en el panel y poder cambiar el estado de forma rápida, para confirmar si es vip(aparece una estrella)
+ * o si no es vip (no aparece una estrella). Muestra a su vez información relevante como su tarjeta bancaria, su nombre.ext.
+ * Se crea un JScrollPane, se le agrega el JPanelLista Instanciado y se añade al JScrollPane .setViewportView() para que reescale el JPanel contenedor. 
+ * Una vez reescalado, si se necesita refrescarlo, se crea un JPanelLista nuevo, (esta clase es fundamental),
+ * con los resultados filtrados o nuevos y se agrega .repaint() y .revalidate() para que se actualice correctamente. Asimismo, contiene un 
+ * WindowListener que hace que se actualize una vez el usuario ha cerrado los JDialogPane que contenga. Asimismo, el botón está incorporado aquí
+ * simplemente ya que es mejor para hacer cambios al estar en una ventana, que se le pueden añadir actionEvents
+ * Se recomienda ver la documentación para ver su implementación.
  */
 public class PanelConsultaSocios extends javax.swing.JFrame {
     
