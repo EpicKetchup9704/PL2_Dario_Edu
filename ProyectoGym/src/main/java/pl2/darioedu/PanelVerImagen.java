@@ -29,6 +29,13 @@ public class PanelVerImagen extends javax.swing.JFrame {
         this.jLabel1.setIcon(imagen);
         this.setSize(imagen.getIconWidth()+40,imagen.getIconHeight()+100);
     }
+    public PanelVerImagen(String idImagen){
+        initComponents();
+        String cadena = "src/main/resources/images/Imagen" + idImagen + ".png";
+        Icon imagen = new ImageIcon(cadena);
+        this.jLabel1.setIcon(imagen);
+        this.setSize(imagen.getIconWidth()+40,imagen.getIconHeight()+100);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.

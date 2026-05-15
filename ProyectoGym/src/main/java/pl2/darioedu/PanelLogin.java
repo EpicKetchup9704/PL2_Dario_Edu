@@ -43,6 +43,11 @@ public class PanelLogin extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("JavaFit - Login Menu - Version "+Globales.version);
         setBackground(new java.awt.Color(255, 204, 102));
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                formKeyPressed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 48)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -178,6 +183,10 @@ public class PanelLogin extends javax.swing.JFrame {
     private void jButtonAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAyudaActionPerformed
         new PanelAyuda("Este panel le permite entrar en su área personal. Si no eres socio, pulse en el boton de la Izquierda. Si eres cliente, introduce sus credenciales en los recuadros superiores (Correo y contraseña). \n Si introduce su usario no es válido, solo es posible iniciar sesión con un correo").setVisible(true);
     }//GEN-LAST:event_jButtonAyudaActionPerformed
+
+    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
+
+    }//GEN-LAST:event_formKeyPressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAcceder;

@@ -120,7 +120,7 @@ public class UtilTienda {
         }
         
         public int getNumImagenes(){
-            File directorio = new File("src/main/src/main/resources/images");
+            File directorio = new File("src/main/resources/images");
             return directorio.list().length;
         }
         
